@@ -65,7 +65,7 @@
                     <span class="name">购物车</span>
                 </a>
                 <div class="line"></div>
-                <a class="alist">
+                <a class="alist" href="#page-myMovie">
                     <i class="fa fa-film ico"></i>
                     <span class="name">我的影片</span>
                 </a>
@@ -94,34 +94,39 @@
 
     <div class="page" id="page-withdraw">
         <!--提现-->
-        {%include './withdraw.html'%}
+        {%include './me/withdraw.html'%}
     </div>
 
     <div class="page" id="page-charge">
         <!--充值-->
-        {%include './charge.html'%}
+        {%include './me/charge.html'%}
     </div>
 
     <div class="page" id="page-qrcode">
         <!--二维码-->
-        {%include './qrcode.html'%}
+        {%include './me/qrcode.html'%}
     </div>
 
     <div class="page" id="page-profit">
         <!--收益明细-->
-        {%include './profit.html'%}
+        {%include './me/profit.html'%}
     </div>
     <div class="page" id="page-profit-1">
         <!-- 一级推客 -->
-        {%include './profit-in.html'%}
+        {%include './me/profit-in.html'%}
     </div>
     <div class="page" id="page-profit-2">
         <!-- 二级 -->
-        {%include './profit-in.html'%}
+        {%include './me/profit-in.html'%}
     </div>
     <div class="page" id="page-profit-3">
         <!-- 三级 -->
-        {%include './profit-in.html'%}
+        {%include './me/profit-in.html'%}
+    </div>
+
+    <div class="page" id="page-myMovie">
+        <!-- 我的影片 -->
+        {%include './me/myMovie.html'%}
     </div>
 
 </div>
@@ -133,5 +138,7 @@
 <script src="../js/withdraw.js"></script> 
 <script src="../js/charge.js"></script>
 <script src="../js/profit.js"></script>
+<script src="../js/myMovie.js"></script>
+
 
 {% endblock %}

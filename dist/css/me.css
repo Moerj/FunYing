@@ -582,4 +582,94 @@
     color: #F36C60;
     font-size: 0.6rem; }
 
+.myMovie {
+  bottom: 0; }
+  .myMovie .tools {
+    height: 2.2rem;
+    width: 100%;
+    background: white;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    z-index: 2; }
+    .myMovie .tools > * {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); }
+    .myMovie .tools p {
+      width: 100%;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      font-size: 0.7rem; }
+    .myMovie .tools .btn {
+      left: 0.8rem;
+      width: 1.2rem;
+      height: 1.2rem;
+      z-index: 10; }
+  .myMovie .myMovieList {
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 2.2rem;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+    .myMovie .myMovieList.empty {
+      background: #eee url("../images/empty_mov.png") no-repeat center;
+      background-size: 8.4rem; }
+    .myMovie .myMovieList .box {
+      display: block;
+      background: white;
+      width: 100%;
+      padding-top: 0.8rem;
+      position: relative;
+      font-size: 0.6rem; }
+      .myMovie .myMovieList .box:last-of-type .info2 {
+        border-bottom: 0; }
+      .myMovie .myMovieList .box .imgbox {
+        width: 4rem;
+        height: 5.6rem;
+        top: 16px;
+        left: 16px;
+        overflow: hidden;
+        position: absolute; }
+        .myMovie .myMovieList .box .imgbox img {
+          height: 100%; }
+      .myMovie .myMovieList .box .info {
+        width: 100%;
+        padding-left: 5.6rem;
+        padding-top: 0.8rem; }
+        .myMovie .myMovieList .box .info .Title {
+          font-size: 0.8rem;
+          width: 100%;
+          color: rgba(0, 0, 0, 0.87); }
+          .myMovie .myMovieList .box .info .Title:after {
+            content: '>';
+            float: right;
+            transform: scale3d(1, 1.8, 1);
+            color: #c1bfbf;
+            font-size: 0.6rem;
+            margin-right: 0.8rem; }
+        .myMovie .myMovieList .box .info .text {
+          color: rgba(0, 0, 0, 0.54); }
+        .myMovie .myMovieList .box .info .text2 {
+          border-bottom: 1px solid #ddd;
+          display: block;
+          padding-bottom: 0.8rem; }
+      .myMovie .myMovieList .box .info2 {
+        height: 2.2rem;
+        display: -ms-flexbox;
+        display: flex;
+        margin-left: 0.8rem;
+        padding-left: 4.9rem;
+        padding-right: 0.8rem;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+        -ms-flex-align: center;
+            align-items: center;
+        color: rgba(0, 0, 0, 0.87);
+        border-bottom: 1px solid #ddd; }
+        .myMovie .myMovieList .box .info2 .price {
+          color: #FF9800; }
+
 /*# sourceMappingURL=me.css.map */
