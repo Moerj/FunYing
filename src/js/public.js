@@ -6,6 +6,7 @@ $.url = {
 $.msg = function (opts, timeout) {
     let text = opts.text || opts
     let title = opts.title || '温馨提示'
+    let callback = opts.callback
 
     if (timeout === undefined) {
         timeout = opts.timeout || 2000
@@ -25,6 +26,9 @@ $.msg = function (opts, timeout) {
     if (timeout) {
         setTimeout(function () {
             $tpl.remove()
+            if (callback) {
+                callback()
+            }
         }, timeout);
     }
 }

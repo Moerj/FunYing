@@ -8,6 +8,7 @@ $.url = {
 $.msg = function (opts, timeout) {
     var text = opts.text || opts;
     var title = opts.title || '温馨提示';
+    var callback = opts.callback;
 
     if (timeout === undefined) {
         timeout = opts.timeout || 2000;
@@ -20,6 +21,9 @@ $.msg = function (opts, timeout) {
     if (timeout) {
         setTimeout(function () {
             $tpl.remove();
+            if (callback) {
+                callback();
+            }
         }, timeout);
     }
 };
