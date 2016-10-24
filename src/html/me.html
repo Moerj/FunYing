@@ -70,7 +70,7 @@
                     <span class="name">我的影片</span>
                 </a>
                 <div class="line"></div>
-                <a class="alist">
+                <a class="alist" href="#page-message">
                     <i class="fa fa-commenting-o ico"></i>
                     <span class="name">系统消息</span>
                 </a>
@@ -129,6 +129,11 @@
         {%include './me/myMovie.html'%}
     </div>
 
+    <div class="page" id="page-message">
+        <!-- 系统消息 -->
+        {%include './me/message.html'%}
+    </div>
+
 </div>
 {% endblock %} 
 
@@ -139,6 +144,7 @@
 <script src="../js/charge.js"></script>
 <script src="../js/profit.js"></script>
 <script src="../js/myMovie.js"></script>
+<script src="../js/message.js"></script>
 
 
 {% endblock %}
