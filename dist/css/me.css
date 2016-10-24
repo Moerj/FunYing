@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.content {
+#page-default .content {
   bottom: 2.5rem; }
 
 .endone {
@@ -741,5 +741,28 @@
       transform: translate3d(100%, 0, 0); }
       .message-contanier .message .delete:after {
         content: '删除'; }
+
+#feedbackText {
+  background: rgba(0, 0, 0, 0.04);
+  border: 0;
+  margin: 0.8rem;
+  min-height: 8rem;
+  padding: 0.6rem;
+  font-size: 0.6rem; }
+
+#feedbackSubmit {
+  height: 2.4rem;
+  line-height: 2.4rem;
+  background: #FF9800;
+  color: white;
+  border: 0;
+  margin: 0 0.8rem;
+  font-size: 0.7rem; }
+
+.feedback {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
 
 /*# sourceMappingURL=me.css.map */

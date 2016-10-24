@@ -87,7 +87,7 @@
                     <span class="name">我的推客二维码</span>
                 </a>
 
-                <a class="alist endone">
+                <a class="alist endone" href="#page-feedback">
                     <i class="fa fa-meh-o ico"></i>
                     <span class="name">用户反馈与报错</span>
                 </a>
@@ -383,15 +383,29 @@
 
     <div class="page" id="page-message">
         <!-- 系统消息 -->
-        <div class="content message-contanier">
+        <div class="content message-contanier headerTool">
     <img src="../images/empty_message.png" class="empty">
-    <div class="headerTool">
+    <div class="tool">
         <p class="toolname">系统消息</p>
         <div class="button-group">
             <a class="btn back" href="#"><i class="fa fa-long-arrow-left"></i></a>
         </div>
     </div>
     <!--这里动态添加 messageList-->
+</div>
+    </div>
+
+    <div class="page" id="page-feedback">
+        <!-- 反馈与报错 -->
+        <div class="content feedback headerTool">
+    <div class="tool">
+        <p class="toolname">用户反馈与报错</p>
+        <div class="button-group">
+            <a class="btn back" href="#"><i class="fa fa-long-arrow-left"></i></a>
+        </div>
+    </div>
+    <textarea id="feedbackText"></textarea>
+    <button id="feedbackSubmit" class="btn" type="button">提交问题</button>
 </div>
     </div>
 
@@ -420,6 +434,7 @@
 <script src="../js/profit.js"></script>
 <script src="../js/myMovie.js"></script>
 <script src="../js/message.js"></script>
+<script src="../js/feedback.js"></script>
 
 
 

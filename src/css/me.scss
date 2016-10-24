@@ -1,7 +1,10 @@
 @import './layout/public.scss';
-.content {
-    bottom: 2.5rem;
+#page-default{
+    .content {
+        bottom: 2.5rem;
+    }
 }
+
 
 .endone {
     @include box-shadow-bottom;
@@ -201,4 +204,6 @@
 @import './me/profit.scss';
 @import './me/myMovie.scss';
 @import './me/message.scss';
+@import './me/feedback.scss';
+
 

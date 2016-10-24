@@ -80,7 +80,7 @@
                     <span class="name">我的推客二维码</span>
                 </a>
 
-                <a class="alist endone">
+                <a class="alist endone" href="#page-feedback">
                     <i class="fa fa-meh-o ico"></i>
                     <span class="name">用户反馈与报错</span>
                 </a>
@@ -134,6 +134,11 @@
         {%include './me/message.html'%}
     </div>
 
+    <div class="page" id="page-feedback">
+        <!-- 反馈与报错 -->
+        {%include './me/feedback.html'%}
+    </div>
+
 </div>
 {% endblock %} 
 
@@ -145,6 +150,7 @@
 <script src="../js/profit.js"></script>
 <script src="../js/myMovie.js"></script>
 <script src="../js/message.js"></script>
+<script src="../js/feedback.js"></script>
 
 
 {% endblock %}

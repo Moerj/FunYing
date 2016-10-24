@@ -1,0 +1,21 @@
+#feedbackText{
+    background: rgba(0,0,0,0.04);
+    border:0;
+    margin: rem(16px);
+    min-height: rem(160px);
+    padding: rem(12px);
+    font-size: rem(12px);
+}
+#feedbackSubmit{
+    height: rem(48px);
+    line-height: rem(48px);
+    background: $ui-color;
+    color:white;
+    border: 0;
+    margin: 0 rem(16px);
+    font-size: rem(14px);
+}
+.feedback{
+    display: flex;
+    flex-direction: column;
+}
