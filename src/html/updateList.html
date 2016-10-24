@@ -1,0 +1,48 @@
+{% extends "./layout/default.html"%}
+
+{% block title%}剧情更新{% endblock %}
+{% block style%}
+<link rel="stylesheet" href="../css/find.css">
+{% endblock %}
+
+
+
+{% block main %}
+<div class="page-group">
+
+    <div class="page page-current" id='index-default'>
+        <div class="content headerTool infinite-scroll infinite-scroll-bottom">
+            <!-- 顶部浮动工具条 -->
+            <div class="tool">
+                <p class="toolname">剧情更新</p>
+                <div class="button-group">
+                    <a class="btn back" href="#"><i class="fa fa-long-arrow-left"></i></a>
+                </div>
+            </div>
+            <div class="find-content" style="padding-top: 0;">
+                <!--list-->
+            </div>
+            <!-- 加载提示符 -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+        <!--{{find}}{%set find = "active"%}{{find}}-->
+        {% include "./layout/navbar.html"%}
+    </div>
+
+    <!--搜索页面-->
+    <div class="page" id='page-search'>
+        {% include "./index/search.html"%}
+    </div>
+
+
+</div>
+
+
+
+{% endblock %}
+
+{% block script %}
+<script src="../js/updateList.js"></script>
+{% endblock %}
