@@ -48,7 +48,6 @@
     }
 }
 
-
 .swiper-container {
     height: rem(250px);
     .swiper-slide {
@@ -65,7 +64,8 @@
     height: 44px;
     transition: .3s;
     overflow: hidden;
-    &.search-outside{//首页上的search
+    &.search-outside {
+        //首页上的search
         padding-left: 12px;
     }
     input {
@@ -93,7 +93,6 @@
     left: 0;
     right: 0;
     padding: 0 !important;
-
     background: url('../images/empty_mov.png') no-repeat;
     background-position: center;
     background-size: 205px 168px;
@@ -103,13 +102,14 @@
         padding: 0 16px;
     }
 }
-.search-fixed{
+
+.search-fixed {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 10;
-    background: white ;
+    background: white;
     box-sizing: 0 1px 1px rgba($color: black, $alpha: .1);
 }
 
@@ -154,33 +154,41 @@
     padding-bottom: 16px;
     padding-right: 0;
     .list {
-        white-space: nowrap;
         display: block;
         overflow: auto;
+        ul{
+            display: block;
+            width: 9999px;
+        }
         li {
-            width: 80px;
-            display: inline-block;
+            width: rem(80px);
+            float: left;
             overflow: hidden;
             margin-right: 10px;
-            position: relative;
-            a {
+            .imgbox {
+                overflow: hidden;
                 position: relative;
-            }
-            img {
                 height: 112px;
-            }
-            .name {
-                font-size: .6rem;
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                margin: 0;
-                color: #fff;
-                @include name-background;
+                width: 100%;
+                margin-bottom: rem(8px);
+                img {
+                    height: 100%;
+                }
+                .name {
+                    font-size: .6rem;
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    margin: 0;
+                    color: #fff;
+                    padding-left: 4px;
+                    @include name-background;
+                }
             }
             .text {
                 display: block;
+                height: rem(36px);
                 font-size: .6rem;
                 margin: 0;
                 color: #000;

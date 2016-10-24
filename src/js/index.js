@@ -61,11 +61,13 @@ $(function () {
             let mov = movs[i]
             tpl += `
             <li>
-                <a href="${$.url.movDetails}${mov.id}" class="external">
+            <a href="${$.url.movDetails}${mov.id}" class="external">
+                <div class="imgbox">
                     <img src="${mov.poster}" />
                     <p class="name">${mov.updateStatus == 0 ? '更新中' : '已完结'}</p>
-                    <p class="text">${mov.introduction}</p>
-                </a>
+                </div>
+                <p class="text">${mov.introduction}</p>
+            </a>
             </li>
             `
         }

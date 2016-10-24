@@ -61,7 +61,7 @@ $(function () {
         var tpl = "";
         for (var i = 0; i < movs.length; i++) {
             var mov = movs[i];
-            tpl += "\n            <li>\n                <a href=\"" + $.url.movDetails + mov.id + "\" class=\"external\">\n                    <img src=\"" + mov.poster + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                    <p class=\"text\">" + mov.introduction + "</p>\n                </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n            <a href=\"" + $.url.movDetails + mov.id + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.poster + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
         }
         $('#rec1 ul').append(tpl);
     }
