@@ -25,6 +25,7 @@ $(function () {
             if ($contanier.find('.messageList').length == 0) {
                 $emptyBackground.show()
             }
+            return false;
         })
 
 
@@ -34,7 +35,7 @@ $(function () {
         for (let i = 0; i < length; i++) {
             tpl += `
             <div class="messageList">
-                <a href="#" class="message">
+                <a href="${$.url.artDetails + 1}" class="message external">
                     <p class="Title">
                         <span class="name">《正义联盟》新版戈登曝光造型</span>
                         <span class="day">9/17</span>

@@ -130,6 +130,9 @@ a {
         justify-content: space-between;
         align-items: center;
         z-index: 1;
+        .btn{
+            font-size: rem(18px);
+        }
     }
 }
 

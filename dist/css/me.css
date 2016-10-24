@@ -686,14 +686,7 @@
     background: white;
     overflow: hidden;
     width: 100%; }
-  .message-contanier .message {
-    display: block;
-    padding: 0.8rem;
-    position: relative;
-    transition: .3s; }
-    .message-contanier .message.showDelete {
-      transform: translate3d(-4rem, 0, 0); }
-    .message-contanier .message:after {
+    .message-contanier .messageList .message:after {
       content: '';
       position: absolute;
       bottom: 0;
@@ -701,10 +694,17 @@
       right: 0;
       height: 1px;
       background: #ddd; }
-    .message-contanier .message:last-of-type {
+    .message-contanier .messageList:last-of-type {
       border-bottom: 1px solid #ddd; }
-      .message-contanier .message:last-of-type:after {
+      .message-contanier .messageList:last-of-type .message:after {
         display: none; }
+  .message-contanier .message {
+    display: block;
+    padding: 0.8rem;
+    position: relative;
+    transition: .3s; }
+    .message-contanier .message.showDelete {
+      transform: translate3d(-4rem, 0, 0); }
     .message-contanier .message p {
       margin: 0; }
     .message-contanier .message .Title {

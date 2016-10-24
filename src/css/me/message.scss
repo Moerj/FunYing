@@ -1,42 +1,46 @@
 .message-contanier {
-    $deleteWidth:rem(80px);
+    $deleteWidth: rem(80px);
     font-size: rem(12px);
     bottom: 0;
-    .empty{
+    .empty {
         width: rem(121px);
         height: rem(168px);
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate3d(-50%,-50%,0);
+        transform: translate3d(-50%, -50%, 0);
     }
-    .messageList{
+    .messageList {
         background: white;
         overflow: hidden;
         width: 100%;
+        & .message{
+            &:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: rem(16px);
+                right: 0;
+                height: 1px;
+                background: #ddd;
+            }
+        }
+        &:last-of-type {
+            border-bottom: $ui-border;
+            & .message{
+                &:after {
+                    display: none;
+                }
+            }
+        }
     }
     .message {
         display: block;
         padding: rem(16px);
         position: relative;
         transition: .3s;
-        &.showDelete{
-            transform: translate3d(-$deleteWidth,0,0);
-        }
-        &:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: rem(16px);
-            right: 0;
-            height: 1px;
-            background: #ddd;
-        }
-        &:last-of-type {
-            border-bottom: $ui-border;
-            &:after {
-                display: none;
-            }
+        &.showDelete {
+            transform: translate3d(-$deleteWidth, 0, 0);
         }
         p {
             margin: 0;

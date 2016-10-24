@@ -99,6 +99,8 @@ a {
     -ms-flex-align: center;
         align-items: center;
     z-index: 1; }
+    .headerTool .button-group .btn {
+      font-size: 0.9rem; }
 
 .inithide {
   display: none !important; }
