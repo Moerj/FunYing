@@ -4,7 +4,7 @@
     (function () {
         // 当前页
 
-        var getFindData = function getFindData(data, callback) {
+        var getData = function getData(data, callback) {
             if (data.loadingModal) {
                 $.showIndicator();
             }
@@ -12,7 +12,8 @@
             data = $.extend({}, data, {
                 sort: sort,
                 area: area,
-                type: type
+                type: type,
+                bbb: 'bbb'
             });
             $.ajax({
                 type: "get",
@@ -52,7 +53,7 @@
 
             // 开启无限加载
             loading = false;
-            getFindData({
+            getData({
                 loadingModal: true,
                 skip: 1, //当前页
                 limit: itemsPerLoad //每页条数
@@ -67,7 +68,7 @@
         // 加载完成
 
 
-        var _finish = function _finish() {
+        var finish = function finish() {
             // 加载完毕，则注销无限加载事件，以防不必要的加载
             // $.detachInfiniteScroll($('.infinite-scroll'));
 
@@ -78,10 +79,9 @@
             $preloader.text('已经到底了！');
         };
 
-        // 顶部筛选
+        // 渲染模板
 
 
-        // infinite-scroll
         var addItems = function addItems(data) {
             // 生成新条目的HTML
             var html = '';
@@ -93,7 +93,7 @@
             $contanier.append(html);
         };
 
-        //预先加载
+        // 注册'infinite'事件处理函数
 
 
         // picker
@@ -107,7 +107,44 @@
         var sort = 1; //排序 1.更新时间 2.人气排行
         var area = null; //地区 直接传中文字符，'全部'传空
         var type = null;
-        var currentPage = 1;var $selectSwitch = $('.select-switch');
+        var currentPage = 1;$infiniteScroll.on('infinite', function () {
+            // 如果正在加载，则退出
+            if (loading) return;
+
+            // 超出最大限制
+            if ($contanier.children().length >= maxItems) {
+                finish();
+                return;
+            }
+
+            // 设置flag
+            loading = true;
+
+            // console.log(currentPage);
+            getData({
+                skip: currentPage, //当前页
+                limit: itemsPerLoad //每页条数
+            }, function (data) {
+                // 重置加载flag
+                loading = false;
+                // console.log(data);
+
+                // 数据加载完
+                if (data.length <= 0) {
+                    finish();
+                    return;
+                }
+
+                currentPage++;
+                addItems(data);
+
+                //容器发生改变,如果是js滚动，需要刷新滚动
+                $.refreshScroller();
+            });
+        });
+
+        // 顶部筛选
+        var $selectSwitch = $('.select-switch');
         $selectSwitch.on('click', function (e) {
             e.stopPropagation();
             var $this = $(this);
@@ -154,51 +191,10 @@
                 area = picker.value[0] == '全部' ? null : picker.value[0];
                 reload();
             }
-        });getFindData({
-            skip: 1, //当前页
-            limit: itemsPerLoad //每页条数
-        }, function (data) {
-            console.log(data);
-            currentPage++;
-            addItems(data);
         });
 
-        // 注册'infinite'事件处理函数
-        $infiniteScroll.on('infinite', function () {
-            // 如果正在加载，则退出
-            if (loading) return;
-
-            // 超出最大限制
-            if ($(this).children().length >= maxItems) {
-                _finish();
-                return;
-            }
-
-            // 设置flag
-            loading = true;
-
-            // console.log(currentPage);
-            getFindData({
-                skip: currentPage, //当前页
-                limit: itemsPerLoad //每页条数
-            }, function (data) {
-                // 重置加载flag
-                loading = false;
-                // console.log(data);
-
-                // 数据加载完
-                if (data.length <= 0) {
-                    _finish();
-                    return;
-                }
-
-                currentPage++;
-                addItems(data);
-
-                //容器发生改变,如果是js滚动，需要刷新滚动
-                $.refreshScroller();
-            });
-        });
+        //预先加载
+        reload();
     })();
 }
 //# sourceMappingURL=find.js.map
