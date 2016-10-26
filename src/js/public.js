@@ -4,6 +4,7 @@ class LazyLoad {
         this.opt = opt
         this.loading = false
         this.currentPage = 1
+        this.maxItems = this.opt.maxItems || 1000
 
         // 注册'infinite'事件处理函数
         this.opt.$scrollContanier.on('infinite', () => {
