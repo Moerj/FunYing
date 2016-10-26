@@ -19,8 +19,7 @@
         data = $.extend({}, data, {
             sort: sort,
             area: area,
-            type: type,
-            bbb:'bbb'
+            type: type
         })
         $.ajax({
             type: "get",
