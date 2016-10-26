@@ -54,8 +54,9 @@
         .imgbox {
             overflow: hidden;
             position: relative;
+            height: rem(172px);
             img {
-                height: 172px;
+                height: 100%;
             }
             .status {
                 @include name-background;
@@ -69,7 +70,7 @@
         }
         .name {
             color: $ui-color-dark1;
-            padding: 8px;
+            padding: rem(8px);
             margin: 0;
             height: 2rem;
             @include text-clamp(2);

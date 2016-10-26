@@ -1,0 +1,75 @@
+{
+    "STATUS":1,
+    "DATA":[
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        },
+        {
+            "id": 1,
+            "poster":"../images/index-banner.jpg",
+            "title": "title",
+            "updateSite":0,
+            "updateStatus":0
+        }
+    ]
+}

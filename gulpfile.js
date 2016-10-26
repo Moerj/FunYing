@@ -80,6 +80,9 @@ gulp.task('js', function () {
         }))
         .pipe($.sourcemaps.write('./'))
         .pipe(gulp.dest('dist/js/'))
+        .pipe(reload({
+            stream: true
+        }));
 });
 //listen file modify
 gulp.task('watch', function () {
@@ -104,11 +107,11 @@ gulp.task('watch', function () {
         }
     })
 
+    gulp.watch(paths.json.all, ['json']);
+    gulp.watch(paths.images.all, ['copy']);
     gulp.watch(paths.html.all, ['html']);
     gulp.watch(paths.sass.all, ['sass']);
     gulp.watch(paths.js.all, ['js']);
-    gulp.watch(paths.images.all, ['copy']);
-    gulp.watch(paths.json.all, ['json']);
 })
 
 var commTask = ['copy', 'html', 'sass', 'js'];
