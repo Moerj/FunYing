@@ -63,9 +63,13 @@ class LazyLoad {
             skip: 1, //当前页
             limit: this.opt.itemsPerLoad //每页条数
         }, (data) => {
-            this.currentPage++;
             this.opt.$listContanier.empty()
-            this.render(data)
+            if (data.length) {
+                this.currentPage++;
+                this.render(data)
+            }else{
+                this.finish();
+            }
             $.hideIndicator();
         })
     }

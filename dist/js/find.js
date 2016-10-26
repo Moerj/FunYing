@@ -41,7 +41,7 @@
                     url: 'http://118.178.136.60:8001/rest/find/all',
                     data: data,
                     success: function success(res) {
-                        if (res.STATUS == 1) {
+                        if (res.DATA) {
                             callback(res.DATA);
                         } else {
                             $.alert('没有数据了');

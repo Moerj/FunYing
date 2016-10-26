@@ -78,9 +78,13 @@ var LazyLoad = function () {
                 skip: 1, //当前页
                 limit: this.opt.itemsPerLoad //每页条数
             }, function (data) {
-                _this2.currentPage++;
                 _this2.opt.$listContanier.empty();
-                _this2.render(data);
+                if (data.length) {
+                    _this2.currentPage++;
+                    _this2.render(data);
+                } else {
+                    _this2.finish();
+                }
                 $.hideIndicator();
             });
         }
