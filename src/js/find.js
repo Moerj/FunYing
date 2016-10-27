@@ -16,7 +16,7 @@
             for (let i = 0; i < data.length; i++) {
                 let d = data[i]
                 html += `
-                <a href="./movieDetails.html?movieId=${d.id}" class="find-list">
+                <a href="./movieDetails.html?movieId=${d.id}" class="find-list external">
                     <div class="imgbox">
                         <img src="${d.poster}" alt="">
                         <div class="status">${d.updateStatus==0?'已完结':'更新中'}</div>
