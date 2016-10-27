@@ -54,10 +54,8 @@ gulp.task('html', function () {
 //compile sass file
 gulp.task('sass', function () {
     gulp.src(paths.sass.entry)
-        .pipe($.sourcemaps.init())
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer('last 2 version', 'android 4'))
-        .pipe($.sourcemaps.write('./'))
         // .pipe(spriter({
         //     // The path and file name of where we will save the sprite sheet
         //     'spriteSheet': './dist/images/spritesheet.png',
@@ -71,8 +69,30 @@ gulp.task('sass', function () {
         }));
 
 });
+gulp.task('sass-debug', function () {
+    gulp.src(paths.sass.entry)
+        .pipe($.sourcemaps.init())
+        .pipe($.sass().on('error', $.sass.logError))
+        .pipe($.autoprefixer('last 2 version', 'android 4'))
+        .pipe($.sourcemaps.write('./'))
+        .pipe(gulp.dest('./dist/css/'))
+        .pipe(reload({
+            stream: true
+        }));
+
+});
 //compile js file
 gulp.task('js', function () {
+    gulp.src(paths.js.entry)
+        .pipe($.babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('dist/js/'))
+        .pipe(reload({
+            stream: true
+        }));
+});
+gulp.task('js-debug', function () {
     gulp.src(paths.js.entry)
         .pipe($.sourcemaps.init())
         .pipe($.babel({
@@ -115,7 +135,8 @@ gulp.task('watch', function () {
 })
 
 var commTask = ['copy', 'html', 'sass', 'js'];
+var debugTask = ['copy', 'html', 'sass-debug', 'js-debug'];
 
-gulp.task('dev', commTask.concat('watch'));
+gulp.task('debug', debugTask.concat('watch'));
 gulp.task('build', commTask);
-gulp.task('default', ['dev']);
+gulp.task('default', ['debug']);

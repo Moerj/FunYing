@@ -4,19 +4,15 @@
     (function () {
         // picker
 
-        var sort = 1;
-        var area = null;
-        var type = null;
+        // 筛选参数，页面独有
+        var sort = 1; //排序 1.更新时间 2.人气排行
+        var area = null; //地区 直接传中文字符，'全部'传空
+        var type = null; //电影类型，同地区
 
         var lazy = new LazyLoad({
+
             $scrollContanier: $('.infinite-scroll'), //滚动父容器
             $listContanier: $('.find-content'), //列表容器
-            $preloader: $('.infinite-scroll-preloader'), //滚动加载loading效果
-            maxItems: 100, // 最多可加载的条目
-            itemsPerLoad: 27, // 每次加载添加多少条目
-            sort: 1, //排序 1.更新时间 2.人气排行
-            area: null, //地区 直接传中文字符，'全部'传空
-            type: null, //电影类型，同地区
 
             // 配置渲染模板
             template: function template(data) {
@@ -109,4 +105,3 @@
         lazy.reload();
     })();
 }
-//# sourceMappingURL=find.js.map

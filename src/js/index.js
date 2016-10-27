@@ -97,7 +97,7 @@ $(function () {
                         <img src="${mov.poster}" alt="">
                     </div>
                     <div class="info">
-                        <span class="t"><span class="index">01</span>${mov.title}</span>
+                        <span class="t"><span class="index">0${i+1}</span>${mov.title}</span>
                         <p class="text">${mov.introduction}</p>
                         <span class="text2">更新到第${mov.updateSite}集</span>
                     </div>

@@ -62,4 +62,3 @@
         });
     })();
 }
-//# sourceMappingURL=updateList.js.map

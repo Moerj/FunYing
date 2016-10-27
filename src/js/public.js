@@ -1,18 +1,31 @@
 // 无限滚动的懒加载
 class LazyLoad {
     constructor(opt) {
-        this.opt = opt
-        this.loading = false
-        this.currentPage = 1
-        this.maxItems = this.opt.maxItems || 1000
+        // 默认参数
+        const DEFAULT = {
+            maxItems: 1000,
+            itemsPerLoad: 27,
+            loading: false,
+            currentPage: 1,
+            $preloader: opt.$scrollContanier.find('.infinite-scroll-preloader')
+        }
+
+        opt = $.extend({}, DEFAULT, opt)
+
+        // 将opt参数解构给this
+        for (let key in opt) {
+            if (opt.hasOwnProperty(key)) {
+                this[key] = opt[key]
+            }
+        }
 
         // 注册'infinite'事件处理函数
-        this.opt.$scrollContanier.on('infinite', () => {
+        this.$scrollContanier.on('infinite', () => {
             // 如果正在加载，则退出
             if (this.loading) return;
 
             // 超出最大限制
-            if (this.opt.$listContanier.children().length >= this.maxItems) {
+            if (this.$listContanier.children().length >= this.maxItems) {
                 this.finish();
                 return;
             }
@@ -20,9 +33,9 @@ class LazyLoad {
             // 设置flag
             this.loading = true;
 
-            this.opt.ajax({
+            this.ajax({
                 skip: this.currentPage, //当前页
-                limit: this.opt.itemsPerLoad //每页条数
+                limit: this.itemsPerLoad //每页条数
             }, (data) => {
                 // 重置加载flag
                 this.loading = false;
@@ -46,10 +59,10 @@ class LazyLoad {
     // 刷新数据
     reload() {
         // 滚动条置顶
-        this.opt.$scrollContanier[0].scrollTop = 0;
+        this.$scrollContanier[0].scrollTop = 0;
 
         // 回复loading的效果
-        this.opt.$preloader.html('<div class="preloader"></div>')
+        this.$preloader.html('<div class="preloader"></div>')
 
         // 当前页从1开始
         this.currentPage = 1;
@@ -60,15 +73,15 @@ class LazyLoad {
         // loading效果
         $.showIndicator()
 
-        this.opt.ajax({
+        this.ajax({
             skip: 1, //当前页
-            limit: this.opt.itemsPerLoad //每页条数
+            limit: this.itemsPerLoad //每页条数
         }, (data) => {
-            this.opt.$listContanier.empty()
+            this.$listContanier.empty()
             if (data.length) {
                 this.currentPage++;
                 this.render(data)
-            }else{
+            } else {
                 this.finish();
             }
             $.hideIndicator();
@@ -84,14 +97,14 @@ class LazyLoad {
         this.loading = true;
 
         // 删除加载提示符
-        this.opt.$preloader.text('已经到底了！');
+        this.$preloader.text('已经到底了！');
     }
 
     // 进行渲染
     render(data) {
-        let html = this.opt.template(data)
-        // 添加新条目
-        this.opt.$listContanier.append(html);
+        let html = this.template(data)
+            // 添加新条目
+        this.$listContanier.append(html);
 
     }
 }

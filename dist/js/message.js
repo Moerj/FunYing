@@ -39,4 +39,3 @@ $(function () {
     }
     createMessage();
 });
-//# sourceMappingURL=message.js.map

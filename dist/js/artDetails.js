@@ -47,4 +47,3 @@
         });
     })();
 }
-//# sourceMappingURL=artDetails.js.map

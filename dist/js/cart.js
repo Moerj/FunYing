@@ -89,4 +89,3 @@ $(function () {
         $(this).find('.delete').removeClass('show');
     });
 });
-//# sourceMappingURL=cart.js.map

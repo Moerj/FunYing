@@ -82,7 +82,7 @@ $(function () {
         var tpl = "";
         for (var i = 0; i < res.length; i++) {
             var mov = res[i];
-            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + $.url.movDetails + mov.id + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.poster + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">01</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + $.url.movDetails + mov.id + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.poster + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">0" + (i + 1) + "</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
         }
         $('#rankTop').append(tpl);
     }
@@ -193,4 +193,3 @@ $(function () {
         }
     });
 });
-//# sourceMappingURL=index.js.map

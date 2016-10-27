@@ -18,4 +18,3 @@
 
     createMyMovie();
 }
-//# sourceMappingURL=myMovie.js.map
