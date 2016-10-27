@@ -2,6 +2,7 @@
     $deleteWidth: rem(80px);
     font-size: rem(12px);
     bottom: 0;
+    top: 0;
     .empty {
         width: rem(121px);
         height: rem(168px);
@@ -9,6 +10,18 @@
         top: 50%;
         left: 50%;
         transform: translate3d(-50%, -50%, 0);
+        z-index: 0;
+    }
+    ul{
+        position: absolute;
+        display: block;
+        top: 2.2rem;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        background: #eee;
+        overflow: auto;
     }
     .messageList {
         background: white;

@@ -2,19 +2,52 @@
 
 $(function () {
 
-    var $contanier = $('.message-contanier');
+    var $contanier = $('.message-contanier ul');
     var $emptyBackground = $contanier.find('.empty');
 
-    // $.showIndicator()
+    $.showIndicator();
 
-    // $.ajax({
-    //     type: "get",
-    //     url: "url",
-    //     data: "data",
-    //     success: function (response) {
-    //         $.hideIndicator()
-    //     }
-    // });
+    var loader = new ScrollLoad({
+
+        scrollContanier: $contanier, //滚动父容器
+        // maxload: 10,
+        // perload: 7,
+
+        // 配置渲染模板
+        template: function template(data) {
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                html += '\n                <li class="messageList">\n                    <a href="' + ($.url.artDetails + d.id) + '" class="message external">\n                        <p class="Title">\n                            <span class="name">' + d.title + '</span>\n                            <span class="day">' + d.addTime + '</span>\n                        </p>\n                        <p class="details">' + d.introduction + '</p>\n                        <span class="delete"></span>\n                    </a>\n                </li>\n                ';
+            }
+            return html;
+        },
+
+        ajax: function ajax(data, callback) {
+            $.ajax({
+                type: "get",
+                url: '../json/message.json',
+                data: data,
+                success: function success(res) {
+                    if (res.DATA) {
+                        callback(res.DATA);
+                    } else {
+                        $.alert('没有数据了');
+                    }
+                },
+                error: function error(e) {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！');
+                },
+                complete: function complete() {
+                    if ($contanier.children().length == 0) {
+                        $contanier.hide();
+                    }
+                    $.hideIndicator();
+                }
+            });
+        }
+    });
 
     $(document).on('swipeLeft', '.message', function () {
         $(this).addClass('showDelete');
@@ -27,15 +60,4 @@ $(function () {
         }
         return false;
     });
-
-    function createMessage() {
-        var length = 3;
-        var tpl = '';
-        for (var i = 0; i < length; i++) {
-            tpl += '\n            <div class="messageList">\n                <a href="' + ($.url.artDetails + 1) + '" class="message external">\n                    <p class="Title">\n                        <span class="name">《正义联盟》新版戈登曝光造型</span>\n                        <span class="day">9/17</span>\n                    </p>\n                    <p class="details">DC漫改大作《正义联盟》导演扎克·施奈德昨日曝光该片两张最新宣传照，庆祝今年的蝙蝠侠日（9月17日）hahahahahahahahahahahahahahahahahahahahahahahahaha</p>\n                    <span class="delete"></span>\n                </a>\n            </div>\n            ';
-        }
-        $contanier.append(tpl);
-        $emptyBackground.hide();
-    }
-    createMessage();
 });

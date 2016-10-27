@@ -5,10 +5,10 @@
     let area = null //地区 直接传中文字符，'全部'传空
     let type = null //电影类型，同地区
 
-    let lazy = new LazyLoad({
+    let loader = new ScrollLoad({
 
-        $scrollContanier: $('.infinite-scroll'), //滚动父容器
-        $listContanier: $('.find-content'), //列表容器
+        scrollContanier: '.infinite-scroll', //滚动父容器
+        listContanier: '.find-content', //列表容器
 
         // 配置渲染模板
         template: (data) => {
@@ -80,7 +80,7 @@
         }],
         onClose: (picker) => {
             sort = picker.value[0] == '更新时间' ? 1 : 2
-            lazy.reload()
+            loader.reload()
         }
     });
     $selectSwitch.eq(1).picker({
@@ -91,7 +91,7 @@
         }],
         onClose: (picker) => {
             area = picker.value[0] == '全部' ? null : picker.value[0]
-            lazy.reload()
+            loader.reload()
         }
     });
     $selectSwitch.eq(2).picker({
@@ -102,11 +102,9 @@
         }],
         onClose: (picker) => {
             type = picker.value[0] == '全部' ? null : picker.value[0]
-            lazy.reload()
+            loader.reload()
         }
     });
 
 
-    //预先加载
-    lazy.reload()
 }

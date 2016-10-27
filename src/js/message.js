@@ -1,20 +1,67 @@
 $(function () {
 
-    const $contanier = $('.message-contanier')
+    const $contanier = $('.message-contanier ul')
     const $emptyBackground = $contanier.find('.empty')
 
-    // $.showIndicator()
+    $.showIndicator()
 
-    // $.ajax({
-    //     type: "get",
-    //     url: "url",
-    //     data: "data",
-    //     success: function (response) {
-    //         $.hideIndicator()
-    //     }
-    // });
+    let loader = new ScrollLoad({
 
-    $(document).on('swipeLeft', '.message', function () {
+        scrollContanier: $contanier, //滚动父容器
+        // maxload: 10,
+        // perload: 7,
+
+        // 配置渲染模板
+        template: (data) => {
+            let html = '';
+            for (let i = 0; i < data.length; i++) {
+                let d = data[i]
+                html += `
+                <li class="messageList">
+                    <a href="${$.url.artDetails + d.id}" class="message external">
+                        <p class="Title">
+                            <span class="name">${d.title}</span>
+                            <span class="day">${d.addTime}</span>
+                        </p>
+                        <p class="details">${d.introduction}</p>
+                        <span class="delete"></span>
+                    </a>
+                </li>
+                `
+            }
+            return html
+        },
+
+        ajax: (data, callback) => {
+            $.ajax({
+                type: "get",
+                url: '../json/message.json',
+                data: data,
+                success: (res) => {
+                    if (res.DATA) {
+                        callback(res.DATA)
+                    } else {
+                        $.alert('没有数据了')
+                    }
+                },
+                error: (e) => {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！')
+                },
+                complete: () => {
+                    if ($contanier.children().length == 0) {
+                        $contanier.hide();
+                    }
+                    $.hideIndicator()
+                }
+            });
+        }
+    })
+
+
+
+    $(document)
+        .on('swipeLeft', '.message', function () {
             $(this).addClass('showDelete')
         })
         .on('swipeRight', '.message', function () {
@@ -29,25 +76,4 @@ $(function () {
         })
 
 
-    function createMessage() {
-        let length = 3;
-        let tpl = ``
-        for (let i = 0; i < length; i++) {
-            tpl += `
-            <div class="messageList">
-                <a href="${$.url.artDetails + 1}" class="message external">
-                    <p class="Title">
-                        <span class="name">《正义联盟》新版戈登曝光造型</span>
-                        <span class="day">9/17</span>
-                    </p>
-                    <p class="details">DC漫改大作《正义联盟》导演扎克·施奈德昨日曝光该片两张最新宣传照，庆祝今年的蝙蝠侠日（9月17日）hahahahahahahahahahahahahahahahahahahahahahahahaha</p>
-                    <span class="delete"></span>
-                </a>
-            </div>
-            `
-        }
-        $contanier.append(tpl)
-        $emptyBackground.hide()
-    }
-    createMessage()
 })

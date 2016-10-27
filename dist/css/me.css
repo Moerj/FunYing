@@ -676,14 +676,26 @@
 
 .message-contanier {
   font-size: 0.6rem;
-  bottom: 0; }
+  bottom: 0;
+  top: 0; }
   .message-contanier .empty {
     width: 6.05rem;
     height: 8.4rem;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate3d(-50%, -50%, 0); }
+    transform: translate3d(-50%, -50%, 0);
+    z-index: 0; }
+  .message-contanier ul {
+    position: absolute;
+    display: block;
+    top: 2.2rem;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: #eee;
+    overflow: auto; }
   .message-contanier .messageList {
     background: white;
     overflow: hidden;
@@ -766,5 +778,3 @@
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column; }
-
-/*# sourceMappingURL=me.css.map */
