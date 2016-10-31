@@ -4,7 +4,10 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+window.openId = 'opneid165498463123';
+
 // 无限滚动的懒加载
+
 var ScrollLoad = function () {
     function ScrollLoad(opt) {
         var _this = this;

@@ -23,9 +23,14 @@
             ajax: function ajax(data, callback) {
                 $.ajax({
                     type: "get",
-                    url: '../json/message.json',
-                    data: data,
+                    url: 'http://118.178.136.60:8001/rest/user/myMovie',
+                    // url: '../json/message.json',
+                    data: {
+                        openId: window.openId,
+                        state: 1
+                    },
                     success: function success(res) {
+                        // console.log(res);
                         if (res.DATA) {
                             callback(res.DATA);
                         } else {

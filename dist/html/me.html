@@ -21,18 +21,18 @@
             <div class="userinfo alist endone">
                 <label class="headpic">
                     <input type="file" id="headpicUpload">
-                    <img src="../images/index-banner.jpg" id="headimg">
+                    <img src="#" id="headerImg">
                 </label>
                 <div class="text">
-                    <span class="name">周呗</span>
-                    <span class="weixin">微信号：<span>18923525</span></span>
+                    <span class="name" id="nickName"></span>
+                    <span class="weixin">微信号：<span id="loginName"></span></span>
                 </div>
             </div>
             <div class="money endone">
                 <div class="circle">
                     <div class="echart"></div>
                     <div class="total">
-                        <div class="num">125.00</div>
+                        <div class="num" id="total">--</div>
                         <span class="numinfo">账户余额</span>
                     </div>
                 </div>
@@ -40,12 +40,12 @@
                     <div class="numdetails">
                         <b class="yellow"></b>
                         <span class="numinfo">充值余额</span>
-                        <span class="num">78.13</span>
+                        <span class="num" id="rechargeAmount">--</span>
                     </div>
                     <div class="numdetails">
                         <b class="red"></b>
                         <span class="numinfo">收益余额</span>
-                        <span class="num">46.87</span>
+                        <span class="num" id="lucreAmount">--</span>
                     </div>
                 </div>
                 <div class="line"></div>

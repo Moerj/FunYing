@@ -1,3 +1,5 @@
+window.openId = 'opneid165498463123'
+
 // 无限滚动的懒加载
 class ScrollLoad {
     constructor(opt) {
