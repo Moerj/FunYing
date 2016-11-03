@@ -23,6 +23,7 @@
                 let lucreAmountVal = Number($('#lucreAmount').text())
                 let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
                 $('#total').text(total)
+                $headimg.attr('src',data.headerImg)
 
                 let pieData = [{
                     name: '收益余额',

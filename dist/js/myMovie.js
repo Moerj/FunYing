@@ -30,11 +30,11 @@
                         state: 1 //我的影片
                     },
                     success: function success(res) {
-                        console.log(res);
+                        // console.log(res);
                         if (res.DATA) {
                             callback(res.DATA);
                         } else {
-                            $.alert('没有数据了');
+                            console.log(window.location.hash + '没有数据');
                         }
                     },
                     error: function error(e) {

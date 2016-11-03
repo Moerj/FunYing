@@ -5,9 +5,7 @@ $(function () {
     var $contanier = $('.message-contanier ul');
     var $emptyBackground = $contanier.find('.empty');
 
-    $.showIndicator();
-
-    var loader = new ScrollLoad({
+    new ScrollLoad({
 
         scrollContanier: $contanier, //滚动父容器
         // maxload: 10,
@@ -24,15 +22,20 @@ $(function () {
         },
 
         ajax: function ajax(data, callback) {
+            var newData = $.extend({}, data, {
+                openId: window.openId
+            });
             $.ajax({
                 type: "get",
-                url: '../json/message.json',
-                data: data,
+                // url: '../json/message.json',
+                url: 'http://118.178.136.60:8001/rest/user/systemMsg',
+                data: newData,
                 success: function success(res) {
+                    // console.log(res);
                     if (res.DATA) {
                         callback(res.DATA);
                     } else {
-                        $.alert('没有数据了');
+                        console.log('路由页面没有数据>>');
                     }
                 },
                 error: function error(e) {
@@ -40,24 +43,42 @@ $(function () {
                     $.alert('刷新失败，请稍后再试！');
                 },
                 complete: function complete() {
-                    if ($contanier.children().length == 0) {
-                        $contanier.hide();
-                    }
-                    $.hideIndicator();
+                    showEmpty();
                 }
             });
         }
     });
+
+    function showEmpty() {
+        if ($contanier.children('.messageList').length == 0) {
+            $contanier.hide();
+        }
+    }
+
+    function deleteOneMsg(deleteBtn) {
+        var $deleteBtn = $(deleteBtn);
+        var msgId = '';
+        $deleteBtn.parents('.messageList').remove();
+        showEmpty();
+        // $.ajax({
+        //     url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
+        //     data: {
+        //         openId: window.openId,
+        //         msgId: msgId
+        //     },
+        //     dataType: "dataType",
+        //     success: function (res) {
+        //         console.log(res);
+        //     }
+        // });
+    }
 
     $(document).on('swipeLeft', '.message', function () {
         $(this).addClass('showDelete');
     }).on('swipeRight', '.message', function () {
         $(this).removeClass('showDelete');
     }).on('click', '.messageList .delete', function () {
-        $(this).parents('.messageList').remove();
-        if ($contanier.find('.messageList').length == 0) {
-            $emptyBackground.show();
-        }
-        return false;
+        deleteOneMsg(this);
+        return false; //防冒泡
     });
 });

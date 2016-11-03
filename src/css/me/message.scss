@@ -3,6 +3,8 @@
     font-size: rem(12px);
     bottom: 0;
     top: 0;
+    background: #eee url('../images/empty_message.png') no-repeat center;
+    background-size: rem(168px);
     .empty {
         width: rem(121px);
         height: rem(168px);

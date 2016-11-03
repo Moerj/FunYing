@@ -63,6 +63,7 @@
                     var lucreAmountVal = Number($('#lucreAmount').text());
                     var total = (rechargeAmountVal + lucreAmountVal).toFixed(2);
                     $('#total').text(total);
+                    $headimg.attr('src', data.headerImg);
 
                     var pieData = [{
                         name: '收益余额',
