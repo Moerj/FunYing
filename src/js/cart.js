@@ -1,38 +1,78 @@
 $(() => {
-    function createList(data) {
-        let tpl = ``
-        let len = 6
-        for (let i = 0; i < len; i++) {
-            tpl += `
-        <li>
-            <label for="list-${i+1}">
-                <span class="checkbox">
-                    <input type="checkbox" class="select" id="list-${i+1}">
-                    <label for="list-${i+1}"></label>
-                </span>
-                <div class="listcontent">
-                    <div class="imgbox">
-                        <img src="${'../images/index-banner.jpg'}">
-                    </div>
-                    <div class="info">
-                        <h4 class="Title">${'芳芳'}</h4>
-                        <span class="text">
-                            ${'每个早上，我都要离开你；每个黄昏，你都要把我追回来。一天一天爱下去。” 电影总是留下貌似圆满的结尾，生活的...'}
+    const $contanier = $('.list')
+    let loader = new ScrollLoad({
+
+        scrollContanier: $contanier, //滚动父容器
+        // maxload: 10,
+        // perload: 7,
+
+        // 配置渲染模板
+        template: (data) => {
+            let html = '';
+            for (let i = 0; i < data.length; i++) {
+                let d = data[i]
+                html += `
+                <li>
+                    <label for="list-${i+1}">
+                        <span class="checkbox">
+                            <input type="checkbox" class="select" id="list-${i+1}" movieId="${d.id}">
+                            <label for="list-${i+1}"></label>
                         </span>
-                        <p>
-                            <span class="site">更新至第${5}集</span>
-                            <span class="price">${Number(10).toFixed(2)}</span>
-                        </p>
-                    </div>
-                    <span class="delete">删除</span>
-                </div>
-            </label>
-        </li>
-        `
+                        <div class="listcontent">
+                            <div class="imgbox">
+                                <img src="${d.poster}">
+                            </div>
+                            <div class="info">
+                                <h4 class="Title">${d.title}</h4>
+                                <span class="text">
+                                    ${d.introduction}
+                                </span>
+                                <p>
+                                    <span class="site">更新至第${d.updateSite}集</span>
+                                    <span class="price">${Number(d.price).toFixed(2)}</span>
+                                </p>
+                            </div>
+                            <span class="delete" movieId="${d.id}">删除</span>
+                        </div>
+                    </label>
+                </li>
+                `
+            }
+            return html
+        },
+
+        ajax: (data, callback) => {
+            let newData = $.extend({}, data, {
+                openId: window.openId,
+                state: 0
+            })
+
+            $.showIndicator()
+
+            $.ajax({
+                url: 'http://118.178.136.60:8001/rest/user/myMovie',
+                data: newData,
+                success: (res) => {
+                    console.log(res);
+                    if (res.DATA) {
+                        callback(res.DATA)
+                    } else {
+                        $.alert('没有数据了')
+                    }
+                },
+                error: (e) => {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！')
+                },
+                complete: () => {
+                    if ($contanier.children().length == 0) {
+                        $contanier.hide();
+                    }
+                    $.hideIndicator()
+                }
+            });
         }
-        $('.list').append(tpl)
-    }
-    createList();
+    })
 
 
 
@@ -84,16 +124,48 @@ $(() => {
         }
     }
 
-    // 删除一行
+    // 删除请求
+    function deleteOneMovie(deleteBtn) {
+        // 确保是jq对象
+        let $deleteBtn = $(deleteBtn)
+
+        for (let i = 0; i < $deleteBtn.length; i++) {
+            let movieId = $($deleteBtn[i]).attr('movieId')
+            console.log('deleteId:' + movieId);
+            /*$.ajax({
+                url: "http://118.178.136.60:8001/rest/user/delMyMovie",
+                data: {
+                    openId: window.openId,
+                    movieId: movieId
+                },
+                success: (res) => {
+                    if (res.STATUS == 1) {
+
+                    } else {
+
+                    }
+                },
+                error: () => {
+
+                }
+            });*/
+        }
+
+        // 不必等待数据的真实删除
+        // 删除dom
+        $deleteBtn.parents('li').remove();
+    }
+
+    // 删除单个
     $(document).on('click', '.delete', function () {
-        $(this).parents('li').remove();
+        deleteOneMovie(this)
         changeBtnStatus()
         deleteEmpty()
     })
 
     // 删除全部
     $('.deleteAll').click(function () {
-        $('.select:checked').parents('li').remove();
+        deleteOneMovie($('.select:checked'))
         changeBtnStatus()
         deleteEmpty()
     })
@@ -108,11 +180,11 @@ $(() => {
 
     // 触摸滑动事件
     // 左滑 显示单个删除
-    $('.list>li')
-        .swipeLeft(function () {
+    $contanier
+        .on('swipeLeft', 'li', function () {
             $(this).find('.delete').addClass('show')
         })
-        .swipeRight(function () {
+        .on('swipeRight', 'li', function () {
             $(this).find('.delete').removeClass('show')
         })
 })

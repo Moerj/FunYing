@@ -104,7 +104,8 @@
     border-bottom: 1px #ddd solid;
     background: white;
     height: 7.2rem;
-    overflow: hidden; }
+    overflow: hidden;
+    position: relative; }
   .list .checkbox {
     margin: 0 0.4rem; }
   .list .listcontent {
@@ -115,8 +116,7 @@
     -ms-flex-pack: justify;
         justify-content: space-between;
     -ms-flex-align: center;
-        align-items: center;
-    position: relative; }
+        align-items: center; }
     .list .listcontent .imgbox {
       display: inline-block;
       width: 4rem;
@@ -156,5 +156,3 @@
       transform: translate3d(100%, 0, 0); }
       .list .listcontent .delete.show {
         transform: translate3d(0, 0, 0); }
-
-/*# sourceMappingURL=cart.css.map */

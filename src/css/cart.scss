@@ -110,6 +110,7 @@ $navHeight: 2.5rem;
         background: white;
         height:$listHeight;
         overflow: hidden;
+        position: relative;
     }
     .checkbox {
         margin: 0 rem(8px);
@@ -119,7 +120,7 @@ $navHeight: 2.5rem;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        position: relative;
+        // position: relative;
         .imgbox {
             display: inline-block;
             width: rem(80px);

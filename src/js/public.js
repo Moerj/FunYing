@@ -1,10 +1,34 @@
-window.openId = 'opneid165498463123'
+// 获取openid
+
+$.GetQueryString = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+}
+
+let code = $.GetQueryString('code')
+
+if (code) {
+    $.ajax({
+        url: "http://118.178.136.60/wx/service/getOpenId",
+        data: {
+            code: code
+        },
+        success: function (res) {
+            let str = JSON.stringify(res)
+            $.alert(str)
+        }
+    });
+}
+
+window.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
 
 // 无限滚动的懒加载
 class ScrollLoad {
     constructor(opt) {
         opt.scrollContanier = $(opt.scrollContanier)
-        if (opt.listContanier!=undefined) {
+        if (opt.listContanier != undefined) {
             opt.listContanier = $(opt.listContanier)
         }
 

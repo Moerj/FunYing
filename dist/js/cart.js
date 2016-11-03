@@ -1,15 +1,55 @@
 'use strict';
 
 $(function () {
-    function createList(data) {
-        var tpl = '';
-        var len = 6;
-        for (var i = 0; i < len; i++) {
-            tpl += '\n        <li>\n            <label for="list-' + (i + 1) + '">\n                <span class="checkbox">\n                    <input type="checkbox" class="select" id="list-' + (i + 1) + '">\n                    <label for="list-' + (i + 1) + '"></label>\n                </span>\n                <div class="listcontent">\n                    <div class="imgbox">\n                        <img src="' + '../images/index-banner.jpg' + '">\n                    </div>\n                    <div class="info">\n                        <h4 class="Title">' + '芳芳' + '</h4>\n                        <span class="text">\n                            ' + '每个早上，我都要离开你；每个黄昏，你都要把我追回来。一天一天爱下去。” 电影总是留下貌似圆满的结尾，生活的...' + '\n                        </span>\n                        <p>\n                            <span class="site">更新至第' + 5 + '集</span>\n                            <span class="price">' + Number(10).toFixed(2) + '</span>\n                        </p>\n                    </div>\n                    <span class="delete">删除</span>\n                </div>\n            </label>\n        </li>\n        ';
+    var $contanier = $('.list');
+    var loader = new ScrollLoad({
+
+        scrollContanier: $contanier, //滚动父容器
+        // maxload: 10,
+        // perload: 7,
+
+        // 配置渲染模板
+        template: function template(data) {
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                html += '\n                <li>\n                    <label for="list-' + (i + 1) + '">\n                        <span class="checkbox">\n                            <input type="checkbox" class="select" id="list-' + (i + 1) + '" movieId="' + d.id + '">\n                            <label for="list-' + (i + 1) + '"></label>\n                        </span>\n                        <div class="listcontent">\n                            <div class="imgbox">\n                                <img src="' + d.poster + '">\n                            </div>\n                            <div class="info">\n                                <h4 class="Title">' + d.title + '</h4>\n                                <span class="text">\n                                    ' + d.introduction + '\n                                </span>\n                                <p>\n                                    <span class="site">更新至第' + d.updateSite + '集</span>\n                                    <span class="price">' + Number(d.price).toFixed(2) + '</span>\n                                </p>\n                            </div>\n                            <span class="delete" movieId="' + d.id + '">删除</span>\n                        </div>\n                    </label>\n                </li>\n                ';
+            }
+            return html;
+        },
+
+        ajax: function ajax(data, callback) {
+            var newData = $.extend({}, data, {
+                openId: window.openId,
+                state: 0
+            });
+
+            $.showIndicator();
+
+            $.ajax({
+                url: 'http://118.178.136.60:8001/rest/user/myMovie',
+                data: newData,
+                success: function success(res) {
+                    console.log(res);
+                    if (res.DATA) {
+                        callback(res.DATA);
+                    } else {
+                        $.alert('没有数据了');
+                    }
+                },
+                error: function error(e) {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！');
+                },
+                complete: function complete() {
+                    if ($contanier.children().length == 0) {
+                        $contanier.hide();
+                    }
+                    $.hideIndicator();
+                }
+            });
         }
-        $('.list').append(tpl);
-    }
-    createList();
+    });
 
     // 交互部分==============
     var editMode = false;
@@ -59,16 +99,45 @@ $(function () {
         }
     }
 
-    // 删除一行
+    // 删除请求
+    function deleteOneMovie(deleteBtn) {
+        // 确保是jq对象
+        var $deleteBtn = $(deleteBtn);
+
+        for (var i = 0; i < $deleteBtn.length; i++) {
+            var movieId = $($deleteBtn[i]).attr('movieId');
+            console.log('deleteId:' + movieId);
+            /*$.ajax({
+                url: "http://118.178.136.60:8001/rest/user/delMyMovie",
+                data: {
+                    openId: window.openId,
+                    movieId: movieId
+                },
+                success: (res) => {
+                    if (res.STATUS == 1) {
+                     } else {
+                     }
+                },
+                error: () => {
+                 }
+            });*/
+        }
+
+        // 不必等待数据的真实删除
+        // 删除dom
+        $deleteBtn.parents('li').remove();
+    }
+
+    // 删除单个
     $(document).on('click', '.delete', function () {
-        $(this).parents('li').remove();
+        deleteOneMovie(this);
         changeBtnStatus();
         deleteEmpty();
     });
 
     // 删除全部
     $('.deleteAll').click(function () {
-        $('.select:checked').parents('li').remove();
+        deleteOneMovie($('.select:checked'));
         changeBtnStatus();
         deleteEmpty();
     });
@@ -83,9 +152,9 @@ $(function () {
 
     // 触摸滑动事件
     // 左滑 显示单个删除
-    $('.list>li').swipeLeft(function () {
+    $contanier.on('swipeLeft', 'li', function () {
         $(this).find('.delete').addClass('show');
-    }).swipeRight(function () {
+    }).on('swipeRight', 'li', function () {
         $(this).find('.delete').removeClass('show');
     });
 });

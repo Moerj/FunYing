@@ -8,7 +8,7 @@
         type: "get",
         url: "http://118.178.136.60:8001/rest/user/index",
         data: {
-            openId: openId
+            openId: window.openId
         },
         success: function (res) {
             // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount

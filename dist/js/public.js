@@ -1,10 +1,34 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-window.openId = 'opneid165498463123';
+// 获取openid
+
+$.GetQueryString = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+};
+
+var code = $.GetQueryString('code');
+
+if (code) {
+    $.ajax({
+        url: "http://118.178.136.60/wx/service/getOpenId",
+        data: {
+            code: code
+        },
+        success: function success(res) {
+            var str = JSON.stringify(res);
+            $.alert(str);
+        }
+    });
+}
+
+window.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
 
 // 无限滚动的懒加载
 
@@ -67,7 +91,7 @@ var ScrollLoad = function () {
 
 
     _createClass(ScrollLoad, [{
-        key: 'scroll',
+        key: "scroll",
         value: function scroll() {
             var _this2 = this;
 
@@ -109,7 +133,7 @@ var ScrollLoad = function () {
         // 刷新数据
 
     }, {
-        key: 'reload',
+        key: "reload",
         value: function reload() {
             var _this3 = this;
 
@@ -151,7 +175,7 @@ var ScrollLoad = function () {
         // 加载完成
 
     }, {
-        key: 'finish',
+        key: "finish",
         value: function finish() {
             // 关闭滚动监听
             this.scrollContanier.off('scroll');
@@ -163,7 +187,7 @@ var ScrollLoad = function () {
         // 进行渲染
 
     }, {
-        key: 'render',
+        key: "render",
         value: function render(data) {
             // 根据每页条数限制data长度
             // 后台返回的数据，有可能超过自定分页长度
@@ -181,8 +205,8 @@ var ScrollLoad = function () {
 }();
 
 $.url = {
-    movDetails: './movieDetails.html?movieId=',
-    artDetails: './articleDetails.html?articleId='
+    movDetails: "./movieDetails.html?movieId=",
+    artDetails: "./articleDetails.html?articleId="
 };
 
 $.msg = function (opts, timeout) {
@@ -194,7 +218,7 @@ $.msg = function (opts, timeout) {
         timeout = opts.timeout || 2000;
     }
 
-    var $tpl = $('\n        <div class="mask">\n            <div class="msg">\n                <p class="msg-title">' + title + '</p>\n                <p class="msg-text">' + text + '</p>\n            </div>\n        </div>\n    ');
+    var $tpl = $("\n        <div class=\"mask\">\n            <div class=\"msg\">\n                <p class=\"msg-title\">" + title + "</p>\n                <p class=\"msg-text\">" + text + "</p>\n            </div>\n        </div>\n    ");
 
     $('body').append($tpl);
 
