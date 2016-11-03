@@ -27,10 +27,10 @@
                     // url: '../json/message.json',
                     data: {
                         openId: window.openId,
-                        state: 1
+                        state: 1 //我的影片
                     },
                     success: function success(res) {
-                        // console.log(res);
+                        console.log(res);
                         if (res.DATA) {
                             callback(res.DATA);
                         } else {
@@ -42,8 +42,9 @@
                         $.alert('刷新失败，请稍后再试！');
                     },
                     complete: function complete() {
-                        $contanier.toggleClass('empty', !!!$contanier.children().length);
-                        $.hideIndicator();
+                        if ($contanier.find('.box').length == 0) {
+                            $contanier.hide();
+                        }
                     }
                 });
             }

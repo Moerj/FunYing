@@ -40,7 +40,7 @@ $(function () {
                     $.alert('刷新失败，请稍后再试！');
                 },
                 complete: function complete() {
-                    if ($contanier.children().length == 0) {
+                    if ($contanier.children('li').length == 0) {
                         $contanier.hide();
                     }
                 }
