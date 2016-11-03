@@ -2,7 +2,7 @@
 
 $(function () {
     var $contanier = $('.list');
-    var loader = new ScrollLoad({
+    new ScrollLoad({
 
         scrollContanier: $contanier, //滚动父容器
         // maxload: 10,
@@ -21,16 +21,14 @@ $(function () {
         ajax: function ajax(data, callback) {
             var newData = $.extend({}, data, {
                 openId: window.openId,
-                state: 0
+                state: 0 //购物车
             });
-
-            $.showIndicator();
 
             $.ajax({
                 url: 'http://118.178.136.60:8001/rest/user/myMovie',
                 data: newData,
                 success: function success(res) {
-                    console.log(res);
+                    // console.log(res);
                     if (res.DATA) {
                         callback(res.DATA);
                     } else {
@@ -45,11 +43,37 @@ $(function () {
                     if ($contanier.children().length == 0) {
                         $contanier.hide();
                     }
-                    $.hideIndicator();
                 }
             });
         }
     });
+
+    // 删除请求
+    function deleteOneMovie(deleteBtn) {
+        // 确保是jq对象
+        var $deleteBtn = $(deleteBtn);
+
+        for (var i = 0; i < $deleteBtn.length; i++) {
+            var movieId = $($deleteBtn[i]).attr('movieId');
+            console.log('deleteId:' + movieId);
+            $.ajax({
+                url: "http://118.178.136.60:8001/rest/user/delMyMovie",
+                data: {
+                    openId: window.openId,
+                    movieId: movieId
+                },
+                success: function success(res) {
+                    console.log(res);
+                    if (res.STATUS == 1) {} else {}
+                },
+                error: function error() {}
+            });
+        }
+
+        // 不必等待数据的真实删除
+        // 删除dom
+        $deleteBtn.parents('li').remove();
+    }
 
     // 交互部分==============
     var editMode = false;
@@ -99,35 +123,6 @@ $(function () {
         }
     }
 
-    // 删除请求
-    function deleteOneMovie(deleteBtn) {
-        // 确保是jq对象
-        var $deleteBtn = $(deleteBtn);
-
-        for (var i = 0; i < $deleteBtn.length; i++) {
-            var movieId = $($deleteBtn[i]).attr('movieId');
-            console.log('deleteId:' + movieId);
-            /*$.ajax({
-                url: "http://118.178.136.60:8001/rest/user/delMyMovie",
-                data: {
-                    openId: window.openId,
-                    movieId: movieId
-                },
-                success: (res) => {
-                    if (res.STATUS == 1) {
-                     } else {
-                     }
-                },
-                error: () => {
-                 }
-            });*/
-        }
-
-        // 不必等待数据的真实删除
-        // 删除dom
-        $deleteBtn.parents('li').remove();
-    }
-
     // 删除单个
     $(document).on('click', '.delete', function () {
         deleteOneMovie(this);
@@ -153,6 +148,7 @@ $(function () {
     // 触摸滑动事件
     // 左滑 显示单个删除
     $contanier.on('swipeLeft', 'li', function () {
+        $('.delete').removeClass('show');
         $(this).find('.delete').addClass('show');
     }).on('swipeRight', 'li', function () {
         $(this).find('.delete').removeClass('show');

@@ -13,21 +13,11 @@ $.GetQueryString = function (name) {
     return null;
 };
 
-var code = $.GetQueryString('code');
+window.openId = $.GetQueryString('openid');
 
-if (code) {
-    $.ajax({
-        url: "http://118.178.136.60/wx/service/getOpenId",
-        data: {
-            code: code
-        },
-        success: function success(res) {
-            var str = JSON.stringify(res);
-            $.alert(str);
-        }
-    });
-}
+// console.log('openId:', window.openId);
 
+// 测试用
 window.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
 
 // 无限滚动的懒加载
@@ -49,7 +39,6 @@ var ScrollLoad = function () {
             perload: 27, //每次分页条数
             loading: false, //加载等待
             currentPage: 1, //当前页
-            preloader: opt.scrollContanier.find('.infinite-scroll-preloader'), //底部loading菊花
             listContanier: opt.scrollContanier, //list容器，默认等于scroll容器
             scrollContanier: opt.scrollContanier
         };
@@ -63,9 +52,12 @@ var ScrollLoad = function () {
             }
         }
 
+        // 创建loading
+        this.preloader = $("\n            <div class=\"infinite-scroll-preloader\">\n                <div class=\"preloader\"></div>\n            </div>\n        ").appendTo(this.listContanier);
+
         // 调整最大页数
-        if (this.preload > this.maxload) {
-            this.preload = this.maxload;
+        if (this.perload > this.maxload) {
+            this.perload = this.maxload;
         }
 
         // 开启滚动监听
@@ -81,7 +73,8 @@ var ScrollLoad = function () {
             if (data.length) {
                 _this.currentPage++;
                 _this.render(data);
-            } else {
+            }
+            if (data.length <= _this.perload) {
                 _this.finish();
             }
         });
@@ -198,6 +191,9 @@ var ScrollLoad = function () {
 
             // 添加新条目
             this.listContanier.append(html);
+
+            // 将loader移动到列表末
+            this.preloader.appendTo(this.listContanier);
         }
     }]);
 

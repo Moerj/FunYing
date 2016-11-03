@@ -34,7 +34,7 @@
                 }]
             };
 
-            echarts.init($('.echart')[0]).setOption(option);
+            window.echarts.init($('.echart')[0]).setOption(option);
         };
 
         //头像上传

@@ -108,6 +108,11 @@ a {
       .headerTool .tool .button-group .btn {
         font-size: 0.9rem; }
 
+.infinite-scroll-preloader {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0; }
+
 .inithide {
   display: none !important; }
 

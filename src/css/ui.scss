@@ -147,6 +147,13 @@ a {
     }
 }
 
+// 无限滚动的加载菊花
+.infinite-scroll-preloader{
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+}
+
 // ------ ui ------
 .inithide {
     display: none !important;
