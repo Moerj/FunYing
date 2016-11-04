@@ -776,7 +776,10 @@
   font-size: 0.7rem; }
 
 .feedback {
+  top: 0;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
       flex-direction: column; }
+  .feedback .tool {
+    position: relative; }
