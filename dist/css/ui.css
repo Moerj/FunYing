@@ -116,6 +116,14 @@ a {
 .inithide {
   display: none !important; }
 
+button,
+input[type=button] {
+  border: 0; }
+  button:disabled,
+  input[type=button]:disabled {
+    color: white !important;
+    background: #c8c9cb !important; }
+
 .navbar {
   position: fixed;
   bottom: 0;

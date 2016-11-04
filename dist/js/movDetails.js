@@ -3,7 +3,38 @@
 {
     (function () {
 
+        // 加入购物车
+        var addCart = function addCart() {
+            $addCart.prop('disabled', true);
+
+            function _fail() {
+                $.alert('加入购物车失败，请稍后再试！');
+                $addCart.prop('disabled', false);
+            }
+
+            $.ajax({
+                url: "http://118.178.136.60:8001/rest/index/addMovie",
+                data: {
+                    openId: openId,
+                    movieId: movieId
+                },
+                success: function success(res) {
+                    // console.log(res);
+                    if (res.STATUS == 1) {
+                        $.toast('加入购物车成功');
+                    } else {
+                        _fail();
+                    }
+                },
+                error: function error() {
+                    _fail();
+                }
+            });
+        };
+
         // 打开视频
+
+
         var openVedio = function openVedio(url) {
             // $.alert('打开视频：' + url)
             window.location.href = url;
@@ -79,15 +110,19 @@
         // 请求数据
 
 
+        var movieId = $.GetQueryString('movieId');
+        var $addCart = $('#addCart'); //加入购物车按钮
+        var $feedback = $('#detail-tab3'); //反馈快捷标签
+        var $feedbackContext = $('#feedbackContext'); //反馈的内容
+        var $feedbackSubmit = $('#feedbackSubmit'); //反馈提交按钮
+
         // 开启loading效果
         $.showPreloader();
         // 迷你laoding
         // $.showIndicator();
 
         // 影视详情页
-        var $details = $('.details');var idsearch = window.location.search.split('=');
-        var movieId = idsearch[idsearch.length - 1];
-        $.ajax({
+        var $details = $('.details');$.ajax({
             type: "get",
             url: "http://118.178.136.60:8001/rest/index/getMovie",
             data: {
@@ -118,22 +153,49 @@
         // 简介
         $details.on('click', '.button-group .btn', function () {
             var $this = $(this);
+
             // 立即购买
             if ($this.hasClass('buy')) {
-                $.msg('您还不是会员，无法购买，先长按页面下方二维码成为会员吧！');
+                $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！');
             }
 
             // 加入购物车
             if ($this.hasClass('cart')) {
-                $.msg('您还不是会员，无法购买，先长按页面下方二维码成为会员吧！');
+                // $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
+                addCart($this);
             }
         });
 
         // 我要报错
-        var $feedback = $('#detail-tab3');
-        var $subText = $feedback.find('.sub-text');
         $feedback.on('click', '.sub-tag span', function () {
-            $subText.val($subText.val() + '#' + $(this).text() + '#');
+            $feedbackContext.val($feedbackContext.val() + '#' + $(this).text() + '#');
+        });
+
+        // 提交问题
+        $feedbackSubmit.on('click', function () {
+            var $this = $(this);
+
+            if (!$feedbackContext.val()) {
+                return;
+            }
+
+            $this.prop('disabled', true);
+
+            $.ajax({
+                url: "http://118.178.136.60:8001/rest/index/feedback",
+                data: {
+                    context: $('#feedbackContext').val(),
+                    movieId: movieId
+                },
+                success: function success(res) {
+                    console.log(res);
+                    $.msg('谢谢你的反馈！');
+                    $feedbackContext.val('');
+                },
+                complete: function complete() {
+                    $this.prop('disabled', false);
+                }
+            });
         });
     })();
 }

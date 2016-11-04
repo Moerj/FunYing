@@ -148,7 +148,7 @@ a {
 }
 
 // 无限滚动的加载菊花
-.infinite-scroll-preloader{
+.infinite-scroll-preloader {
     width: 100%;
     margin-right: 0;
     margin-left: 0;
@@ -157,6 +157,15 @@ a {
 // ------ ui ------
 .inithide {
     display: none !important;
+}
+
+button,
+input[type=button] {
+    border: 0;
+    &:disabled {
+        color: white !important;
+        background: #c8c9cb !important;
+    }
 }
 
 // 底部navbar

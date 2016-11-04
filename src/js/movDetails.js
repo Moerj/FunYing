@@ -1,4 +1,10 @@
 {
+    const movieId = $.GetQueryString('movieId')
+    const $addCart = $('#addCart') //加入购物车按钮
+    const $feedback = $('#detail-tab3'); //反馈快捷标签
+    const $feedbackContext = $('#feedbackContext') //反馈的内容
+    const $feedbackSubmit = $('#feedbackSubmit') //反馈提交按钮
+
     // 开启loading效果
     $.showPreloader();
     // 迷你laoding
@@ -7,11 +13,42 @@
     // 影视详情页
     let $details = $('.details')
 
+
+    // 加入购物车
+    function addCart() {
+        $addCart.prop('disabled', true)
+
+        function _fail() {
+            $.alert('加入购物车失败，请稍后再试！')
+            $addCart.prop('disabled', false)
+        }
+
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/index/addMovie",
+            data: {
+                openId: openId,
+                movieId: movieId
+            },
+            success: function (res) {
+                // console.log(res);
+                if (res.STATUS == 1) {
+                    $.toast('加入购物车成功')
+                } else {
+                    _fail()
+                }
+            },
+            error: function () {
+                _fail()
+            }
+        });
+    }
+
     // 打开视频
     function openVedio(url) {
         // $.alert('打开视频：' + url)
         window.location.href = url
     }
+
 
     // 页面添加数据
     function _updateDetailsPage(data) {
@@ -23,7 +60,7 @@
         // isbuy = 0
         if (isbuy) {
             $('#isbuy').hide();
-        }else{
+        } else {
             $('.numbox').hide();
         }
 
@@ -81,8 +118,6 @@
     }
 
     // 请求数据
-    let idsearch = window.location.search.split('=')
-    let movieId = idsearch[idsearch.length - 1]
     $.ajax({
         type: "get",
         url: "http://118.178.136.60:8001/rest/index/getMovie",
@@ -93,8 +128,8 @@
             console.log(res);
             if (res.STATUS == 1) {
                 _updateDetailsPage(res);
-            }else{
-                $.alert('没有该影片信息！',function(){
+            } else {
+                $.alert('没有该影片信息！', function () {
                     $.router.back()
                 })
             }
@@ -102,7 +137,7 @@
         error: (e) => {
             let str = `影视详情页获取失败，稍后再试！`
             console.log(str, e);
-            $.alert(str,function(){
+            $.alert(str, function () {
                 $.router.back()
             })
         },
@@ -115,21 +150,48 @@
     // 简介
     $details.on('click', '.button-group .btn', function () {
         let $this = $(this)
-            // 立即购买
+
+        // 立即购买
         if ($this.hasClass('buy')) {
-            $.msg('您还不是会员，无法购买，先长按页面下方二维码成为会员吧！')
+            $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
         }
 
         // 加入购物车
         if ($this.hasClass('cart')) {
-            $.msg('您还不是会员，无法购买，先长按页面下方二维码成为会员吧！')
+            // $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
+            addCart($this)
         }
     })
 
     // 我要报错
-    let $feedback = $('#detail-tab3');
-    let $subText = $feedback.find('.sub-text')
     $feedback.on('click', '.sub-tag span', function () {
-        $subText.val($subText.val() + '#' + $(this).text() + '#')
+        $feedbackContext.val($feedbackContext.val() + '#' + $(this).text() + '#')
+    })
+
+    // 提交问题
+    $feedbackSubmit.on('click', function () {
+        let $this = $(this)
+        
+        if (!$feedbackContext.val()) {
+            return
+        }
+
+        $this.prop('disabled', true)
+
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/index/feedback",
+            data: {
+                context: $('#feedbackContext').val(),
+                movieId: movieId
+            },
+            success: function (res) {
+                console.log(res);
+                $.msg('谢谢你的反馈！')
+                $feedbackContext.val('')
+            },
+            complete: function () {
+                $this.prop('disabled', false)
+            }
+        });
     })
 }
