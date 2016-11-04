@@ -93,7 +93,7 @@ $(function () {
             var tpl = "";
             for (var i = 0; i < data.length; i++) {
                 var d = data[0];
-                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.url.movDetails + d.id + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + d.poster + "\" alt=\"\">\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">01</span>" + d.title + "</span>\n                            <p class=\"text\">" + d.introduction + "</p>\n                            <span class=\"text2\">更新到第" + d.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
+                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.url.movDetails + d.id + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + d.poster + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + d.title + "</span>\n                            <p class=\"text\">" + d.introduction + "</p>\n                            <span class=\"text2\">更新到第" + d.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
             }
             $(contaier).empty().append(tpl);
         }
@@ -147,7 +147,7 @@ $(function () {
         // 进行搜索
         if ($this.hasClass('search-btn')) {
             var _ret = function () {
-                var searchName = $this.parent().find('input').val();
+                var searchName = $.trim($this.parent().find('input').val());
                 if (!searchName) {
                     return {
                         v: void 0

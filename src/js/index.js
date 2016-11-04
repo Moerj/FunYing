@@ -120,10 +120,10 @@ $(function () {
                 <li>
                     <a class="external flexlist" href="${$.url.movDetails}${d.id}">
                         <div class="imgbox">
-                            <img src="${d.poster}" alt="">
+                            <img src="${d.poster}" >
                         </div>
                         <div class="info">
-                            <span class="t"><span class="index">01</span>${d.title}</span>
+                            <span class="t"><span class="index">${i+1}</span>${d.title}</span>
                             <p class="text">${d.introduction}</p>
                             <span class="text2">更新到第${d.updateSite}集</span>
                         </div>
@@ -185,7 +185,7 @@ $(function () {
 
         // 进行搜索
         if ($this.hasClass('search-btn')) {
-            let searchName = $this.parent().find('input').val();
+            let searchName = $.trim($this.parent().find('input').val());
             if (!searchName) {
                 return;
             }
