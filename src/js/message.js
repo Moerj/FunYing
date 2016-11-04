@@ -16,13 +16,13 @@ $(function () {
                 let d = data[i]
                 html += `
                 <li class="messageList">
-                    <a href="${$.url.artDetails + d.id}" class="message external">
+                    <a href=${$.url.artDetails + d.id} class="message external">
                         <p class="Title">
                             <span class="name">${d.title}</span>
                             <span class="day">${d.addTime}</span>
                         </p>
-                        <p class="details">${d.introduction}</p>
-                        <span class="delete"></span>
+                        <p class="details">${d.context}</p>
+                        <span class="delete" msgId=${d.id}></span>
                     </a>
                 </li>
                 `
@@ -40,7 +40,7 @@ $(function () {
                 url: 'http://118.178.136.60:8001/rest/user/systemMsg',
                 data: newData,
                 success: (res) => {
-                    // console.log(res);
+                    console.log(res);
                     if (res.DATA) {
                         callback(res.DATA)
                     } else {
@@ -66,20 +66,23 @@ $(function () {
 
     function deleteOneMsg(deleteBtn) {
         let $deleteBtn = $(deleteBtn)
-        let msgId = ''
+        let msgId = $deleteBtn.attr('msgId')
         $deleteBtn.parents('.messageList').remove();
         showEmpty()
-        // $.ajax({
-        //     url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
-        //     data: {
-        //         openId: window.openId,
-        //         msgId: msgId
-        //     },
-        //     dataType: "dataType",
-        //     success: function (res) {
-        //         console.log(res);
-        //     }
-        // });
+
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
+            data: {
+                openId: window.openId,
+                msgId: msgId
+            },
+            success: function (res) {
+                // console.log(res);
+                if (res.STATUS==1) {
+                    console.log('id:'+msgId+' 消息删除成功!');
+                }
+            }
+        });
     }
 
 

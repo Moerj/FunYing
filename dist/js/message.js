@@ -16,7 +16,7 @@ $(function () {
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 var d = data[i];
-                html += '\n                <li class="messageList">\n                    <a href="' + ($.url.artDetails + d.id) + '" class="message external">\n                        <p class="Title">\n                            <span class="name">' + d.title + '</span>\n                            <span class="day">' + d.addTime + '</span>\n                        </p>\n                        <p class="details">' + d.introduction + '</p>\n                        <span class="delete"></span>\n                    </a>\n                </li>\n                ';
+                html += '\n                <li class="messageList">\n                    <a href=' + ($.url.artDetails + d.id) + ' class="message external">\n                        <p class="Title">\n                            <span class="name">' + d.title + '</span>\n                            <span class="day">' + d.addTime + '</span>\n                        </p>\n                        <p class="details">' + d.context + '</p>\n                        <span class="delete" msgId=' + d.id + '></span>\n                    </a>\n                </li>\n                ';
             }
             return html;
         },
@@ -31,7 +31,7 @@ $(function () {
                 url: 'http://118.178.136.60:8001/rest/user/systemMsg',
                 data: newData,
                 success: function success(res) {
-                    // console.log(res);
+                    console.log(res);
                     if (res.DATA) {
                         callback(res.DATA);
                     } else {
@@ -57,20 +57,23 @@ $(function () {
 
     function deleteOneMsg(deleteBtn) {
         var $deleteBtn = $(deleteBtn);
-        var msgId = '';
+        var msgId = $deleteBtn.attr('msgId');
         $deleteBtn.parents('.messageList').remove();
         showEmpty();
-        // $.ajax({
-        //     url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
-        //     data: {
-        //         openId: window.openId,
-        //         msgId: msgId
-        //     },
-        //     dataType: "dataType",
-        //     success: function (res) {
-        //         console.log(res);
-        //     }
-        // });
+
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
+            data: {
+                openId: window.openId,
+                msgId: msgId
+            },
+            success: function success(res) {
+                // console.log(res);
+                if (res.STATUS == 1) {
+                    console.log('id:' + msgId + ' 消息删除成功!');
+                }
+            }
+        });
     }
 
     $(document).on('swipeLeft', '.message', function () {
