@@ -33,7 +33,7 @@
 
     function render(data) {
         // console.log(data);
-        $('.text').text(data.context)
+        $('.text').append(data.context)
         $('.time').text(data.updateTime)
         $('.Title').text(data.title)
 
