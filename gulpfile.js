@@ -20,7 +20,7 @@ var paths = {
     images: {
         all: 'src/images/**/*.js'
     },
-    json:{
+    json: {
         all: 'src/json/**/*.json'
     }
 }
@@ -28,19 +28,22 @@ var paths = {
 // var webpackcfg = require('./webpack.config.js')(paths);
 
 //copy file to src folder
-gulp.task('copy',['lib','images','json']);
+gulp.task('copy', ['lib', 'images', 'json']);
 gulp.task('lib', function () {
     gulp.src('./src/lib/**/*')
-        .pipe(gulp.dest('./dist/lib/'));
+        .pipe($.changed('./dist/lib'))
+        .pipe(gulp.dest('./dist/lib'));
 
 });
 gulp.task('images', function () {
     gulp.src('./src/images/**/*')
+        .pipe($.changed('./dist/images'))
         .pipe(gulp.dest('./dist/images/'));
 
 });
 gulp.task('json', function () {
     gulp.src('./src/json/**/*.json')
+        .pipe($.changed('./dist/json'))
         .pipe(gulp.dest('./dist/json/'));
 
 });
