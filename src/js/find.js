@@ -1,7 +1,7 @@
 {
 
     // 记录oldOpenId
-    sessionStorage.oldOpenId = window.openId
+    // sessionStorage.oldOpenId = window.openId
 
     // 筛选参数，页面独有
     let sort = 1 //排序 1.更新时间 2.人气排行

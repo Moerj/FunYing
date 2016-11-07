@@ -7,7 +7,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 $(function () {
     // 记录oldOpenId
-    sessionStorage.oldOpenId = window.openId;
+    // sessionStorage.oldOpenId = window.openId
 
     // 开启loading效果
     $.showPreloader();
@@ -59,12 +59,18 @@ $(function () {
         });
     }
 
+    // 生成影视详情的url
+    function getMovDetailsUrl(id) {
+        // http://localhost:3000/html/articleDetails.html?articleId=1&oldOpenId=123
+        return "" + $.url.movDetails + id + "&oldOpenId=" + window.openId;
+    }
+
     // 加载精品推荐
     function initBest(movs) {
         var tpl = "";
         for (var i = 0; i < movs.length; i++) {
             var mov = movs[i];
-            tpl += "\n            <li>\n            <a href=\"" + $.url.movDetails + mov.id + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.poster + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n            <a href=\"" + getMovDetailsUrl(mov.id) + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.poster + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
         }
         $('#rec1 ul').append(tpl);
     }
@@ -73,7 +79,7 @@ $(function () {
     function initMain(res) {
         $('.recommended-2 a').each(function (i, el) {
             var $el = $(el);
-            $el.attr('href', $.url.artDetails + res[i].id);
+            $el.attr('href', $.url.artDetails + res[i].id + ("&oldOpenId=" + window.openId));
             $el.find('img').attr('src', res[i].pictrueUrl);
             $el.find('.titleInfo').text(res[i].title);
             $el.find('.content-text').text(res[i].introduction);
@@ -85,7 +91,7 @@ $(function () {
         var tpl = "";
         for (var i = 0; i < res.length; i++) {
             var mov = res[i];
-            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + $.url.movDetails + mov.id + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.poster + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">0" + (i + 1) + "</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + getMovDetailsUrl(mov.id) + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.poster + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">0" + (i + 1) + "</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
         }
         $('#rankTop').append(tpl);
     }
@@ -95,8 +101,8 @@ $(function () {
         function _loadRank(contaier, data) {
             var tpl = "";
             for (var i = 0; i < data.length; i++) {
-                var d = data[0];
-                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.url.movDetails + d.id + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + d.poster + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + d.title + "</span>\n                            <p class=\"text\">" + d.introduction + "</p>\n                            <span class=\"text2\">更新到第" + d.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
+                var mov = data[0];
+                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + getMovDetailsUrl(mov.id) + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + mov.poster + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + mov.title + "</span>\n                            <p class=\"text\">" + mov.introduction + "</p>\n                            <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
             }
             $(contaier).empty().append(tpl);
         }
@@ -174,7 +180,7 @@ $(function () {
                             for (var i = 0; i < movs.length; i++) {
                                 var mov = res.MOVIES.content[i];
                                 var index = mov.id < 10 ? '0' + mov.id : mov.id;
-                                listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + $.url.movDetails + mov.id + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.poster + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
+                                listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + getMovDetailsUrl(mov.id) + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.poster + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
                             }
                             $ul.append(listTpl);
                             $ul.show();

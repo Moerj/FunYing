@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 // 文章详情
 
@@ -18,13 +18,13 @@
         };
 
         // 判断是否有oldOpenId  
-        var oldId = sessionStorage.oldOpenId;
+        // const oldId = sessionStorage.oldOpenId
 
         // 如果有oldOpenId，将其拼接到url参数，以供分享朋友圈调用参数
-        if (oldId && location.search.indexOf('oldOpenId') == -1) {
-            var url = window.location.href;
-            history.pushState({}, 0, url + '&oldOpenId=' + oldId);
-        }
+        // if (oldId && location.search.indexOf('oldOpenId')==-1) {
+        //     let url = window.location.href
+        //     history.pushState({}, 0, url + '&oldOpenId=' + oldId);
+        // }
 
         $.showPreloader();
 
@@ -47,7 +47,7 @@
                 }
             },
             error: function error(e) {
-                var str = '文章详情获取失败，稍后再试！';
+                var str = "文章详情获取失败，稍后再试！";
                 console.log(str, e);
                 $.alert(str, function () {
                     $.router.back();
