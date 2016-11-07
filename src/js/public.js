@@ -187,7 +187,7 @@ $.getMovDetails = function (id) {
 
 // 生成文章详情
 $.getArtDetails = function (id) {
-    return `./articleDetails.html?articleId=${id}`
+    return `./articleDetails.html?articleId=${id}&oldOpenId=${window.openId}`
 }
 
 
