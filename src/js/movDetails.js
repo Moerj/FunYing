@@ -59,19 +59,22 @@
         // 加载二维码
         $('#qrcode').attr('src', data.QR_CODE)
 
+        // 显示底部按钮
+        $('#isbuy').removeClass('hide')
+
         // 会员隐藏二维码
         if (data.IS_SUBSCRIBE == 1) {
-            $('#qrcodeBox').hide()
+            $('#qrcodeBox').remove()
         }
 
         // 是否在购物车
         if (data.IS_CART == 1) {
-            $('#addCart').hide()
+            $('#addCart').remove()
         }
 
         // 是否已购
         if (data.IS_BUY == 1) {
-            $('#isbuy').hide();
+            $('#isbuy').remove();
         } else {
             $('.numbox').hide();
         }
@@ -197,8 +200,7 @@
                 context: $('#feedbackContext').val(),
                 movieId: movieId
             },
-            success: function (res) {
-                console.log(res);
+            success: function () {
                 $.msg('谢谢你的反馈！')
                 $feedbackContext.val('')
             },
@@ -207,4 +209,15 @@
             }
         });
     })
+
+    // 点击我要报错时，隐藏加入购物车和立即购买按钮
+    /*$('.tab-link').click(function(){
+        let $this = $(this)
+        if ($this.text()==='我要报错') {
+            $('#isbuy').hide()
+        }
+        else{
+            $('#isbuy').attr('style','')
+        }
+    })*/
 }

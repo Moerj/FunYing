@@ -1,5 +1,7 @@
 'use strict';
 
+// 购物车
+
 $(function () {
     var $contanier = $('.list');
     new ScrollLoad({
@@ -154,4 +156,3 @@ $(function () {
         $(this).find('.delete').removeClass('show');
     });
 });
-//# sourceMappingURL=cart.js.map

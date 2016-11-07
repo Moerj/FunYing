@@ -36,4 +36,3 @@ $(function () {
         }
     }
 });
-//# sourceMappingURL=withdraw.js.map

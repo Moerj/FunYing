@@ -67,17 +67,17 @@
         color: #ddd;
         font-weight: 100; }
 
-.userinfo .headpic {
+.userinfo .headpicBox {
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
   margin-left: 0.8rem;
   margin-right: 0.8rem;
   overflow: hidden; }
-  .userinfo .headpic img {
+  .userinfo .headpicBox img {
     width: 100%;
     height: 100%; }
-  .userinfo .headpic input[type=file] {
+  .userinfo .headpicBox input[type=file] {
     display: none; }
 
 .userinfo .text {
@@ -783,5 +783,3 @@
       flex-direction: column; }
   .feedback .tool {
     position: relative; }
-
-/*# sourceMappingURL=me.css.map */

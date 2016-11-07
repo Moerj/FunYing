@@ -1,4 +1,6 @@
-"use strict";
+'use strict';
+
+// 文章详情
 
 {
     (function () {
@@ -15,20 +17,27 @@
             }
         };
 
+        // 判断是否有oldOpenId  
+        var oldId = sessionStorage.oldOpenId;
+
+        // 如果有oldOpenId，将其拼接到url参数，以供分享朋友圈调用参数
+        if (oldId && location.search.indexOf('oldOpenId') == -1) {
+            var url = window.location.href;
+            history.pushState({}, 0, url + '&oldOpenId=' + oldId);
+        }
+
         $.showPreloader();
 
-        var idsearch = window.location.search.split('=');
-        var id = idsearch[idsearch.length - 1];
         $.ajax({
             type: "get",
             url: "http://118.178.136.60:8001/rest/index/getArticle",
             data: {
-                articleId: id,
+                articleId: $.GetQueryString('articleId'),
                 openId: window.openId,
                 oldOpenId: window.openId
             },
             success: function success(res) {
-                console.log(res);
+                // console.log(res);
                 if (res.STATUS == 1) {
                     render(res);
                 } else {
@@ -38,7 +47,7 @@
                 }
             },
             error: function error(e) {
-                var str = "文章详情获取失败，稍后再试！";
+                var str = '文章详情获取失败，稍后再试！';
                 console.log(str, e);
                 $.alert(str, function () {
                     $.router.back();
@@ -50,4 +59,3 @@
         });
     })();
 }
-//# sourceMappingURL=artDetails.js.map

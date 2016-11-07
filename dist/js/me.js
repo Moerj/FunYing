@@ -42,19 +42,21 @@
         //头像上传
 
 
+        // 记录oldOpenId
+        sessionStorage.oldOpenId = window.openId;
+
         var $uploadPicker = $('#headpicUpload'); //头像input file
         var $headimg = $('#headerImg'); //头像img
 
         // 我的页面数据
         $.ajax({
-            type: "get",
             url: "http://118.178.136.60:8001/rest/user/index",
             data: {
                 openId: window.openId
             },
             success: function success(res) {
                 // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-                // console.log(res);
+                console.log(res);
                 if (res.STATUS == 1) {
                     var data = res.DATA;
                     for (var key in data) {
@@ -65,7 +67,7 @@
                     var lucreAmountVal = Number($('#lucreAmount').text());
                     var total = (rechargeAmountVal + lucreAmountVal).toFixed(2);
                     $('#total').text(total);
-                    $headimg.attr('src', data.headerImg);
+                    $('.headpic').init(data.headerImg);
 
                     var pieData = [{
                         name: '收益余额',
@@ -89,7 +91,11 @@
                 openId: openId
             },
             success: function success(res) {
-                console.log(res);
+                // console.log(res);
+                $('#myqrcode').init(res.code);
+            },
+            error: function error(e) {
+                console.error('我的二维码加载失败', e);
             }
         });$uploadPicker.change(function () {
             var formdata = new FormData();
@@ -126,4 +132,3 @@
         });
     })();
 }
-//# sourceMappingURL=me.js.map

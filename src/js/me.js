@@ -1,20 +1,21 @@
 // 个人中心
 
 {
+    // 记录oldOpenId
+    sessionStorage.oldOpenId = window.openId
 
     const $uploadPicker = $('#headpicUpload'); //头像input file
     const $headimg = $('#headerImg'); //头像img
 
     // 我的页面数据
     $.ajax({
-        type: "get",
         url: "http://118.178.136.60:8001/rest/user/index",
         data: {
             openId: window.openId
         },
         success: function (res) {
             // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-            // console.log(res);
+            console.log(res);
             if (res.STATUS == 1) {
                 let data = res.DATA
                 for (let key in data) {
@@ -25,7 +26,7 @@
                 let lucreAmountVal = Number($('#lucreAmount').text())
                 let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
                 $('#total').text(total)
-                $headimg.attr('src',data.headerImg)
+                $('.headpic').init(data.headerImg)
 
                 let pieData = [{
                     name: '收益余额',
@@ -50,7 +51,11 @@
             openId: openId
         },
         success: function (res) {
-            console.log(res);
+            // console.log(res);
+            $('#myqrcode').init(res.code)
+        },
+        error: function (e) {
+            console.error('我的二维码加载失败', e);
         }
     });
 

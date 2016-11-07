@@ -1,3 +1,5 @@
+// 购物车
+
 $(() => {
     const $contanier = $('.list')
     new ScrollLoad({

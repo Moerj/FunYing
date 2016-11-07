@@ -113,7 +113,7 @@ a {
   margin-right: 0;
   margin-left: 0; }
 
-.inithide {
+.hide {
   display: none !important; }
 
 button,
@@ -205,5 +205,3 @@ input[type=button] {
 .swiper-container .swiper-pagination-bullet-active {
   width: 24px;
   opacity: 1; }
-
-/*# sourceMappingURL=ui.css.map */

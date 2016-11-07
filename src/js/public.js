@@ -14,6 +14,7 @@ window.openId = $.GetQueryString('openid')
 // 测试用
 window.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
 
+
 // 无限滚动的懒加载
 class ScrollLoad {
     constructor(opt) {
@@ -175,6 +176,8 @@ class ScrollLoad {
     }
 }
 
+
+// $ 下的公共方法
 $.url = {
     movDetails: `./movieDetails.html?movieId=`,
     artDetails: `./articleDetails.html?articleId=`
@@ -210,9 +213,27 @@ $.msg = function (opts, timeout) {
     }
 }
 
+// jq 对象新增方法
+$.fn.init = function (data) {
+
+    for (let i = 0; i < this.length; i++) {
+        let thisJq = $(this[i])
+        // console.log(thisJq);
+        if (this[i].localName === 'img') {
+            thisJq.attr('src', data)
+        } else if (thisJq.val() == undefined) {
+            thisJq.text(data)
+        } else {
+            thisJq.val(data)
+        }
+        thisJq.removeClass('hide').show()
+    }
+
+}
 
 
-// 影视详情绑定
+
+// 影视详情跳转
 $(document).on('click', '.getMovie', function () {
     function _updateDetailsPage(res) {
         let $page = $('.movieDetails')

@@ -6,6 +6,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 // updateSite 就是更新的集数 数字标识
 
 $(function () {
+    // 记录oldOpenId
+    sessionStorage.oldOpenId = window.openId;
+
     // 开启loading效果
     $.showPreloader();
 
@@ -193,4 +196,3 @@ $(function () {
         }
     });
 });
-//# sourceMappingURL=index.js.map
