@@ -16,7 +16,7 @@ $(function () {
                 let d = data[i]
                 html += `
                 <li class="messageList">
-                    <a href=${$.url.artDetails + d.id} class="message external">
+                    <a href=${$.getArtDetails(d.id)} class="message external">
                         <p class="Title">
                             <span class="name">${d.title}</span>
                             <span class="day">${d.addTime}</span>

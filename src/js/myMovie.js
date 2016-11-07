@@ -13,7 +13,7 @@
             for (let i = 0; i < data.length; i++) {
                 let d = data[i]
                 html += `
-                <a class="box external" href="${$.url.movDetails + d.id}">
+                <a class="box external" href="${$.getMovDetails(d.id)}">
                     <div class="imgbox">
                         <img src="${d.poster}" alt="">
                     </div>

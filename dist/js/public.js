@@ -202,10 +202,17 @@ var ScrollLoad = function () {
 
 // $ 下的公共方法
 
+// 生成影视详情的url
 
-$.url = {
-    movDetails: "./movieDetails.html?movieId=",
-    artDetails: "./articleDetails.html?articleId="
+
+$.getMovDetails = function (id) {
+    // http://localhost:3000/html/articleDetails.html?articleId=1&oldOpenId=123
+    return "./movieDetails.html?movieId=" + id + "&oldOpenId=" + window.openId;
+};
+
+// 生成文章详情
+$.getArtDetails = function (id) {
+    return "./articleDetails.html?articleId=" + id;
 };
 
 $.msg = function (opts, timeout) {

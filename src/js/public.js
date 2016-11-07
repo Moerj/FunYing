@@ -178,10 +178,19 @@ class ScrollLoad {
 
 
 // $ 下的公共方法
-$.url = {
-    movDetails: `./movieDetails.html?movieId=`,
-    artDetails: `./articleDetails.html?articleId=`
+
+// 生成影视详情的url
+$.getMovDetails = function (id) {
+    // http://localhost:3000/html/articleDetails.html?articleId=1&oldOpenId=123
+    return `./movieDetails.html?movieId=${id}&oldOpenId=${window.openId}`
 }
+
+// 生成文章详情
+$.getArtDetails = function (id) {
+    return `./articleDetails.html?articleId=${id}`
+}
+
+
 
 $.msg = function (opts, timeout) {
     let text = opts.text || opts
@@ -218,7 +227,7 @@ $.fn.init = function (data) {
 
     for (let i = 0; i < this.length; i++) {
         let thisJq = $(this[i])
-        // console.log(thisJq);
+            // console.log(thisJq);
         if (this[i].localName === 'img') {
             thisJq.attr('src', data)
         } else if (thisJq.val() == undefined) {
