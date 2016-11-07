@@ -14,7 +14,7 @@ $(function () {
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 var d = data[i];
-                html += '\n                <a href="./movieDetails.html?movieId=' + d.id + '" class="find-list external">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                        <div class="status">' + (d.updateStatus == 0 ? '已完结' : '更新中') + '</div>\n                    </div>\n                    <p class="name">' + d.title + ' ' + d.updateSite + '</p>\n                </a>\n                ';
+                html += '\n                <a href="' + $.getMovDetails(d.id) + '" class="find-list external">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                        <div class="status">' + (d.updateStatus == 0 ? '已完结' : '更新中') + '</div>\n                    </div>\n                    <p class="name">' + d.title + ' ' + d.updateSite + '</p>\n                </a>\n                ';
             }
             return html;
         },
