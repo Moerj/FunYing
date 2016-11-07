@@ -42,9 +42,6 @@
         //头像上传
 
 
-        // 记录oldOpenId
-        // sessionStorage.oldOpenId = window.openId
-
         var $uploadPicker = $('#headpicUpload'); //头像input file
         var $headimg = $('#headerImg'); //头像img
 

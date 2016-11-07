@@ -1,8 +1,6 @@
 // 个人中心
 
 {
-    // 记录oldOpenId
-    // sessionStorage.oldOpenId = window.openId
 
     const $uploadPicker = $('#headpicUpload'); //头像input file
     const $headimg = $('#headerImg'); //头像img

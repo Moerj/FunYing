@@ -3,9 +3,6 @@
 {
     (function () {
 
-        // 记录oldOpenId
-        // sessionStorage.oldOpenId = window.openId
-
         // 筛选参数，页面独有
         var sort = 1; //排序 1.更新时间 2.人气排行
         var area = null; //地区 直接传中文字符，'全部'传空

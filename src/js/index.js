@@ -2,8 +2,6 @@
 // updateSite 就是更新的集数 数字标识
 
 $(function () {
-    // 记录oldOpenId
-    // sessionStorage.oldOpenId = window.openId
 
     // 开启loading效果
     $.showPreloader();
@@ -41,7 +39,7 @@ $(function () {
         })
         $('#banner a').each((i, a) => {
             let $a = $(a)
-            $a.attr('href', $.url.movDetails + res[i].id)
+            $a.attr('href', getMovDetailsUrl(res[i].id))
         })
 
         // 初始化 swiper组件
