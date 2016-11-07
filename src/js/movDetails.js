@@ -1,3 +1,4 @@
+// 影视详情
 {
     const movieId = $.GetQueryString('movieId')
     const $addCart = $('#addCart') //加入购物车按钮
@@ -26,7 +27,7 @@
         $.ajax({
             url: "http://118.178.136.60:8001/rest/index/addMovie",
             data: {
-                openId: openId,
+                openId: window.openId,
                 movieId: movieId
             },
             success: function (res) {
@@ -54,11 +55,22 @@
     function _updateDetailsPage(data) {
         const mov = data.MOVIE //当前电影数据
         const series = data.MOVIE_SERIES //当前电影选集数据
-        let isbuy = Number(data.IS_BUY)
+
+        // 加载二维码
+        $('#qrcode').attr('src', data.QR_CODE)
+
+        // 会员隐藏二维码
+        if (data.IS_SUBSCRIBE == 1) {
+            $('#qrcodeBox').hide()
+        }
+
+        // 是否在购物车
+        if (data.IS_CART == 1) {
+            $('#addCart').hide()
+        }
 
         // 是否已购
-        // isbuy = 0
-        if (isbuy) {
+        if (data.IS_BUY == 1) {
             $('#isbuy').hide();
         } else {
             $('.numbox').hide();
@@ -117,12 +129,13 @@
         })
     }
 
-    // 请求数据
+    // 初始请求数据
     $.ajax({
-        type: "get",
         url: "http://118.178.136.60:8001/rest/index/getMovie",
         data: {
-            movieId: movieId
+            movieId: movieId,
+            openId: window.openId,
+            oldOpenId: window.openId
         },
         success: (res) => {
             console.log(res);
@@ -171,7 +184,7 @@
     // 提交问题
     $feedbackSubmit.on('click', function () {
         let $this = $(this)
-        
+
         if (!$feedbackContext.val()) {
             return
         }

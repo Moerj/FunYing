@@ -2,16 +2,17 @@
 
 {
     (function () {
-        var render = function render(data) {
+        var render = function render(res) {
+            var data = res.ARTICLE;
             // console.log(data);
             $('.text').append(data.context);
             $('.time').text(data.updateTime);
             $('.Title').text(data.title);
 
             // 判断是否会员，然后隐藏二维码
-            // if () {
-
-            // }
+            if (res.IS_SUBSCRIBE) {
+                $('#SUBSCRIBE').hide();
+            }
         };
 
         $.showPreloader();
@@ -22,12 +23,14 @@
             type: "get",
             url: "http://118.178.136.60:8001/rest/index/getArticle",
             data: {
-                articleId: id
+                articleId: id,
+                openId: window.openId,
+                oldOpenId: window.openId
             },
             success: function success(res) {
                 console.log(res);
                 if (res.STATUS == 1) {
-                    render(res.ARTICLE);
+                    render(res);
                 } else {
                     $.alert('文章详情不存在！', function () {
                         $.router.back();
@@ -47,3 +50,4 @@
         });
     })();
 }
+//# sourceMappingURL=artDetails.js.map

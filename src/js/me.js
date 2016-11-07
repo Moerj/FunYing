@@ -1,3 +1,5 @@
+// 个人中心
+
 {
 
     const $uploadPicker = $('#headpicUpload'); //头像input file
@@ -41,6 +43,16 @@
         }
     });
 
+    // 我的二维码
+    $.ajax({
+        url: "http://118.178.136.60:8001/rest/user/getQrcode",
+        data: {
+            openId: openId
+        },
+        success: function (res) {
+            console.log(res);
+        }
+    });
 
     // 账户余额
     function makePie(data) {

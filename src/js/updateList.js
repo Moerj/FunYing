@@ -1,5 +1,61 @@
+// 剧情更新
 
-{ // infinite-scroll
+$(function(){
+    
+
+    new ScrollLoad({
+
+        scrollContanier: '.infinite-scroll', //滚动父容器
+        listContanier: '.find-content', //列表容器
+
+        // 配置渲染模板
+        template: (data) => {
+            let html = '';
+            for (let i = 0; i < data.length; i++) {
+                let d = data[i]
+                html += `
+                <a href="./movieDetails.html?movieId=${d.id}" class="find-list external">
+                    <div class="imgbox">
+                        <img src="${d.poster}" alt="">
+                        <div class="status">${d.updateStatus==0?'已完结':'更新中'}</div>
+                    </div>
+                    <p class="name">${d.title} ${d.updateSite}</p>
+                </a>
+                `
+            }
+            return html
+        },
+
+        ajax: (data, callback) => {
+            // 合并入筛选参数
+            data = $.extend({}, data, {
+                sort: 1
+            })
+
+            $.ajax({
+                type: "get",
+                url: 'http://118.178.136.60:8001/rest/find/all',
+                data: data,
+                success: function (res) {
+                    if (res.DATA) {
+                        callback(res.DATA)
+                    } else {
+                        $.alert('没有数据了')
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！')
+                }
+            });
+        }
+    })
+
+
+
+
+
+/*
     // 加载flag
     let loading = false;
     // 最多可加载的条目
@@ -63,5 +119,7 @@
             //容器发生改变,如果是js滚动，需要刷新滚动
             $.refreshScroller();
         }, 1000);
-    });
-}
+    });*/
+
+
+})

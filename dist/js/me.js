@@ -1,5 +1,7 @@
 'use strict';
 
+// 个人中心
+
 {
     (function () {
 
@@ -78,6 +80,17 @@
                     makePie(pieData);
                 }
             }
+        });
+
+        // 我的二维码
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/user/getQrcode",
+            data: {
+                openId: openId
+            },
+            success: function success(res) {
+                console.log(res);
+            }
         });$uploadPicker.change(function () {
             var formdata = new FormData();
             var v_this = $(this);
@@ -113,3 +126,4 @@
         });
     })();
 }
+//# sourceMappingURL=me.js.map

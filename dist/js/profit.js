@@ -29,3 +29,4 @@
         length: 5
     });
 }
+//# sourceMappingURL=profit.js.map

@@ -1,5 +1,6 @@
 'use strict';
 
+// 影视详情
 {
     (function () {
 
@@ -15,7 +16,7 @@
             $.ajax({
                 url: "http://118.178.136.60:8001/rest/index/addMovie",
                 data: {
-                    openId: openId,
+                    openId: window.openId,
                     movieId: movieId
                 },
                 success: function success(res) {
@@ -46,11 +47,22 @@
         var _updateDetailsPage = function _updateDetailsPage(data) {
             var mov = data.MOVIE; //当前电影数据
             var series = data.MOVIE_SERIES; //当前电影选集数据
-            var isbuy = Number(data.IS_BUY);
+
+            // 加载二维码
+            $('#qrcode').attr('src', data.QR_CODE);
+
+            // 会员隐藏二维码
+            if (data.IS_SUBSCRIBE == 1) {
+                $('#qrcodeBox').hide();
+            }
+
+            // 是否在购物车
+            if (data.IS_CART == 1) {
+                $('#addCart').hide();
+            }
 
             // 是否已购
-            // isbuy = 0
-            if (isbuy) {
+            if (data.IS_BUY == 1) {
                 $('#isbuy').hide();
             } else {
                 $('.numbox').hide();
@@ -107,7 +119,7 @@
             });
         };
 
-        // 请求数据
+        // 初始请求数据
 
 
         var movieId = $.GetQueryString('movieId');
@@ -123,10 +135,11 @@
 
         // 影视详情页
         var $details = $('.details');$.ajax({
-            type: "get",
             url: "http://118.178.136.60:8001/rest/index/getMovie",
             data: {
-                movieId: movieId
+                movieId: movieId,
+                openId: window.openId,
+                oldOpenId: window.openId
             },
             success: function success(res) {
                 console.log(res);
@@ -199,3 +212,4 @@
         });
     })();
 }
+//# sourceMappingURL=movDetails.js.map

@@ -31,7 +31,7 @@ $(function () {
                 url: 'http://118.178.136.60:8001/rest/user/systemMsg',
                 data: newData,
                 success: function success(res) {
-                    console.log(res);
+                    // console.log(res);
                     if (res.DATA) {
                         callback(res.DATA);
                     } else {
@@ -85,3 +85,4 @@ $(function () {
         return false; //防冒泡
     });
 });
+//# sourceMappingURL=message.js.map

@@ -252,3 +252,4 @@ $(document).on('click', '.getMovie', function () {
         }
     });
 });
+//# sourceMappingURL=public.js.map

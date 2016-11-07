@@ -40,7 +40,7 @@ $(function () {
                 url: 'http://118.178.136.60:8001/rest/user/systemMsg',
                 data: newData,
                 success: (res) => {
-                    console.log(res);
+                    // console.log(res);
                     if (res.DATA) {
                         callback(res.DATA)
                     } else {
