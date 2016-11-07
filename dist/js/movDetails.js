@@ -142,7 +142,7 @@
             data: {
                 movieId: movieId,
                 openId: window.openId,
-                oldOpenId: window.openId
+                oldOpenId: $.GetQueryString('oldOpenId')
             },
             success: function success(res) {
                 console.log(res);
