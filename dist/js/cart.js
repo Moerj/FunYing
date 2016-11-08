@@ -22,7 +22,7 @@ $(function () {
 
         ajax: function ajax(data, callback) {
             var newData = $.extend({}, data, {
-                openId: window.openId,
+                openId: $.openId,
                 state: 0 //购物车
             });
 
@@ -61,7 +61,7 @@ $(function () {
             $.ajax({
                 url: "http://118.178.136.60:8001/rest/user/delMyMovie",
                 data: {
-                    openId: window.openId,
+                    openId: $.openId,
                     movieId: movieId
                 },
                 success: function success(res) {

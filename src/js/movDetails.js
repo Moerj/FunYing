@@ -27,7 +27,7 @@
         $.ajax({
             url: "http://118.178.136.60:8001/rest/index/addMovie",
             data: {
-                openId: window.openId,
+                openId: $.openId,
                 movieId: movieId
             },
             success: function (res) {
@@ -132,12 +132,13 @@
         })
     }
 
+
     // 初始请求数据
     $.ajax({
         url: "http://118.178.136.60:8001/rest/index/getMovie",
         data: {
             movieId: movieId,
-            openId: window.openId,
+            openId: $.openId,
             oldOpenId: $.GetQueryString('oldOpenId')
         },
         success: (res) => {

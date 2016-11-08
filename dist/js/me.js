@@ -49,7 +49,7 @@
         $.ajax({
             url: "http://118.178.136.60:8001/rest/user/index",
             data: {
-                openId: window.openId
+                openId: $.openId
             },
             success: function success(res) {
                 // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
@@ -85,7 +85,7 @@
         $.ajax({
             url: "http://118.178.136.60:8001/rest/user/getQrcode",
             data: {
-                openId: openId
+                openId: $.openId
             },
             success: function success(res) {
                 // console.log(res);

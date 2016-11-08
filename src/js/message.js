@@ -32,7 +32,7 @@ $(function () {
 
         ajax: (data, callback) => {
             let newData = $.extend({}, data, {
-                openId: window.openId
+                openId: $.openId
             })
             $.ajax({
                 type: "get",
@@ -73,7 +73,7 @@ $(function () {
         $.ajax({
             url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
             data: {
-                openId: window.openId,
+                openId: $.openId,
                 msgId: msgId
             },
             success: function (res) {

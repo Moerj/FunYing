@@ -5,7 +5,7 @@ $('#feedbackSubmit').click(function () {
     $.ajax({
         url: "http://118.178.136.60:8001/rest/user/addFeedBack",
         data: {
-            openId: window.openId,
+            openId: $.openId,
             content: $('#feedbackText').val()
         },
         success: function success(res) {

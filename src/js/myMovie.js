@@ -38,7 +38,7 @@
                 url: 'http://118.178.136.60:8001/rest/user/myMovie',
                 // url: '../json/message.json',
                 data: {
-                    openId: window.openId,
+                    openId: $.openId,
                     state: 1 //我的影片
                 },
                 success: (res) => {

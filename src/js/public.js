@@ -1,5 +1,4 @@
-// 获取openid
-
+// 取queryString
 $.GetQueryString = function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
@@ -7,12 +6,17 @@ $.GetQueryString = function (name) {
     return null;
 }
 
-window.openId = $.GetQueryString('openid')
+// 获取初始openid
+$.openId = $.GetQueryString('openid')
+if ($.openId === null) { // from sessionStorage
+    $.openId = sessionStorage.openId
 
-// console.log('openId:', window.openId);
+} else { // from queryString
+    sessionStorage.openId = $.openId
+}
 
 // 测试用
-window.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
+// $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
 
 
 // 无限滚动的懒加载
@@ -182,12 +186,12 @@ class ScrollLoad {
 // 生成影视详情的url
 $.getMovDetails = function (id) {
     // http://localhost:3000/html/articleDetails.html?articleId=1&oldOpenId=123
-    return `./movieDetails.html?movieId=${id}&oldOpenId=${window.openId}`
+    return `./movieDetails.html?movieId=${id}&oldOpenId=${$.openId}`
 }
 
 // 生成文章详情
 $.getArtDetails = function (id) {
-    return `./articleDetails.html?articleId=${id}&oldOpenId=${window.openId}`
+    return `./articleDetails.html?articleId=${id}&oldOpenId=${$.openId}`
 }
 
 
