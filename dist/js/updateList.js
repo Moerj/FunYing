@@ -110,3 +110,4 @@ $(function () {
             }, 1000);
         });*/
 });
+//# sourceMappingURL=updateList.js.map

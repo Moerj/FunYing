@@ -50,3 +50,4 @@
         });
     })();
 }
+//# sourceMappingURL=artDetails.js.map

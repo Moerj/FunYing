@@ -225,3 +225,4 @@
         })*/
     })();
 }
+//# sourceMappingURL=movDetails.js.map
