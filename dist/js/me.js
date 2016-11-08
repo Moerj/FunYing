@@ -53,8 +53,8 @@
             },
             success: function success(res) {
                 // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-                console.log(res);
-                if (res.STATUS == 1) {
+                console.log('个人中心首页数据：', res);
+                if (res.STATUS == 1 && res.DATA) {
                     var data = res.DATA;
                     for (var key in data) {
                         $('#' + key).text(data[key]);
@@ -77,6 +77,8 @@
                     }];
 
                     makePie(pieData);
+                } else {
+                    $.alert('用户信息读取失败');
                 }
             }
         });

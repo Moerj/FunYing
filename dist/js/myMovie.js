@@ -34,12 +34,12 @@
                         if (res.DATA) {
                             callback(res.DATA);
                         } else {
-                            console.log(window.location.hash + '没有数据');
+                            console.log('我的影片没有数据');
                         }
                     },
                     error: function error(e) {
-                        console.log(e);
-                        $.alert('刷新失败，请稍后再试！');
+                        console.log('我的影片加载失败', e);
+                        // $.alert('刷新失败，请稍后再试！')
                     },
                     complete: function complete() {
                         if ($contanier.find('.box').length == 0) {
