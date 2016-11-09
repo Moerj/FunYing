@@ -36,4 +36,3 @@ $(function () {
     }
     addChargeList();
 });
-//# sourceMappingURL=charge.js.map

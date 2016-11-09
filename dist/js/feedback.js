@@ -28,4 +28,3 @@ $('#feedbackSubmit').click(function () {
         }
     });
 });
-//# sourceMappingURL=feedback.js.map

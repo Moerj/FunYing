@@ -71,6 +71,7 @@
                 $('.numbox').hide();
             }
 
+            // 解构绑定后台数据
             for (var key in mov) {
                 var $dom = $('#' + key);
                 if ($dom.length) {
@@ -91,6 +92,29 @@
                 numTpl += '\n                <a href="javascript:" class="num">' + (i + 1) + '</a>\n            ';
             }
             $('.numbox').html(numTpl);
+
+            // 购买绑定
+            $details.on('click', '.button-group .btn', function () {
+                var $this = $(this);
+
+                // 立即购买
+                if ($this.hasClass('buy')) {
+                    if (data.IS_SUBSCRIBE == 1) {
+                        $.payment();
+                    } else {
+                        $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！');
+                    }
+                }
+
+                // 加入购物车
+                if ($this.hasClass('cart')) {
+                    if (data.IS_SUBSCRIBE == 1) {
+                        addCart($this);
+                    } else {
+                        $.msg('您还不是会员，无法加入购物车，先扫描页面下方二维码成为会员吧！');
+                    }
+                }
+            });
 
             // 选集绑定
             $details.on('click', '.num', function () {
@@ -127,6 +151,7 @@
 
         var movieId = $.GetQueryString('movieId');
         var $addCart = $('#addCart'); //加入购物车按钮
+        var $buy = $('#buy'); //立即购买按钮
         var $feedback = $('#detail-tab3'); //反馈快捷标签
         var $feedbackContext = $('#feedbackContext'); //反馈的内容
         var $feedbackSubmit = $('#feedbackSubmit'); //反馈提交按钮
@@ -163,22 +188,6 @@
             },
             complete: function complete() {
                 $.hidePreloader();
-            }
-        });
-
-        // 简介
-        $details.on('click', '.button-group .btn', function () {
-            var $this = $(this);
-
-            // 立即购买
-            if ($this.hasClass('buy')) {
-                $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！');
-            }
-
-            // 加入购物车
-            if ($this.hasClass('cart')) {
-                // $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
-                addCart($this);
             }
         });
 
@@ -225,4 +234,3 @@
         })*/
     })();
 }
-//# sourceMappingURL=movDetails.js.map

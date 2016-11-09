@@ -2,6 +2,8 @@
 
 $(() => {
     const $contanier = $('.list')
+    const $payBtn = $('#payBtn')
+
     new ScrollLoad({
 
         scrollContanier: $contanier, //滚动父容器
@@ -129,13 +131,11 @@ $(() => {
         if (editMode) {
             $(this).text('完成')
             $('.deleteAll').show()
-            $('.pay').hide()
-                // $('.delete').addClass('show')
+            $payBtn.hide()
         } else {
             $(this).text('编辑')
             $('.deleteAll').hide()
-            $('.pay').show()
-                // $('.delete').removeClass('show')
+            $payBtn.show()
         }
     })
 
@@ -188,4 +188,9 @@ $(() => {
         .on('swipeRight', 'li', function () {
             $(this).find('.delete').removeClass('show')
         })
+
+    // 支付
+    $payBtn.click(function(){
+        $.payment()
+    })
 })

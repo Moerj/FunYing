@@ -243,6 +243,24 @@ $.msg = function (opts, timeout) {
     }
 };
 
+// 付款
+$.payment = function () {
+    var buttons = [{
+        text: '账户余额支付',
+        onClick: function onClick() {
+            $.alert("你选择了“账户余额支付“");
+        }
+    }, {
+        text: '微信支付',
+        onClick: function onClick() {
+            $.alert("你选择了“微信支付“");
+        }
+    }, {
+        text: '取消'
+    }];
+    $.actions(buttons);
+};
+
 // jq 对象新增方法
 $.fn.init = function (data) {
 
@@ -284,4 +302,3 @@ $(document).on('click', '.getMovie', function () {
         }
     });
 });
-//# sourceMappingURL=public.js.map

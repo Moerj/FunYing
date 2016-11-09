@@ -2,6 +2,7 @@
 {
     const movieId = $.GetQueryString('movieId')
     const $addCart = $('#addCart') //加入购物车按钮
+    const $buy = $('#buy') //立即购买按钮
     const $feedback = $('#detail-tab3'); //反馈快捷标签
     const $feedbackContext = $('#feedbackContext') //反馈的内容
     const $feedbackSubmit = $('#feedbackSubmit') //反馈提交按钮
@@ -79,6 +80,7 @@
             $('.numbox').hide();
         }
 
+        // 解构绑定后台数据
         for (let key in mov) {
             let $dom = $('#' + key)
             if ($dom.length) {
@@ -101,6 +103,31 @@
             `
         }
         $('.numbox').html(numTpl)
+
+
+        // 购买绑定
+        $details.on('click', '.button-group .btn', function () {
+            let $this = $(this)
+
+            // 立即购买
+            if ($this.hasClass('buy')) {
+                if (data.IS_SUBSCRIBE == 1) {
+                    $.payment()
+                } else {
+                    $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
+                }
+            }
+
+            // 加入购物车
+            if ($this.hasClass('cart')) {
+                if (data.IS_SUBSCRIBE == 1) {
+                    addCart($this)
+
+                } else {
+                    $.msg('您还不是会员，无法加入购物车，先扫描页面下方二维码成为会员吧！')
+                }
+            }
+        })
 
         // 选集绑定
         $details.on('click', '.num', function () {
@@ -163,22 +190,6 @@
         }
     });
 
-
-    // 简介
-    $details.on('click', '.button-group .btn', function () {
-        let $this = $(this)
-
-        // 立即购买
-        if ($this.hasClass('buy')) {
-            $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
-        }
-
-        // 加入购物车
-        if ($this.hasClass('cart')) {
-            // $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
-            addCart($this)
-        }
-    })
 
     // 我要报错
     $feedback.on('click', '.sub-tag span', function () {
