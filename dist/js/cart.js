@@ -5,6 +5,7 @@
 $(function () {
     var $contanier = $('.list');
     var $payBtn = $('#payBtn');
+    var $totalPrice = $('#totalPrice');
 
     new ScrollLoad({
 
@@ -112,16 +113,23 @@ $(function () {
     // 刷新操作按钮状态
     function changeBtnStatus() {
         hasSelect = false;
+        var total = 0;
         $('.select').each(function (i, el) {
-            if ($(el).prop('checked')) {
+            var $el = $(el);
+            if ($el.prop('checked')) {
                 hasSelect = true;
-                return false;
+
+                // 统计价格
+                var price = parseFloat($el.parents('label').find('.price').text());
+                total += price;
             }
         });
         if (hasSelect) {
             $('.tools .btn').addClass('active');
+            $totalPrice.text(total.toFixed(2));
         } else {
             $('.tools .btn').removeClass('active');
+            $totalPrice.text(0);
         }
     }
 

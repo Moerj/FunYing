@@ -3,6 +3,7 @@
 $(() => {
     const $contanier = $('.list')
     const $payBtn = $('#payBtn')
+    const $totalPrice = $('#totalPrice')
 
     new ScrollLoad({
 
@@ -142,16 +143,23 @@ $(() => {
     // 刷新操作按钮状态
     function changeBtnStatus() {
         hasSelect = false;
-        $('.select').each(function (i, el) {
-            if ($(el).prop('checked')) {
+        let total = 0
+        $('.select').each((i, el) => {
+            let $el = $(el)
+            if ($el.prop('checked')) {
                 hasSelect = true;
-                return false;
+
+                // 统计价格
+                let price =  parseFloat($el.parents('label').find('.price').text())
+                total += price
             }
         })
         if (hasSelect) {
             $('.tools .btn').addClass('active')
+            $totalPrice.text(total.toFixed(2))
         } else {
             $('.tools .btn').removeClass('active')
+            $totalPrice.text(0)
         }
     }
 
@@ -190,7 +198,7 @@ $(() => {
         })
 
     // 支付
-    $payBtn.click(function(){
+    $payBtn.click(function () {
         $.payment()
     })
 })
