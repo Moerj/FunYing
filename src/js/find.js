@@ -38,7 +38,7 @@
 
             $.ajax({
                 type: "get",
-                url: 'http://118.178.136.60:8001/rest/find/all',
+                url: 'http://wechat.94joy.com/wx/rest/find/all',
                 data: data,
                 success: function (res) {
                     if (res.DATA) {

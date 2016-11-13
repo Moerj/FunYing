@@ -158,7 +158,7 @@ $(document).on('click', '.getMovie', function () {
     var movieId = $this.attr('movieId');
     $.ajax({
         type: "get",
-        url: "http://118.178.136.60:8001/rest/index/getMovie",
+        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
         data: {
             movieId: movieId
         },

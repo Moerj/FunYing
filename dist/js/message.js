@@ -28,7 +28,7 @@ $(function () {
             $.ajax({
                 type: "get",
                 // url: '../json/message.json',
-                url: 'http://118.178.136.60:8001/rest/user/systemMsg',
+                url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                 data: newData,
                 success: function success(res) {
                     // console.log(res);
@@ -62,7 +62,7 @@ $(function () {
         showEmpty();
 
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/user/delSystemMsg",
+            url: "http://wechat.94joy.com/wx/rest/user/delSystemMsg",
             data: {
                 openId: $.openId,
                 msgId: msgId
@@ -85,3 +85,4 @@ $(function () {
         return false; //防冒泡
     });
 });
+//# sourceMappingURL=message.js.map

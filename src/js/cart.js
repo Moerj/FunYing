@@ -4,6 +4,7 @@ $(() => {
     const $contanier = $('.list')
     const $payBtn = $('#payBtn')
     const $totalPrice = $('#totalPrice')
+    let selectedMovieInput = []
 
     new ScrollLoad({
 
@@ -53,7 +54,7 @@ $(() => {
             })
 
             $.ajax({
-                url: 'http://118.178.136.60:8001/rest/user/myMovie',
+                url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
                 data: newData,
                 success: (res) => {
                     // console.log(res);
@@ -85,7 +86,7 @@ $(() => {
             let movieId = $($deleteBtn[i]).attr('movieId')
             console.log('deleteId:' + movieId);
             $.ajax({
-                url: "http://118.178.136.60:8001/rest/user/delMyMovie",
+                url: "http://wechat.94joy.com/wx/rest/user/delMyMovie",
                 data: {
                     openId: $.openId,
                     movieId: movieId
@@ -142,15 +143,21 @@ $(() => {
 
     // 刷新操作按钮状态
     function changeBtnStatus() {
+        selectedMovieInput = []
         hasSelect = false;
         let total = 0
+
+
         $('.select').each((i, el) => {
             let $el = $(el)
             if ($el.prop('checked')) {
                 hasSelect = true;
 
+                // 记录选择的电影ID
+                selectedMovieInput.push($el)
+
                 // 统计价格
-                let price =  parseFloat($el.parents('label').find('.price').text())
+                let price = parseFloat($el.parents('label').find('.price').text())
                 total += price
             }
         })
@@ -199,6 +206,35 @@ $(() => {
 
     // 支付
     $payBtn.click(function () {
-        $.payment()
+        $.showPreloader('购买中，稍等...');
+
+        let ajaxLength = selectedMovieInput.length
+        for (let i = 0; i < selectedMovieInput.length; i++) {
+
+            $.payment(selectedMovieInput[i].attr('movieid'), () => {
+
+                // ajax成功，删除购买的dom
+                selectedMovieInput[i].parents('li').first().remove()
+                ajaxLength--
+
+                // 最后一个ajax成功，提示批量购买成功
+                if (ajaxLength == 0) {
+
+                    $.hidePreloader();
+
+                    $.msg({
+                        text: '恭喜，您已购买成功! 5s后跳转"我的影片"，可以去看片了',
+                        timeout: 5000,
+                        callback: () => {
+                            // 跳转到我的影片
+                            window.location = 'me.html#page-myMovie'
+                        }
+                    })
+                }
+
+
+            })
+        }
+
     })
 })

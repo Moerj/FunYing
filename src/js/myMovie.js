@@ -35,7 +35,7 @@
         ajax: (data, callback) => {
             $.ajax({
                 type: "get",
-                url: 'http://118.178.136.60:8001/rest/user/myMovie',
+                url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
                 // url: '../json/message.json',
                 data: {
                     openId: $.openId,

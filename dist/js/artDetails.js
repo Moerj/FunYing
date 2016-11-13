@@ -21,7 +21,7 @@
 
         $.ajax({
             type: "get",
-            url: "http://118.178.136.60:8001/rest/index/getArticle",
+            url: "http://wechat.94joy.com/wx/rest/index/getArticle",
             data: {
                 articleId: $.GetQueryString('articleId'),
                 openId: $.openId,
@@ -50,3 +50,4 @@
         });
     })();
 }
+//# sourceMappingURL=artDetails.js.map

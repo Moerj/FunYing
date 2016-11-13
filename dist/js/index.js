@@ -14,7 +14,7 @@ $(function () {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: "http://118.178.136.60:8001/rest/index/index",
+        url: "http://wechat.94joy.com/wx/rest/index/index",
         success: function success(res) {
             // console.log(res);
 
@@ -103,7 +103,7 @@ $(function () {
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "http://118.178.136.60:8001/rest/index/ranking",
+            url: "http://wechat.94joy.com/wx/rest/index/ranking",
             success: function success(res) {
                 // console.log(res);
 
@@ -158,7 +158,7 @@ $(function () {
                 $.showPreloader();
                 $.ajax({
                     type: "get",
-                    url: "http://118.178.136.60:8001/rest/index/search",
+                    url: "http://wechat.94joy.com/wx/rest/index/search",
                     data: {
                         searchName: searchName
                     },
@@ -194,3 +194,4 @@ $(function () {
         }
     });
 });
+//# sourceMappingURL=index.js.map

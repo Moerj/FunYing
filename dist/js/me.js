@@ -47,7 +47,7 @@
 
         // 我的页面数据
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/user/index",
+            url: "http://wechat.94joy.com/wx/rest/user/index",
             data: {
                 openId: $.openId
             },
@@ -85,7 +85,7 @@
 
         // 我的二维码
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/user/getQrcode",
+            url: "http://wechat.94joy.com/wx/rest/user/getQrcode",
             data: {
                 openId: $.openId
             },
@@ -131,3 +131,4 @@
         });
     })();
 }
+//# sourceMappingURL=me.js.map

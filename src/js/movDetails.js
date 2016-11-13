@@ -2,7 +2,7 @@
 {
     const movieId = $.GetQueryString('movieId')
     const $addCart = $('#addCart') //加入购物车按钮
-    const $buy = $('#buy') //立即购买按钮
+    const $Buttons = $('#isbuy') //立即购买按钮
     const $feedback = $('#detail-tab3'); //反馈快捷标签
     const $feedbackContext = $('#feedbackContext') //反馈的内容
     const $feedbackSubmit = $('#feedbackSubmit') //反馈提交按钮
@@ -26,7 +26,7 @@
         }
 
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/index/addMovie",
+            url: "http://wechat.94joy.com/wx/rest/index/addMovie",
             data: {
                 openId: $.openId,
                 movieId: movieId
@@ -61,7 +61,7 @@
         $('#qrcode').attr('src', data.QR_CODE)
 
         // 显示底部按钮
-        $('#isbuy').removeClass('hide')
+        $Buttons.removeClass('hide')
 
         // 会员隐藏二维码
         if (data.IS_SUBSCRIBE == 1) {
@@ -75,7 +75,7 @@
 
         // 是否已购
         if (data.IS_BUY == 1) {
-            $('#isbuy').remove();
+            $Buttons.remove();
         } else {
             $('.numbox').hide();
         }
@@ -113,7 +113,10 @@
             if ($this.hasClass('buy')) {
                 if (data.IS_SUBSCRIBE == 1) {
                     // 支付
-                    $.payment(movieId)
+                    $.payment(movieId,() => {
+                        $Buttons.remove()
+                        $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000)
+                    })
                 } else {
                     $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')
                 }
@@ -163,7 +166,7 @@
 
     // 初始请求数据
     $.ajax({
-        url: "http://118.178.136.60:8001/rest/index/getMovie",
+        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
         data: {
             movieId: movieId,
             openId: $.openId,
@@ -208,7 +211,7 @@
         $this.prop('disabled', true)
 
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/index/feedback",
+            url: "http://wechat.94joy.com/wx/rest/index/feedback",
             data: {
                 context: $('#feedbackContext').val(),
                 movieId: movieId
@@ -227,10 +230,10 @@
     /*$('.tab-link').click(function(){
         let $this = $(this)
         if ($this.text()==='我要报错') {
-            $('#isbuy').hide()
+            $Buttons.hide()
         }
         else{
-            $('#isbuy').attr('style','')
+            $Buttons.attr('style','')
         }
     })*/
 }
