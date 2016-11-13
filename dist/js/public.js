@@ -23,7 +23,8 @@ if ($.openId === null) {
 }
 
 // 测试用
-$.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
+// $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
+
 
 // 无限滚动的懒加载
 
