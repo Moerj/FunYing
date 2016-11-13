@@ -238,4 +238,3 @@
         })*/
     })();
 }
-//# sourceMappingURL=movDetails.js.map

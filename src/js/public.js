@@ -158,8 +158,15 @@ class ScrollLoad {
         // 关闭滚动监听
         this.scrollContanier.off('scroll')
 
-        // 删除加载提示符
-        this.preloader.text('已经到底了！');
+        // 内容出现混动条时，才会显示已经到底
+        let h1 = this.preloader[0].offsetTop
+        let h2 = this.listContanier.height() - parseInt(this.listContanier.css('padding-top'))
+        if (h1 > h2 - 10) {
+            this.preloader.text('已经到底了！');
+        } else {
+            this.preloader.text('');
+        }
+
     }
 
     // 进行渲染
@@ -231,14 +238,15 @@ $.payment = function (movieId, paySuccess_callback) {
 
     // 余额支付
     function _payByRecharge() {
+        $.showPreloader('购买中，稍等...');
         $.ajax({
             url: "http://wechat.94joy.com/wx/rest/pay/payByRecharge",
             data: {
                 openId: $.openId,
                 movieId: movieId
             },
-            success: function (res) {
-                console.log('余额支付接口',res);
+            success: (res) => {
+                console.log('余额支付接口', res);
                 if (res.STATUS == 1) {
                     paySuccess_callback();
 
@@ -246,8 +254,11 @@ $.payment = function (movieId, paySuccess_callback) {
                     $.msg('账户余额不足，请充值或使用微信支付！', 5000)
                 }
             },
-            error: function () {
+            error: () => {
                 $.msg('系统繁忙，请稍后再尝试支付操作！')
+            },
+            complete: () => {
+                $.hidePreloader();
             }
         });
     }

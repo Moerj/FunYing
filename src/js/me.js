@@ -98,6 +98,30 @@
 
     //头像上传
     $uploadPicker.change(function () {
+        function _updateImg(imgUrl) {
+            $.ajax({
+                url: "http://118.178.136.60:8001/rest/user/updateImg",
+                data: {
+                    openId: $.openId,
+                    img: imgUrl
+                },
+                success: function (res) {
+                    if (res.STATUS == 1) {
+                        $.toast("头像上传成功");
+                    } else {
+                        $.alert('上传失败，请稍后再试！')
+                    }
+                },
+                error: () => {
+                    $.alert('上传失败，请稍后再试！')
+                    console.error('接口部分头像上传失败')
+                },
+                complete: () => {
+                    $.hidePreloader();
+                }
+            });
+        }
+
         let formdata = new FormData();
         let v_this = $(this);
         let fileObj = v_this.get(0).files;
@@ -117,14 +141,12 @@
                 console.log('上传结果：', data);
                 if (data[0].result) {
                     $headimg.attr('src', localImgSrc); //更新新头像
-                    $.toast("头像上传成功");
+                    _updateImg('http://wechat.94joy.com/image' + data[0].result)
                 }
             },
-            error: (e) => {
+            error: () => {
                 $.alert('上传失败，请稍后再试！')
-                console.error(e)
-            },
-            complete: () => {
+                console.error('ftp部分头像上传失败')
                 $.hidePreloader();
             }
         });

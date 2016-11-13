@@ -97,6 +97,30 @@
                 console.error('我的二维码加载失败', e);
             }
         });$uploadPicker.change(function () {
+            function _updateImg(imgUrl) {
+                $.ajax({
+                    url: "http://118.178.136.60:8001/rest/user/updateImg",
+                    data: {
+                        openId: $.openId,
+                        img: imgUrl
+                    },
+                    success: function success(res) {
+                        if (res.STATUS == 1) {
+                            $.toast("头像上传成功");
+                        } else {
+                            $.alert('上传失败，请稍后再试！');
+                        }
+                    },
+                    error: function error() {
+                        $.alert('上传失败，请稍后再试！');
+                        console.error('接口部分头像上传失败');
+                    },
+                    complete: function complete() {
+                        $.hidePreloader();
+                    }
+                });
+            }
+
             var formdata = new FormData();
             var v_this = $(this);
             var fileObj = v_this.get(0).files;
@@ -116,14 +140,12 @@
                     console.log('上传结果：', data);
                     if (data[0].result) {
                         $headimg.attr('src', localImgSrc); //更新新头像
-                        $.toast("头像上传成功");
+                        _updateImg('http://wechat.94joy.com/image' + data[0].result);
                     }
                 },
-                error: function error(e) {
+                error: function error() {
                     $.alert('上传失败，请稍后再试！');
-                    console.error(e);
-                },
-                complete: function complete() {
+                    console.error('ftp部分头像上传失败');
                     $.hidePreloader();
                 }
             });
@@ -131,4 +153,3 @@
         });
     })();
 }
-//# sourceMappingURL=me.js.map

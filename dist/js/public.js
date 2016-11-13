@@ -178,8 +178,14 @@ var ScrollLoad = function () {
             // 关闭滚动监听
             this.scrollContanier.off('scroll');
 
-            // 删除加载提示符
-            this.preloader.text('已经到底了！');
+            // 内容出现混动条时，才会显示已经到底
+            var h1 = this.preloader[0].offsetTop;
+            var h2 = this.listContanier.height() - parseInt(this.listContanier.css('padding-top'));
+            if (h1 > h2 - 10) {
+                this.preloader.text('已经到底了！');
+            } else {
+                this.preloader.text('');
+            }
         }
 
         // 进行渲染
@@ -248,6 +254,7 @@ $.payment = function (movieId, paySuccess_callback) {
 
     // 余额支付
     function _payByRecharge() {
+        $.showPreloader('购买中，稍等...');
         $.ajax({
             url: "http://wechat.94joy.com/wx/rest/pay/payByRecharge",
             data: {
@@ -265,6 +272,9 @@ $.payment = function (movieId, paySuccess_callback) {
             },
             error: function error() {
                 $.msg('系统繁忙，请稍后再尝试支付操作！');
+            },
+            complete: function complete() {
+                $.hidePreloader();
             }
         });
     }
@@ -327,4 +337,3 @@ $(document).on('click', '.getMovie', function () {
         }
     });
 });
-//# sourceMappingURL=public.js.map
