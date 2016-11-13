@@ -244,11 +244,53 @@ $.msg = function (opts, timeout) {
 };
 
 // 付款
-$.payment = function () {
+$.payment = function (movieId) {
+
+    // 余额支付
+    function _payByRecharge() {
+        $.ajax({
+            url: "http://118.178.136.60:8001/rest/pay/payByRecharge",
+            data: {
+                openId: $.openId,
+                movieId: movieId
+            },
+            success: function success(res) {
+                console.log('余额支付接口', res);
+                if (res.STATUS == 1) {
+                    var name = location.pathname.split('/');
+                    name = name[name.length - 1];
+
+                    // 购物车页面
+                    if (name == 'cart.html') {
+                        $.msg({
+                            text: '恭喜，您已购买成功! 5s后跳转"我的影片"，可以去看片了',
+                            timeout: 5000,
+                            callback: function callback() {
+                                // 跳转到我的影片
+                                window.location = 'me.html#page-myMovie';
+                            }
+                        });
+                    } else {
+                        // 影视详情页
+                        // 删除购买按钮
+                        $('#isbuy').remove();
+                        $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000);
+                    }
+                } else {
+                    // 支付失败
+                    $.msg('账户余额不足，请充值或使用微信支付！', 5000);
+                }
+            },
+            error: function error() {
+                $.msg('系统繁忙，请稍后再尝试支付操作！');
+            }
+        });
+    }
+
     var buttons = [{
         text: '账户余额支付',
         onClick: function onClick() {
-            $.alert("你选择了“账户余额支付“");
+            _payByRecharge();
         }
     }, {
         text: '微信支付',
@@ -278,6 +320,7 @@ $.fn.init = function (data) {
     }
 };
 
+// 绑定事件=================
 // 影视详情跳转
 $(document).on('click', '.getMovie', function () {
     function _updateDetailsPage(res) {

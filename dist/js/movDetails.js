@@ -100,7 +100,8 @@
                 // 立即购买
                 if ($this.hasClass('buy')) {
                     if (data.IS_SUBSCRIBE == 1) {
-                        $.payment();
+                        // 支付
+                        $.payment(movieId);
                     } else {
                         $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！');
                     }
