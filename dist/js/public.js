@@ -237,9 +237,10 @@ if ($.openId === null) {
 }
 
 // 测试用
-if (!$.openId) {
-    $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
-}
+// if (!$.openId) {
+//     $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
+// }
+
 
 // 生成影视详情的url
 $.getMovDetails = function (id) {
