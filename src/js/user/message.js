@@ -1,4 +1,4 @@
-$(function () {
+{
 
     const $contanier = $('.message-contanier ul')
     const $emptyBackground = $contanier.find('.empty')
@@ -100,4 +100,4 @@ $(function () {
         })
 
 
-})
+}

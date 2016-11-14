@@ -6,43 +6,48 @@
     const $headimg = $('#headerImg'); //头像img
 
     // 我的页面数据
-    $.ajax({
-        url: "http://wechat.94joy.com/wx/rest/user/index",
-        data: {
-            openId: $.openId
-        },
-        success: function (res) {
-            // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-            console.log('个人中心首页数据：', res);
-            if (res.STATUS == 1 && res.DATA) {
-                let data = res.DATA
-                for (let key in data) {
-                    $('#' + key).text(data[key])
+    $.page_me_reload = function () {
+        $.ajax({
+            url: "http://wechat.94joy.com/wx/rest/user/index",
+            data: {
+                openId: $.openId
+            },
+            success: function (res) {
+                // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
+                console.log('个人中心首页数据：', res);
+                if (res.STATUS == 1 && res.DATA) {
+                    let data = res.DATA
+                    for (let key in data) {
+                        $('#' + key).text(data[key])
+                    }
+
+                    let rechargeAmountVal = Number($('#rechargeAmount').text())
+                    let lucreAmountVal = Number($('#lucreAmount').text())
+                    let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
+                    $('#total').text(total)
+                    $('.headpic').init(data.headerImg)
+
+                    let pieData = [{
+                        name: '收益余额',
+                        color: '#F36C60',
+                        value: lucreAmountVal
+                    }, {
+                        name: '充值余额',
+                        color: '#FFC107',
+                        value: rechargeAmountVal
+                    }]
+
+                    makePie(pieData);
+
+                } else {
+                    $.alert('用户信息读取失败')
                 }
-
-                let rechargeAmountVal = Number($('#rechargeAmount').text())
-                let lucreAmountVal = Number($('#lucreAmount').text())
-                let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
-                $('#total').text(total)
-                $('.headpic').init(data.headerImg)
-
-                let pieData = [{
-                    name: '收益余额',
-                    color: '#F36C60',
-                    value: lucreAmountVal
-                }, {
-                    name: '充值余额',
-                    color: '#FFC107',
-                    value: rechargeAmountVal
-                }]
-
-                makePie(pieData);
-
-            } else {
-                $.alert('用户信息读取失败')
             }
-        }
-    });
+        });
+    }
+
+    $.page_me_reload()
+
 
     // 我的二维码
     $.ajax({

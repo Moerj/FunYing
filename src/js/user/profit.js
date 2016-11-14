@@ -1,3 +1,4 @@
+// 收益明细
 {
     $('.childPageEnter').click(function () {
         let $this = $(this)

@@ -127,7 +127,8 @@
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
-      z-index: 2; }
+      z-index: 2;
+      text-align: center; }
       .money .circle .total .num {
         width: 100%;
         font-size: 0.8rem; }
@@ -226,13 +227,11 @@
     right: 0;
     text-align: center;
     color: white;
-    background: rgba(0, 0, 0, 0.24);
+    background: #FF9800;
     height: 48px;
+    width: 100%;
     line-height: 48px;
     font-size: 0.7rem; }
-    .withdraw .ok.active,
-    .charge .ok.active {
-      background: #FF9800; }
   .withdraw .chargelist > li:last-of-type label:after,
   .charge .chargelist > li:last-of-type label:after {
     left: 0; }

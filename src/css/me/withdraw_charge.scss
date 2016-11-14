@@ -42,13 +42,11 @@
         right: 0;
         text-align: center;
         color: white;
-        background: $ui-color-disabled;
+        background: $ui-color;
         height: 48px;
+        width: 100%;
         line-height: 48px;
         font-size: rem(14px);
-        &.active {
-            background: $ui-color;
-        }
     }
     // 充值列表
     .chargelist {

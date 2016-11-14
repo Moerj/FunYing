@@ -1,6 +1,6 @@
 {% extends "./layout/default.html"%} 
 
-{% block title%}我的{% endblock %} 
+{% block title%}个人中心{% endblock %} 
 
 {% block style%}
 <link rel="stylesheet" href="../css/me.css"> 
@@ -144,14 +144,14 @@
 {% endblock %} 
 
 {% block script %}
+
+<!-- jssdk -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="../js/jssdk-config.js"></script>
+
+<!-- js and lib -->
 <script src="../lib/echart/echarts.simple.min.js"></script>
-<script src="../js/me.js"></script> 
-<script src="../js/withdraw.js"></script> 
-<script src="../js/charge.js"></script>
-<script src="../js/profit.js"></script>
-<script src="../js/myMovie.js"></script>
-<script src="../js/message.js"></script>
-<script src="../js/feedback.js"></script>
+<script src="../js/user.js"></script> 
 
 
 {% endblock %}

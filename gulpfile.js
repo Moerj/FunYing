@@ -25,8 +25,6 @@ var paths = {
     }
 }
 
-// var webpackcfg = require('./webpack.config.js')(paths);
-
 //copy file to src folder
 gulp.task('copy', ['lib', 'images', 'json']);
 gulp.task('lib', function () {
@@ -84,8 +82,16 @@ gulp.task('sass-debug', function () {
         }));
 
 });
+
+// js concat
+gulp.task('js-concat', function () {
+    gulp.src(['src/js/user/*.js'])
+        .pipe($.concat('user.js'))
+        .pipe(gulp.dest('src/js'));
+})
+
 //compile js file
-gulp.task('js', function () {
+gulp.task('js',['js-concat'],function () {
     gulp.src(paths.js.entry)
         .pipe($.babel({
             presets: ['es2015']
@@ -95,6 +101,7 @@ gulp.task('js', function () {
             stream: true
         }));
 });
+
 gulp.task('js-debug', function () {
     gulp.src(paths.js.entry)
         .pipe($.sourcemaps.init())

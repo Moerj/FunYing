@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>我的</title>
+    <title>个人中心</title>
 
     <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
@@ -135,7 +135,7 @@
         <p>收益金额大于10元方可提现</p>
         <p>XX个工作日内退回至您的微信支付账户中。微信账户或有延迟，具体以账户到账时间为准。</p>
     </div>
-    <a id="withdrawOk" href="#" class="btn ok">确认提现</a>
+    <button id="withdrawOk" href="#" class="btn ok" disabled>确认提现</button>
 </div>
     </div>
 
@@ -155,7 +155,7 @@
     <ul class="chargelist">
         
     </ul>
-    <a id="chargeOk" href="#" class="btn ok active">确认充值</a>
+    <a id="chargeOk" href="#" class="btn ok">确认充值</a>
 </div>
     </div>
 
@@ -429,14 +429,14 @@
 
 
     
+
+<!-- jssdk -->
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="../js/jssdk-config.js"></script>
+
+<!-- js and lib -->
 <script src="../lib/echart/echarts.simple.min.js"></script>
-<script src="../js/me.js"></script> 
-<script src="../js/withdraw.js"></script> 
-<script src="../js/charge.js"></script>
-<script src="../js/profit.js"></script>
-<script src="../js/myMovie.js"></script>
-<script src="../js/message.js"></script>
-<script src="../js/feedback.js"></script>
+<script src="../js/user.js"></script> 
 
 
 
