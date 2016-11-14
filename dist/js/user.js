@@ -262,7 +262,7 @@ $('#feedbackSubmit').click(function () {
         };
 
         var $contanier = $('.message-contanier ul');
-        var $emptyBackground = $contanier.find('.empty');
+        // const $emptyBackground = $contanier.find('.empty')
 
         new ScrollLoad({
 

@@ -3,6 +3,7 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 var spriter = require('gulp-css-spriter');
+var glob = require("glob")
 
 var paths = {
     html: {
@@ -85,13 +86,23 @@ gulp.task('sass-debug', function () {
 
 // js concat
 gulp.task('js-concat', function () {
-    gulp.src(['src/js/user/*.js'])
-        .pipe($.concat('user.js'))
-        .pipe(gulp.dest('src/js'));
+    glob("src/js/*", {
+        ignore: ['src/js/*.js']
+    }, function (er, files) {
+
+        for (let i = 0; i < files.length; i++) {
+            let name = files[i].split('/')
+            name = name[name.length - 1]
+            gulp.src(files[i] + '/*.js')
+                .pipe($.concat(`${name}.js`))
+                .pipe(gulp.dest('src/js'));
+        }
+
+    })
 })
 
 //compile js file
-gulp.task('js',['js-concat'],function () {
+gulp.task('js', function () {
     gulp.src(paths.js.entry)
         .pipe($.babel({
             presets: ['es2015']
@@ -141,7 +152,8 @@ gulp.task('watch', function () {
     gulp.watch(paths.images.all, ['copy']);
     gulp.watch(paths.html.all, ['html']);
     gulp.watch(paths.sass.all, ['sass']);
-    gulp.watch(paths.js.all, ['js']);
+    gulp.watch(paths.js.entry, ['js']);
+    gulp.watch(['src/js/**/*.js','!src/js/*.js'], ['js-concat']);
 })
 
 var commTask = ['copy', 'html', 'sass', 'js'];

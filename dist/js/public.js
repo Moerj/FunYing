@@ -1,32 +1,10 @@
-"use strict";
+'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-// 取queryString
-$.GetQueryString = function (name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
-};
-
-// 获取初始openid
-$.openId = $.GetQueryString('openid');
-if ($.openId === null) {
-    // from sessionStorage
-    $.openId = sessionStorage.openId;
-} else {
-    // from queryString
-    sessionStorage.openId = $.openId;
-}
-
-// 测试用
-$.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
-
 // 无限滚动的懒加载
-
 var ScrollLoad = function () {
     function ScrollLoad(opt) {
         var _this = this;
@@ -58,7 +36,7 @@ var ScrollLoad = function () {
         }
 
         // 创建loading
-        this.preloader = $("\n            <div class=\"infinite-scroll-preloader\">\n                <div class=\"preloader\"></div>\n            </div>\n        ").appendTo(this.listContanier);
+        this.preloader = $('\n            <div class="infinite-scroll-preloader">\n                <div class="preloader"></div>\n            </div>\n        ').appendTo(this.listContanier);
 
         // 调整最大页数
         if (this.perload > this.maxload) {
@@ -89,7 +67,7 @@ var ScrollLoad = function () {
 
 
     _createClass(ScrollLoad, [{
-        key: "scroll",
+        key: 'scroll',
         value: function scroll() {
             var _this2 = this;
 
@@ -131,7 +109,7 @@ var ScrollLoad = function () {
         // 刷新数据
 
     }, {
-        key: "reload",
+        key: 'reload',
         value: function reload() {
             var _this3 = this;
 
@@ -173,7 +151,7 @@ var ScrollLoad = function () {
         // 加载完成
 
     }, {
-        key: "finish",
+        key: 'finish',
         value: function finish() {
             // 关闭滚动监听
             this.scrollContanier.off('scroll');
@@ -191,7 +169,7 @@ var ScrollLoad = function () {
         // 进行渲染
 
     }, {
-        key: "render",
+        key: 'render',
         value: function render(data) {
             // 根据每页条数限制data长度
             // 后台返回的数据，有可能超过自定分页长度
@@ -211,19 +189,65 @@ var ScrollLoad = function () {
     return ScrollLoad;
 }();
 
-// $ 下的公共方法
+// 绑定事件=================
+// 影视详情跳转
+
+
+$(document).on('click', '.getMovie', function () {
+    function _updateDetailsPage(res) {
+        var $page = $('.movieDetails');
+        $page.find('.pic').attr('src', res.MOVIE.poster);
+    }
+
+    var $this = $(this);
+    var movieId = $this.attr('movieId');
+    $.ajax({
+        type: "get",
+        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
+        data: {
+            movieId: movieId
+        },
+        success: function success(res) {
+            console.log(res);
+            _updateDetailsPage(res);
+        },
+        error: function error(e) {
+            console.log('影视详情页获取失败。', e);
+        }
+    });
+});
+// $ 下的公共方法 ==============
+
+// 取queryString
+$.GetQueryString = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+};
+
+// 获取初始openid
+$.openId = $.GetQueryString('openid');
+if ($.openId === null) {
+    // from sessionStorage
+    $.openId = sessionStorage.openId;
+} else {
+    // from queryString
+    sessionStorage.openId = $.openId;
+}
+
+// 测试用
+$.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q';
 
 // 生成影视详情的url
-
-
 $.getMovDetails = function (id) {
     // http://localhost:3000/html/articleDetails.html?articleId=1&oldOpenId=123
-    return "./movieDetails.html?movieId=" + id + "&oldOpenId=" + $.openId;
+    return './movieDetails.html?movieId=' + id + '&oldOpenId=' + $.openId;
 };
 
 // 生成文章详情
 $.getArtDetails = function (id) {
-    return "./articleDetails.html?articleId=" + id + "&oldOpenId=" + $.openId;
+    return './articleDetails.html?articleId=' + id + '&oldOpenId=' + $.openId;
 };
 
 $.msg = function (opts, timeout) {
@@ -235,7 +259,7 @@ $.msg = function (opts, timeout) {
         timeout = opts.timeout || 2000;
     }
 
-    var $tpl = $("\n        <div class=\"mask\">\n            <div class=\"msg\">\n                <p class=\"msg-title\">" + title + "</p>\n                <p class=\"msg-text\">" + text + "</p>\n            </div>\n        </div>\n    ");
+    var $tpl = $('\n        <div class="mask">\n            <div class="msg">\n                <p class="msg-title">' + title + '</p>\n                <p class="msg-text">' + text + '</p>\n            </div>\n        </div>\n    ');
 
     $('body').append($tpl);
 
@@ -295,7 +319,9 @@ $.payment = function (movieId, paySuccess_callback) {
     $.actions(buttons);
 };
 
-// jq 对象新增方法
+// jq 对象新增方法 ==================
+
+// dom加载ajax数据
 $.fn.init = function (data) {
 
     for (var i = 0; i < this.length; i++) {
@@ -311,29 +337,3 @@ $.fn.init = function (data) {
         thisJq.removeClass('hide').show();
     }
 };
-
-// 绑定事件=================
-// 影视详情跳转
-$(document).on('click', '.getMovie', function () {
-    function _updateDetailsPage(res) {
-        var $page = $('.movieDetails');
-        $page.find('.pic').attr('src', res.MOVIE.poster);
-    }
-
-    var $this = $(this);
-    var movieId = $this.attr('movieId');
-    $.ajax({
-        type: "get",
-        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
-        data: {
-            movieId: movieId
-        },
-        success: function success(res) {
-            console.log(res);
-            _updateDetailsPage(res);
-        },
-        error: function error(e) {
-            console.log('影视详情页获取失败。', e);
-        }
-    });
-});
