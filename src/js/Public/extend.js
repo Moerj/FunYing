@@ -18,9 +18,9 @@ if ($.openId === null) { // from sessionStorage
 }
 
 // 测试用
-if (!$.openId) {
-    $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
-}
+// if (!$.openId) {
+//     $.openId = 'o-IOqxK0lxh9KSLbpxdU8QKILd9Q'
+// }
 
 
 
