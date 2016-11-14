@@ -61,6 +61,7 @@
 
         // 确认充值
         $chargeBtn.click(function () {
+            $.alert(topay.prepay_id)
             wx.chooseWXPay({
                 appId: topay.appId,
                 timestamp: topay.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符  
