@@ -113,9 +113,18 @@
             if ($this.hasClass('buy')) {
                 if (data.IS_SUBSCRIBE == 1) {
                     // 支付
-                    $.payment(movieId,() => {
-                        $Buttons.remove()
-                        $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000)
+                    $.payment({
+                        productId: movieId,
+                        success: () => {
+                            $Buttons.remove()
+                            $('.numbox').show()
+                            $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000)
+                        },
+                        // 微信支付的参数
+                        wxPay: {
+                            type: 1, //影片购买
+                            title: `影视详情-影片购买`
+                        }
                     })
                 } else {
                     $.msg('您还不是会员，无法购买，先扫描页面下方二维码成为会员吧！')

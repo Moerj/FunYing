@@ -17,9 +17,14 @@
                 console.log('个人中心首页数据：', res);
                 if (res.STATUS == 1 && res.DATA) {
                     let data = res.DATA
+
+                    // 根据id 加载后台数据
                     for (let key in data) {
                         $('#' + key).text(data[key])
                     }
+
+                    // 充值页面的余额
+                    $('#rechargeAmount-2').init(data['rechargeAmount'].toFixed(2))
 
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
@@ -37,6 +42,7 @@
                         value: rechargeAmountVal
                     }]
 
+                    // 生成echart
                     makePie(pieData);
 
                 } else {

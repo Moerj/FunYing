@@ -116,7 +116,7 @@ $(function () {
     function changeBtnStatus() {
         selectedMovieId = [];
         hasSelect = false;
-        var total = 0;
+        var payTotal = 0;
 
         $('.select').each(function (i, el) {
             var $el = $(el);
@@ -128,12 +128,12 @@ $(function () {
 
                 // 统计价格
                 var price = parseFloat($el.parents('label').find('.price').text());
-                total += price;
+                payTotal += price;
             }
         });
         if (hasSelect) {
             $('.tools .btn').addClass('active');
-            $totalPrice.text(total.toFixed(2));
+            $totalPrice.text(payTotal.toFixed(2));
         } else {
             $('.tools .btn').removeClass('active');
             $totalPrice.text(0);
@@ -174,23 +174,31 @@ $(function () {
     // 支付
     $payBtn.click(function () {
 
-        var movieId = selectedMovieId[0];
+        var productId = selectedMovieId[0];
         if (selectedMovieId.length > 1) {
             for (var i = 1; i < selectedMovieId.length; i++) {
-                movieId += ',' + selectedMovieId[i];
+                productId += ',' + selectedMovieId[i];
             }
         }
 
-        $.payment(movieId, function () {
+        $.payment({
+            productId: productId,
+            movieId: productId,
+            success: function success() {
 
-            $.msg({
-                text: '恭喜，您已购买成功! 5s后跳转"我的影片"，可以去看片了',
-                timeout: 5000,
-                callback: function callback() {
-                    // 跳转到我的影片
-                    window.location = 'me.html#page-myMovie';
-                }
-            });
+                $.msg({
+                    text: '恭喜，您已购买成功! 5s后跳转"我的影片"，可以去看片了',
+                    timeout: 5000,
+                    callback: function callback() {
+                        // 跳转到我的影片
+                        window.location = 'me.html#page-myMovie';
+                    }
+                });
+            },
+            wxPay: {
+                type: 1, //影片购买
+                title: '购物车-影片购买'
+            }
         });
     });
 });

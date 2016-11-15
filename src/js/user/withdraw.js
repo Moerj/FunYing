@@ -17,7 +17,7 @@
                 if (res.STATUS == 1) {
                     $.msg('提现成功，荷包胀起来了！',5000)
                     setTimeout(function() {
-                        $.page_me_reload();
+                        $.page_me_reload();//刷新个人中心数据
                         $.router.back();
                     }, 5000);
                 } else {

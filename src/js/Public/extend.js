@@ -68,7 +68,7 @@ $.msg = function (opts, timeout) {
 }
 
 // 付款
-$.payment = function (movieId, paySuccess_callback) {
+$.payment = function (OPTS) {
 
     // 余额支付
     function _payByRecharge() {
@@ -77,12 +77,12 @@ $.payment = function (movieId, paySuccess_callback) {
             url: "http://wechat.94joy.com/wx/rest/pay/payByRecharge",
             data: {
                 openId: $.openId,
-                movieId: movieId
+                movieId: OPTS.movieId
             },
             success: (res) => {
                 console.log('余额支付接口', res);
                 if (res.STATUS == 1) {
-                    paySuccess_callback();
+                    OPTS.success();
 
                 } else { // 支付失败
                     $.msg('账户余额不足，请充值或使用微信支付！', 5000)
@@ -105,7 +105,11 @@ $.payment = function (movieId, paySuccess_callback) {
     }, {
         text: '微信支付',
         onClick: function () {
-            $.alert("你选择了“微信支付“");
+            OPTS.wxPay.productId = OPTS.productId
+            $.wxPay(OPTS.wxPay, () => {
+                OPTS.success();
+            })
+
         }
     }, {
         text: '取消'
@@ -114,18 +118,77 @@ $.payment = function (movieId, paySuccess_callback) {
 }
 
 
-// $.wxConfig = function (opt) {
-//     wx.config({
-//         debug: opt.debug, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-//         appId: opt.appId, // 必填，公众号的唯一标识
-//         timestamp: opt.timestamp, // 必填，生成签名的时间戳
-//         nonceStr: opt.nonceStr, // 必填，生成签名的随机串
-//         signature: opt.signature, // 必填，签名，见附录1
-//         jsApiList: [
-//                 "chooseWXPay"
-//             ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
-//     });
-// }
+// 统一下单接口
+$.wxPay = function (payOption, payCallback) {
+    console.log(payOption);
+
+    $.showIndicator()
+    $.ajax({
+        url: "http://118.178.136.60:8001/rest/pay/toPay",
+        data: {
+            type: payOption.type, //充值类型 1,影片购买  2，充值
+            title: payOption.title,
+            openId: $.openId,
+            productId: payOption.productId,
+            url: location.href.split('#')[0]
+        },
+        success: (res) => {
+            console.log('统一下单接口：', res);
+
+            // 微信config接口注入权限验证配置
+            wx.config({
+                // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: res.appId, // 必填，公众号的唯一标识
+                timestamp: res.timestamp, // 必填，生成签名的时间戳
+                nonceStr: res.nonceStr, // 必填，生成签名的随机串
+                signature: res.signature, // 必填，签名，见附录1
+                jsApiList: [
+                        "chooseWXPay"
+                    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+            });
+
+            // 通过ready接口处理成功验证
+            wx.ready(() => {
+                // 发起一个微信支付请求
+                wx.chooseWXPay({
+                    appId: res.appId,
+                    timestamp: res.timestamp, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符  
+                    nonceStr: res.nonceStr, // 支付签名随机串，不长于 32 位  
+                    package: 'prepay_id=' + res.prepay_id, // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）  
+                    signType: res.signType, // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'  
+                    paySign: res.paySign, // 支付签名  
+                    success: function (res) {
+                        // 支付成功后的回调函数  
+                        if (res.errMsg == "chooseWXPay:ok") {
+
+                            //支付成功  
+                            payCallback()
+
+                        } else {
+                            alert(res.errMsg);
+                        }
+                    },
+                    cancel: function (res) {
+                        //支付取消  
+                        $.msg('支付取消');
+                    },
+                    fail: function () {
+                        $.msg('充值失败，请小主稍后再试！', 5000)
+                    }
+                });
+            })
+
+
+        },
+        error: (e) => {
+            $.alert('充值服务初始化失败，请稍后再试！')
+            console.log('充值失败', e);
+        },
+        complete: () => {
+            $.hideIndicator()
+        }
+    });
+}
 
 
 // jq 对象新增方法 ==================
