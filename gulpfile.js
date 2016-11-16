@@ -160,5 +160,6 @@ var commTask = ['copy', 'html', 'sass', 'js'];
 var debugTask = ['copy', 'html', 'sass-debug', 'js-debug'];
 
 gulp.task('debug', debugTask.concat('watch'));
+gulp.task('dev', commTask.concat('watch'));
 gulp.task('build', commTask);
-gulp.task('default', ['debug']);
+gulp.task('default', ['dev']);
