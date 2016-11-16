@@ -153,8 +153,8 @@ $('#feedbackSubmit').click(function () {
                         var rechargeAmountVal = Number($('#rechargeAmount').text());
                         var lucreAmountVal = Number($('#lucreAmount').text());
                         var total = (rechargeAmountVal + lucreAmountVal).toFixed(2);
-                        $('#total').text(total);
-                        $('.headpic').init(data.headerImg);
+                        $('#total').text(total); //账户余额
+                        $('.headpic').init(data.headerImg); //个人中心用户头像
 
                         var pieData = [{
                             name: '收益余额',

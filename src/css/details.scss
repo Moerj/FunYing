@@ -14,7 +14,7 @@
         height: 44px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         background: transparent;
         padding: 0 12px;
         &>* {
@@ -236,7 +236,7 @@
 
 // 文章详情
 .details-article {
-    padding: 2rem .8rem 0;
+    padding: 0 .8rem 0;
     .tools {
         background: white;
         box-shadow: 0 1px 1px rgba($color: black, $alpha: .1);

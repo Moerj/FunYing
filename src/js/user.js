@@ -124,8 +124,8 @@ $('#feedbackSubmit').click(function () {
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
                     let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
-                    $('#total').text(total)
-                    $('.headpic').init(data.headerImg)
+                    $('#total').text(total)//账户余额
+                    $('.headpic').init(data.headerImg)//个人中心用户头像
 
                     let pieData = [{
                         name: '收益余额',

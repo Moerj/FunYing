@@ -5,11 +5,17 @@
         .top {
             .headerTools {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 align-items: center;
                 padding: 0 rem(12px);
+                position: relative;
                 span {
                     font-size: rem(14px);
+                    width: 100%;
+                    text-align: center;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                 }
                 >* {
                     position: relative;
@@ -194,8 +200,8 @@
     .con1 {
         background: $ui-color;
     }
-    .level{
-        &:after{
+    .level {
+        &:after {
             content: '一'
         }
     }
@@ -205,8 +211,8 @@
     .con1 {
         background: #FFC107;
     }
-    .level{
-        &:after{
+    .level {
+        &:after {
             content: '二'
         }
     }
@@ -216,8 +222,8 @@
     .con1 {
         background: #00BCD4;
     }
-    .level{
-        &:after{
+    .level {
+        &:after {
             content: '三'
         }
     }
@@ -233,17 +239,17 @@
             padding: rem(15px) rem(16px);
             margin: 0;
         }
-        .text{
+        .text {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-grow: 1;
             padding-right: rem(16px);
-            .name{
+            .name {
                 font-size: rem(14px);
             }
-            .num{
-                color:$ui-color-red;
+            .num {
+                color: $ui-color-red;
                 font-size: rem(12px);
             }
         }

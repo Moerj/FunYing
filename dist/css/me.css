@@ -327,13 +327,19 @@
   .profit .con1 .top .headerTools {
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
     -ms-flex-align: center;
         align-items: center;
-    padding: 0 0.6rem; }
+    padding: 0 0.6rem;
+    position: relative; }
     .profit .con1 .top .headerTools span {
-      font-size: 0.7rem; }
+      font-size: 0.7rem;
+      width: 100%;
+      text-align: center;
+      position: absolute;
+      top: 0;
+      left: 0; }
     .profit .con1 .top .headerTools > * {
       position: relative; }
     .profit .con1 .top .headerTools img {

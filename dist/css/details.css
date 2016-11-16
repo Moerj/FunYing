@@ -12,8 +12,8 @@
     display: flex;
     -ms-flex-align: center;
         align-items: center;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
     background: transparent;
     padding: 0 12px; }
     .details .tools > * {
@@ -201,7 +201,7 @@
         margin: 0; }
 
 .details-article {
-  padding: 2rem .8rem 0; }
+  padding: 0 .8rem 0; }
   .details-article .tools {
     background: white;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); }
