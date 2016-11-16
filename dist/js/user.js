@@ -247,143 +247,137 @@ $('#feedbackSubmit').click(function () {
         });
     })();
 }
-{
-    (function () {
-        var showEmpty = function showEmpty() {
-            if ($contanier.children('.messageList').length == 0) {
-                $contanier.hide();
+setTimeout(function () {
+
+    var $contanier = $('.message-contanier ul');
+    // const $emptyBackground = $contanier.find('.empty')
+
+    new ScrollLoad({
+
+        scrollContanier: $contanier, //滚动父容器
+        // maxload: 10,
+        // perload: 7,
+
+        // 配置渲染模板
+        template: function template(data) {
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                html += '\n                <li class="messageList">\n                    <a href=' + $.getArtDetails(d.id) + ' class="message external">\n                        <p class="Title">\n                            <span class="name">' + d.title + '</span>\n                            <span class="day">' + d.addTime + '</span>\n                        </p>\n                        <p class="details">' + d.context + '</p>\n                        <span class="delete" msgId=' + d.id + '></span>\n                    </a>\n                </li>\n                ';
             }
-        };
+            return html;
+        },
 
-        var deleteOneMsg = function deleteOneMsg(deleteBtn) {
-            var $deleteBtn = $(deleteBtn);
-            var msgId = $deleteBtn.attr('msgId');
-            $deleteBtn.parents('.messageList').remove();
-            showEmpty();
-
+        ajax: function ajax(data, callback) {
+            var newData = $.extend({}, data, {
+                openId: $.openId
+            });
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/delSystemMsg",
+                url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
+                data: newData,
+                success: function success(res) {
+                    console.log('系统消息：', res);
+                    if (res.DATA) {
+                        callback(res.DATA);
+                    } else {
+                        console.log('路由页面没有数据>>');
+                    }
+                },
+                error: function error(e) {
+                    console.log(e);
+                    $.alert('刷新失败，请稍后再试！');
+                },
+                complete: function complete() {
+                    showEmpty();
+                }
+            });
+        }
+    });
+
+    function showEmpty() {
+        if ($contanier.children('.messageList').length == 0) {
+            $contanier.hide();
+        }
+    }
+
+    function deleteOneMsg(deleteBtn) {
+        var $deleteBtn = $(deleteBtn);
+        var msgId = $deleteBtn.attr('msgId');
+        $deleteBtn.parents('.messageList').remove();
+        showEmpty();
+
+        $.ajax({
+            url: "http://wechat.94joy.com/wx/rest/user/delSystemMsg",
+            data: {
+                openId: $.openId,
+                msgId: msgId
+            },
+            success: function success(res) {
+                // console.log(res);
+                if (res.STATUS == 1) {
+                    console.log('id:' + msgId + ' 消息删除成功!');
+                }
+            }
+        });
+    }
+
+    $(document).on('swipeLeft', '.message', function () {
+        $(this).addClass('showDelete');
+    }).on('swipeRight', '.message', function () {
+        $(this).removeClass('showDelete');
+    }).on('click', '.messageList .delete', function () {
+        deleteOneMsg(this);
+        return false; //防冒泡
+    });
+}, 100);
+setTimeout(function () {
+
+    var $contanier = $('.myMovieList');
+
+    // $.showIndicator()
+
+    new ScrollLoad({
+
+        scrollContanier: $contanier, //滚动父容器
+
+        // 配置渲染模板
+        template: function template(data) {
+            var html = '';
+            for (var i = 0; i < data.length; i++) {
+                var d = data[i];
+                html += '\n                <a class="box external" href="' + $.getMovDetails(d.id) + '">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                    </div>\n                    <div class="info">\n                        <span class="Title">' + d.title + '</span>\n                        <p class="text">' + d.introduction + '</p>\n                        <span class="text2">更新到第' + d.updateSite + '集</span>\n                    </div>\n                    <span class="info2">\n                        <span>下单时间: ' + d.updateTime + '</span>\n                        <span class="price">' + d.price + '</span>\n                    </span>\n                </a>\n                ';
+            }
+            return html;
+        },
+
+        ajax: function ajax(data, callback) {
+            $.ajax({
+                url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
                 data: {
                     openId: $.openId,
-                    msgId: msgId
+                    state: 1 //我的影片
                 },
                 success: function success(res) {
-                    // console.log(res);
-                    if (res.STATUS == 1) {
-                        console.log('id:' + msgId + ' 消息删除成功!');
+                    console.log('我的影片：', res);
+                    if (res.DATA) {
+                        callback(res.DATA);
+                    } else {
+                        console.log('我的影片没有数据');
+                    }
+                },
+                error: function error(e) {
+                    console.log('我的影片加载失败', e);
+                    // $.alert('刷新失败，请稍后再试！')
+                },
+                complete: function complete() {
+                    if ($contanier.find('.box').length == 0) {
+                        $contanier.hide();
                     }
                 }
             });
-        };
-
-        var $contanier = $('.message-contanier ul');
-        // const $emptyBackground = $contanier.find('.empty')
-
-        new ScrollLoad({
-
-            scrollContanier: $contanier, //滚动父容器
-            // maxload: 10,
-            // perload: 7,
-
-            // 配置渲染模板
-            template: function template(data) {
-                var html = '';
-                for (var i = 0; i < data.length; i++) {
-                    var d = data[i];
-                    html += '\n                <li class="messageList">\n                    <a href=' + $.getArtDetails(d.id) + ' class="message external">\n                        <p class="Title">\n                            <span class="name">' + d.title + '</span>\n                            <span class="day">' + d.addTime + '</span>\n                        </p>\n                        <p class="details">' + d.context + '</p>\n                        <span class="delete" msgId=' + d.id + '></span>\n                    </a>\n                </li>\n                ';
-                }
-                return html;
-            },
-
-            ajax: function ajax(data, callback) {
-                var newData = $.extend({}, data, {
-                    openId: $.openId
-                });
-                $.ajax({
-                    type: "get",
-                    // url: '../json/message.json',
-                    url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
-                    data: newData,
-                    success: function success(res) {
-                        // console.log(res);
-                        if (res.DATA) {
-                            callback(res.DATA);
-                        } else {
-                            console.log('路由页面没有数据>>');
-                        }
-                    },
-                    error: function error(e) {
-                        console.log(e);
-                        $.alert('刷新失败，请稍后再试！');
-                    },
-                    complete: function complete() {
-                        showEmpty();
-                    }
-                });
-            }
-        });
-
-        $(document).on('swipeLeft', '.message', function () {
-            $(this).addClass('showDelete');
-        }).on('swipeRight', '.message', function () {
-            $(this).removeClass('showDelete');
-        }).on('click', '.messageList .delete', function () {
-            deleteOneMsg(this);
-            return false; //防冒泡
-        });
-    })();
-}
-{
-    (function () {
-        var $contanier = $('.myMovieList');
-
-        $.showIndicator();
-
-        new ScrollLoad({
-
-            scrollContanier: $contanier, //滚动父容器
-
-            // 配置渲染模板
-            template: function template(data) {
-                var html = '';
-                for (var i = 0; i < data.length; i++) {
-                    var d = data[i];
-                    html += '\n                <a class="box external" href="' + $.getMovDetails(d.id) + '">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                    </div>\n                    <div class="info">\n                        <span class="Title">' + d.title + '</span>\n                        <p class="text">' + d.introduction + '</p>\n                        <span class="text2">更新到第' + d.updateSite + '集</span>\n                    </div>\n                    <span class="info2">\n                        <span>下单时间:<span class="day">9/12</span> <span class="time">9:30</span></span>\n                        <span class="price">' + d.price + '</span>\n                    </span>\n                </a>\n                ';
-                }
-                return html;
-            },
-
-            ajax: function ajax(data, callback) {
-                $.ajax({
-                    type: "get",
-                    url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
-                    // url: '../json/message.json',
-                    data: {
-                        openId: $.openId,
-                        state: 1 //我的影片
-                    },
-                    success: function success(res) {
-                        // console.log(res);
-                        if (res.DATA) {
-                            callback(res.DATA);
-                        } else {
-                            console.log('我的影片没有数据');
-                        }
-                    },
-                    error: function error(e) {
-                        console.log('我的影片加载失败', e);
-                        // $.alert('刷新失败，请稍后再试！')
-                    },
-                    complete: function complete() {
-                        if ($contanier.find('.box').length == 0) {
-                            $contanier.hide();
-                        }
-                    }
-                });
-            }
-        });
-    })();
-}
+        }
+    });
+}, 100);
 // 收益明细
 {
     var createProfitInList = function createProfitInList(data) {

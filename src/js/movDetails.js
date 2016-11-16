@@ -1,5 +1,6 @@
 // 影视详情
-{
+setTimeout(function () {
+
     const movieId = $.GetQueryString('movieId')
     const $addCart = $('#addCart') //加入购物车按钮
     const $Buttons = $('#isbuy') //立即购买按钮
@@ -176,6 +177,7 @@
     // 初始请求数据
     $.ajax({
         url: "http://wechat.94joy.com/wx/rest/index/getMovie",
+        // cache:false,
         data: {
             movieId: movieId,
             openId: $.openId,
@@ -245,4 +247,6 @@
             $Buttons.attr('style','')
         }
     })*/
-}
+
+
+},100);

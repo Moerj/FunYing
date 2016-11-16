@@ -1,7 +1,9 @@
-{
+setTimeout(function() {
+    
+
     const $contanier = $('.myMovieList')
 
-    $.showIndicator()
+    // $.showIndicator()
 
     new ScrollLoad({
 
@@ -23,7 +25,7 @@
                         <span class="text2">更新到第${d.updateSite}集</span>
                     </div>
                     <span class="info2">
-                        <span>下单时间:<span class="day">9/12</span> <span class="time">9:30</span></span>
+                        <span>下单时间: ${d.updateTime}</span>
                         <span class="price">${d.price}</span>
                     </span>
                 </a>
@@ -34,15 +36,13 @@
 
         ajax: (data, callback) => {
             $.ajax({
-                type: "get",
                 url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
-                // url: '../json/message.json',
                 data: {
                     openId: $.openId,
                     state: 1 //我的影片
                 },
                 success: (res) => {
-                    // console.log(res);
+                    console.log('我的影片：',res);
                     if (res.DATA) {
                         callback(res.DATA)
                     } else {
@@ -62,4 +62,4 @@
         }
     })
 
-}
+},100);

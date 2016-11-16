@@ -1,4 +1,6 @@
-{
+setTimeout(function() {
+    
+
 
     const $contanier = $('.message-contanier ul')
     // const $emptyBackground = $contanier.find('.empty')
@@ -35,12 +37,10 @@
                 openId: $.openId
             })
             $.ajax({
-                type: "get",
-                // url: '../json/message.json',
                 url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                 data: newData,
                 success: (res) => {
-                    // console.log(res);
+                    console.log('系统消息：',res);
                     if (res.DATA) {
                         callback(res.DATA)
                     } else {
@@ -100,4 +100,4 @@
         })
 
 
-}
+},100);

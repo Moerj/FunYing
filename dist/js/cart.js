@@ -201,4 +201,4 @@ setTimeout(function () {
             }
         });
     });
-});
+}, 100);

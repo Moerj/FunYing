@@ -41,7 +41,7 @@ $navHeight: 2.5rem;
     background: white;
     @include box-shadow-bottom;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 0 rem(12px);
     font-size: rem(14px);
