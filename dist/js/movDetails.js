@@ -102,7 +102,7 @@
                     if (data.IS_SUBSCRIBE == 1) {
                         // 支付
                         $.payment({
-                            productId: movieId,
+                            movieId: movieId,
                             success: function success() {
                                 $Buttons.remove();
                                 $('.numbox').show();

@@ -234,7 +234,7 @@ $('#feedbackSubmit').click(function () {
                     console.log('上传结果：', data);
                     if (data[0].result) {
                         $headimg.attr('src', localImgSrc); //更新新头像
-                        _updateImg('http://wechat.94joy.com/image' + data[0].result);
+                        _updateImg('http://wechat.94joy.com/img' + data[0].result);
                     }
                 },
                 error: function error() {

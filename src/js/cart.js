@@ -1,6 +1,6 @@
 // 购物车
 
-$(() => {
+setTimeout(() => {
     const $contanier = $('.list')
     const $payBtn = $('#payBtn')
     const $totalPrice = $('#totalPrice')

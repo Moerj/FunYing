@@ -11,26 +11,13 @@
 <div class="page-group">
 
     <div class="page page-current" id='index-default'>
-        <div class="content headerTool infinite-scroll infinite-scroll-bottom">
-            <!-- 顶部浮动工具条 -->
-            <div class="tool">
-                <p class="toolname">剧情更新</p>
-                <div class="button-group">
-                    <a class="btn back" href="#"><i class="fa fa-long-arrow-left"></i></a>
-                </div>
-            </div>
+        <div class="content headerTool infinite-scroll infinite-scroll-bottom" style="top:0;bottom:0">
             <div class="find-content" style="padding-top: 0;">
                 <!--list-->
             </div>
         </div>
-        <!--{{find}}{%set find = "active"%}{{find}}-->
-        {% include "./layout/navbar.html"%}
     </div>
 
-    <!--搜索页面-->
-    <div class="page" id='page-search'>
-        {% include "./index/search.html"%}
-    </div>
 
 
 </div>

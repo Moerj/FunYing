@@ -2,7 +2,7 @@
 
 // 购物车
 
-$(function () {
+setTimeout(function () {
     var $contanier = $('.list');
     var $payBtn = $('#payBtn');
     var $totalPrice = $('#totalPrice');
