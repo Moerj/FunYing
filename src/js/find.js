@@ -37,7 +37,6 @@
             })
 
             $.ajax({
-                type: "get",
                 url: 'http://wechat.94joy.com/wx/rest/find/all',
                 data: data,
                 success: function (res) {
