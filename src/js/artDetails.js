@@ -13,7 +13,7 @@
             oldOpenId: $.GetQueryString('oldOpenId')
         },
         success: function (res) {
-            console.log('文章详情数据：',res);
+            console.log('文章详情数据：', res);
             if (res.STATUS == 1) {
                 render(res)
             } else {
@@ -37,9 +37,13 @@
     function render(res) {
         const data = res.ARTICLE
             // console.log(data);
+
         $('.text').append(data.context)
         $('.time').text(data.updateTime)
         $('.Title').text(data.title)
+
+        // 加载二维码
+        $('#qrcode').attr('src', data.QR_CODE)
 
         // 判断是否会员，然后隐藏二维码
         if (res.IS_SUBSCRIBE) {
