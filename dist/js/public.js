@@ -50,6 +50,7 @@ var ScrollLoad = function () {
 
         // 首次加载
         this.ajax({
+            openId: $.openId,
             skip: 1, //当前页
             limit: this.perload //每页条数
         }, function (data) {
@@ -89,6 +90,7 @@ var ScrollLoad = function () {
             this.loading = true;
 
             this.ajax({
+                openId: $.openId,
                 skip: this.currentPage, //当前页
                 limit: this.perload //每页条数
             }, function (data) {
@@ -134,6 +136,7 @@ var ScrollLoad = function () {
             $.showIndicator();
 
             this.ajax({
+                openId: $.openId,
                 skip: 1, //当前页
                 limit: this.perload //每页条数
             }, function (data) {

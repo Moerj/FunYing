@@ -33,14 +33,11 @@ setTimeout(function() {
         },
 
         ajax: (data, callback) => {
-            let newData = $.extend({}, data, {
-                openId: $.openId
-            })
             $.ajax({
                 url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
-                data: newData,
+                data: data,
                 success: (res) => {
-                    console.log('系统消息：',res);
+                    // console.log('系统消息：',res);
                     if (res.DATA) {
                         callback(res.DATA)
                     } else {

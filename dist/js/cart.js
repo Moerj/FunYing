@@ -26,7 +26,6 @@ setTimeout(function () {
 
         ajax: function ajax(data, callback) {
             var newData = $.extend({}, data, {
-                openId: $.openId,
                 state: 0 //购物车
             });
 

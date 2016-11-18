@@ -14,7 +14,7 @@
             },
             success: function (res) {
                 // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-                console.log('个人中心首页数据：', res);
+                // console.log('个人中心首页数据：', res);
                 if (res.STATUS == 1 && res.DATA) {
                     let data = res.DATA
 
@@ -30,7 +30,7 @@
                     let lucreAmountVal = Number($('#lucreAmount').text())
                     let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
                     $('#total').text(total)//账户余额
-                    $('.headpic').init(data.headerImg)//个人中心用户头像
+                    $('.headpic').init(data.headerImg || '../images/icon/user.png')//个人中心用户头像
 
                     let pieData = [{
                         name: '收益余额',

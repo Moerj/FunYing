@@ -138,7 +138,7 @@ $('#feedbackSubmit').click(function () {
                 },
                 success: function success(res) {
                     // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-                    console.log('个人中心首页数据：', res);
+                    // console.log('个人中心首页数据：', res);
                     if (res.STATUS == 1 && res.DATA) {
                         var data = res.DATA;
 
@@ -154,7 +154,7 @@ $('#feedbackSubmit').click(function () {
                         var lucreAmountVal = Number($('#lucreAmount').text());
                         var total = (rechargeAmountVal + lucreAmountVal).toFixed(2);
                         $('#total').text(total); //账户余额
-                        $('.headpic').init(data.headerImg); //个人中心用户头像
+                        $('.headpic').init(data.headerImg || '../images/icon/user.png'); //个人中心用户头像
 
                         var pieData = [{
                             name: '收益余额',
@@ -290,14 +290,11 @@ setTimeout(function () {
         },
 
         ajax: function ajax(data, callback) {
-            var newData = $.extend({}, data, {
-                openId: $.openId
-            });
             $.ajax({
                 url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
-                data: newData,
+                data: data,
                 success: function success(res) {
-                    console.log('系统消息：', res);
+                    // console.log('系统消息：',res);
                     if (res.DATA) {
                         callback(res.DATA);
                     } else {
@@ -351,83 +348,269 @@ setTimeout(function () {
         return false; //防冒泡
     });
 }, 100);
-setTimeout(function () {
+{
+    (function () {
+        var pageInit = function pageInit() {
 
-    var $contanier = $('.myMovieList');
+            var $contanier = $('.myMovieList');
 
-    // $.showIndicator()
+            new ScrollLoad({
 
-    new ScrollLoad({
+                scrollContanier: $contanier, //滚动父容器
 
-        scrollContanier: $contanier, //滚动父容器
-
-        // 配置渲染模板
-        template: function template(data) {
-            var html = '';
-            for (var i = 0; i < data.length; i++) {
-                var d = data[i];
-                html += '\n                <a class="box external" href="' + $.getMovDetails(d.id) + '">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                    </div>\n                    <div class="info">\n                        <span class="Title">' + d.title + '</span>\n                        <p class="text">' + d.introduction + '</p>\n                        <span class="text2">更新到第' + d.updateSite + '集</span>\n                    </div>\n                    <span class="info2">\n                        <span>下单时间: ' + d.updateTime + '</span>\n                        <span class="price">' + d.price + '</span>\n                    </span>\n                </a>\n                ';
-            }
-            return html;
-        },
-
-        ajax: function ajax(data, callback) {
-            $.ajax({
-                url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
-                data: {
-                    openId: $.openId,
-                    state: 1 //我的影片
-                },
-                success: function success(res) {
-                    console.log('我的影片：', res);
-                    if (res.DATA) {
-                        callback(res.DATA);
-                    } else {
-                        console.log('我的影片没有数据');
+                // 配置渲染模板
+                template: function template(data) {
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+                        html += '\n                    <a class="box external" href="' + $.getMovDetails(d.id) + '">\n                        <div class="imgbox">\n                            <img src="' + d.poster + '" alt="">\n                        </div>\n                        <div class="info">\n                            <span class="Title">' + d.title + '</span>\n                            <p class="text">' + d.introduction + '</p>\n                            <span class="text2">更新到第' + d.updateSite + '集</span>\n                        </div>\n                        <span class="info2">\n                            <span>下单时间: ' + d.updateTime + '</span>\n                            <span class="price">' + d.price + '</span>\n                        </span>\n                    </a>\n                    ';
                     }
+                    return html;
                 },
-                error: function error(e) {
-                    console.log('我的影片加载失败', e);
-                    // $.alert('刷新失败，请稍后再试！')
-                },
-                complete: function complete() {
-                    if ($contanier.find('.box').length == 0) {
-                        $contanier.hide();
-                    }
+
+                ajax: function ajax(data, callback) {
+                    $.ajax({
+                        url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
+                        data: {
+                            openId: $.openId,
+                            state: 1 //我的影片
+                        },
+                        success: function success(res) {
+                            // console.log('我的影片：',res);
+                            if (res.DATA) {
+                                callback(res.DATA);
+                            } else {
+                                console.log('我的影片没有数据');
+                            }
+                        },
+                        error: function error(e) {
+                            console.log('我的影片加载失败', e);
+                            // $.alert('刷新失败，请稍后再试！')
+                        },
+                        complete: function complete() {
+                            if ($contanier.find('.box').length == 0) {
+                                $contanier.hide();
+                            }
+                        }
+                    });
                 }
             });
+        };
+
+        // 点击个人中心的收益明细入口后，才加载收益明细模块数据
+
+
+        $('#myMovieEntry').one('click', function () {
+            pageInit();
+        });
+
+        // 初始已进入此模块
+        if (location.hash.indexOf('page-myMovie') > 0) {
+            pageInit();
         }
-    });
-}, 100);
+    })();
+}
 // 收益明细
 {
-    var createProfitInList = function createProfitInList(data) {
-        var index = data.index;
-        var length = data.length;
-        var tpl = '';
-        for (var i = 0; i < length; i++) {
-            tpl += '\n            <li>\n                <div class="info">\n                    <img src="../images/index-banner.jpg" alt="">\n                    <div class="text">\n                        <span class="name">哇哈哈</span>\n                        <span class="num">+20.00</span>\n                    </div>\n                </div>\n            </li>\n            ';
+    (function () {
+
+        // 收益明细页数据
+        var entry = function entry() {
+            new ScrollLoad({
+
+                scrollContanier: '#profitScrollContanier', //滚动父容器
+                listContanier: '#profitList',
+                // maxload: 10,
+                // perload: 7,
+
+                // 配置渲染模板
+                template: function template(data) {
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+
+                        // 推客名
+                        var name = d.one_level_amount || d.second_level_amount || d.three_level_amount || '';
+
+                        var details = void 0; // 收益详情
+                        var classType = void 0; // 推客等级
+                        var amount = void 0; //额度
+
+                        switch (Number(d.type)) {
+                            case 1:
+                                classType = 'one';
+                                details = '从一级推客' + name + '获取收益';
+                                amount = d.charge_amount;
+                                break;
+                            case 2:
+                                classType = 'two';
+                                details = '从二级推客' + name + '获取收益';
+                                amount = d.charge_amount;
+                                break;
+                            case 3:
+                                classType = 'three';
+                                details = '从三级推客' + name + '获取收益';
+                                amount = d.charge_amount;
+                                break;
+                            case 4:
+                                details = '提现';
+                                amount = d.profit_amount;
+                                classType = 'other';
+                                break;
+                            case 5:
+                                details = '消费';
+                                amount = d.profit_amount;
+                                classType = 'other';
+                                break;
+                            case 6:
+                                details = '充值';
+                                amount = d.charge_amount;
+                                classType = 'other';
+                                break;
+                            default:
+
+                                break;
+                        }
+
+                        // 时间
+                        var addTime = d.add_time.split(' ');
+                        var day = addTime[0];
+                        var time = addTime[1];
+
+                        // 创建模板
+                        html += '\n                    <li class=' + classType + '>\n                        <div class="date">\n                            <div class="day">' + day + '</div>\n                            <div class="time">' + time + '</div>\n                        </div>\n                        <div class="info">\n                            <img class="i1" src=' + (d.image || '../images/icon/user.png') + ' alt="">\n                            <div class="i2">\n                                <span class="num">' + (d.charge_amount ? '+' : '-') + amount + '</span>\n                                <span class="text">' + details + '</span>\n                            </div>\n                        </div>\n                    </li>\n                    ';
+                    }
+                    return html;
+                },
+
+                ajax: function ajax(data, callback) {
+                    $.ajax({
+                        url: 'http://118.178.136.60:8001/rest/pay/detail',
+                        data: data,
+                        success: function success(res) {
+                            console.log('收益明细：', res);
+                            if (res.STATUS == 1) {
+                                callback(res.data);
+
+                                // 昨日收益
+                                var yestAmt = res.yestAmt.toFixed(2);
+                                yestAmt = yestAmt >= 0 ? '+' + yestAmt : '-' + yestAmt;
+                                $('#profit-LucreAmt').text(yestAmt);
+
+                                // 累计收益
+                                $('#profit-yestAmt').text(res.LucreAmt.toFixed(2));
+                            } else {
+                                console.log('收益明细没有数据');
+                            }
+                        },
+                        error: function error(e) {
+                            console.log(e);
+                            $.alert('刷新失败，请稍后再试！');
+                        },
+                        complete: function complete() {}
+                    });
+                }
+            });
+        };
+
+        // 一级推客明细
+
+
+        var twitter = function twitter(pageId, type) {
+            var TYPE = void 0;
+            switch (Number(type)) {
+                case 1:
+                    TYPE = '一';
+                    break;
+                case 2:
+                    TYPE = '二';
+                    break;
+                case 3:
+                    TYPE = '三';
+                    break;
+
+                default:
+                    break;
+            }
+            $(pageId).find('.pageName').text('我的' + TYPE + '级推客');
+
+            new ScrollLoad({
+                scrollContanier: pageId + ' .con2', //滚动父容器
+                listContanier: pageId + ' .list',
+                // maxload: 10,
+                // perload: 7,
+
+                // 配置渲染模板
+                template: function template(data) {
+                    var html = '';
+                    for (var i = 0; i < data.length; i++) {
+                        var d = data[i];
+
+                        // 推客名
+                        var name = d.one_level_amount || d.second_level_amount || d.three_level_amount || '未知推客';
+
+                        // 创建模板
+                        html += '\n                    <li>\n                        <div class="info">\n                            <img src=' + (d.image || '../images/icon/user.png') + '>\n                            <div class="text">\n                                <span class="name">' + name + '</span>\n                                <span class="num">+' + d.charge_amount + '</span>\n                            </div>\n                        </div>\n                    </li>\n                    ';
+                    }
+                    return html;
+                },
+
+                ajax: function ajax(data, callback) {
+                    data = $.extend(data, {
+                        type: type
+                    });
+                    $.ajax({
+                        url: 'http://118.178.136.60:8001/rest/pay/twitterDetail',
+                        data: data,
+                        success: function success(res) {
+                            console.log(type + '级推客：', res);
+                            if (res.STATUS == 1) {
+                                callback(res.data);
+
+                                // 昨日收益
+                                if (res.month) {
+                                    var month = res.month.toFixed(2);
+                                    month = month >= 0 ? '+' + month : '-' + month;
+                                    $(pageId + ' .con1 .num').text(month);
+                                }
+
+                                // 累计收益
+                                if (res.totalAmt) {
+                                    $(pageId + ' .con1 .total').text(res.totalAmt.toFixed(2));
+                                }
+                            } else {
+                                console.log(TYPE + '级推客没有数据');
+                            }
+                        },
+                        error: function error(e) {
+                            console.log(e);
+                            $.alert('刷新失败，请稍后再试！');
+                        },
+                        complete: function complete() {}
+                    });
+                }
+            });
+        };
+
+        var pageLoadAll = function pageLoadAll() {
+            entry();
+            twitter('#page-profit-1', 1);
+            twitter('#page-profit-2', 2);
+            twitter('#page-profit-3', 3);
+        };
+
+        // 点击个人中心的收益明细入口后，才加载收益明细模块数据
+
+
+        $('#profit-entry').one('click', function () {
+            pageLoadAll();
+        });
+
+        // 初始已进入此模块
+        if (location.hash.indexOf('page-profit') > 0) {
+            pageLoadAll();
         }
-        $('.profit-in').eq(index).find('.list').append(tpl);
-    };
-
-    $('.childPageEnter').click(function () {
-        var $this = $(this);
-        var index = $this.index();
-    });
-
-    createProfitInList({
-        index: 0,
-        length: 3
-    });
-    createProfitInList({
-        index: 1,
-        length: 2
-    });
-    createProfitInList({
-        index: 2,
-        length: 5
-    });
+    })();
 }
 // 提现
 {

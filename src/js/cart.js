@@ -49,7 +49,6 @@ setTimeout(() => {
 
         ajax: (data, callback) => {
             let newData = $.extend({}, data, {
-                openId: $.openId,
                 state: 0 //购物车
             })
 

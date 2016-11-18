@@ -1,4 +1,6 @@
 .profit {
+    display: flex;
+    flex-direction: column;
     .con1 {
         background: $ui-color-red;
         color: white;
@@ -92,6 +94,8 @@
         }
     }
     .con2 {
+        flex-grow: 1;
+        overflow: auto;
         @mixin ball($color) {
             .date {
                 &:before {
