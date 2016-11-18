@@ -350,7 +350,7 @@ setTimeout(function () {
 }, 100);
 {
     (function () {
-        var pageInit = function pageInit() {
+        var myMovieLoad = function myMovieLoad() {
 
             var $contanier = $('.myMovieList');
 
@@ -397,17 +397,13 @@ setTimeout(function () {
             });
         };
 
-        // 点击个人中心的收益明细入口后，才加载收益明细模块数据
-
-
-        $('#myMovieEntry').one('click', function () {
-            pageInit();
+        $.pageInit({
+            hash: 'page-myMovie',
+            entry: '#myMovie-entry',
+            init: function init() {
+                myMovieLoad();
+            }
         });
-
-        // 初始已进入此模块
-        if (location.hash.indexOf('page-myMovie') > 0) {
-            pageInit();
-        }
     })();
 }
 // 收益明细
@@ -599,17 +595,13 @@ setTimeout(function () {
             twitter('#page-profit-3', 3);
         };
 
-        // 点击个人中心的收益明细入口后，才加载收益明细模块数据
-
-
-        $('#profit-entry').one('click', function () {
-            pageLoadAll();
+        $.pageInit({
+            hash: 'page-profit',
+            entry: '#profit-entry',
+            init: function init() {
+                pageLoadAll();
+            }
         });
-
-        // 初始已进入此模块
-        if (location.hash.indexOf('page-profit') > 0) {
-            pageLoadAll();
-        }
     })();
 }
 // 提现

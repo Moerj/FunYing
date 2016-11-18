@@ -1,6 +1,6 @@
 {
 
-    function pageInit() {
+    function myMovieLoad() {
 
         const $contanier = $('.myMovieList')
 
@@ -65,15 +65,13 @@
 
 
 
-    // 点击个人中心的收益明细入口后，才加载收益明细模块数据
-    $('#myMovieEntry').one('click', function () {
-        pageInit()
+    $.pageInit({
+        hash: 'page-myMovie',
+        entry: '#myMovie-entry',
+        init: () => {
+            myMovieLoad()
+        }
     })
-
-    // 初始已进入此模块
-    if (location.hash.indexOf('page-myMovie') > 0) {
-        pageInit()
-    }
 
 
 }

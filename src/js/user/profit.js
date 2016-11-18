@@ -215,15 +215,13 @@
     }
 
 
-    // 点击个人中心的收益明细入口后，才加载收益明细模块数据
-    $('#profit-entry').one('click',function () {
-        pageLoadAll()
+    $.pageInit({
+        hash: 'page-profit',
+        entry: '#profit-entry',
+        init: () => {
+            pageLoadAll()
+        }
     })
-
-    // 初始已进入此模块
-    if (location.hash.indexOf('page-profit') > 0) {
-        pageLoadAll()
-    }
 
 
 }

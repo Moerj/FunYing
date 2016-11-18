@@ -1,3 +1,25 @@
+// jq 对象新增方法 ==================
+
+// dom加载ajax数据
+$.fn.init = function (data) {
+
+    for (let i = 0; i < this.length; i++) {
+        let thisJq = $(this[i])
+            // console.log(thisJq);
+        if (this[i].localName === 'img') {
+            thisJq.attr('src', data)
+        } else if (thisJq.val() == undefined) {
+            thisJq.text(data)
+        } else {
+            thisJq.val(data)
+        }
+        thisJq.removeClass('hide').show()
+    }
+
+}
+
+
+
 // $ 下的公共方法 ==============
 
 // 取queryString
@@ -191,22 +213,15 @@ $.wxPay = function (payOption, payCallback) {
 }
 
 
-// jq 对象新增方法 ==================
+$.pageInit = function (opt) {
 
-// dom加载ajax数据
-$.fn.init = function (data) {
+    // 点击入口进入模块
+    $(opt.entry).one('click', function () {
+        opt.init()
+    })
 
-    for (let i = 0; i < this.length; i++) {
-        let thisJq = $(this[i])
-            // console.log(thisJq);
-        if (this[i].localName === 'img') {
-            thisJq.attr('src', data)
-        } else if (thisJq.val() == undefined) {
-            thisJq.text(data)
-        } else {
-            thisJq.val(data)
-        }
-        thisJq.removeClass('hide').show()
+    // 初始刷新已进入此模块
+    if (location.hash.indexOf(opt.hash) > 0) {
+        opt.init()
     }
-
 }
