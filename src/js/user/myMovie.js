@@ -1,4 +1,6 @@
-{
+setTimeout(function() {
+    
+
 
     function myMovieLoad() {
 
@@ -67,11 +69,11 @@
 
     $.pageInit({
         hash: 'page-myMovie',
-        entry: '#myMovie-entry',
+        entry: '#entry-myMovie',
         init: () => {
             myMovieLoad()
         }
     })
 
 
-}
+}, 100);

@@ -1,5 +1,6 @@
 // 收益明细
-{
+setTimeout(function() {
+    
 
     // 收益明细页数据
     function entry() {
@@ -217,11 +218,11 @@
 
     $.pageInit({
         hash: 'page-profit',
-        entry: '#profit-entry',
+        entry: '#entry-profit',
         init: () => {
             pageLoadAll()
         }
     })
 
 
-}
+}, 100);

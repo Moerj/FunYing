@@ -424,5 +424,6 @@ $.pageInit = function (opt) {
     // 初始刷新已进入此模块
     if (location.hash.indexOf(opt.hash) > 0) {
         opt.init();
+        $(opt.entry).off('click');
     }
 };
