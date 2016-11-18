@@ -14,6 +14,7 @@ gulp
 gulp 启动项目，并执行一次编译、开启监听
 gulp debug 同上，但以debug模式开启，js和sass文件会有map文件生成
 gulp build 编译一次
+gulp compress 压缩dist下面的js，发布前使用
 
   
   

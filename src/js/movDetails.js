@@ -184,7 +184,7 @@ setTimeout(function () {
             oldOpenId: $.GetQueryString('oldOpenId')
         },
         success: (res) => {
-            console.log(res);
+            console.log('影视详情数据：',res);
             if (res.STATUS == 1) {
                 _updateDetailsPage(res);
             } else {

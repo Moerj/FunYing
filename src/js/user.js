@@ -108,8 +108,8 @@ $('#feedbackSubmit').click(function () {
                 openId: $.openId
             },
             success: function (res) {
-                // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount
-                // console.log('个人中心首页数据：', res);
+                // headerImg头像，nickName微信昵称，lucreAmount收益余额，充值余额rechargeAmount  账户余额totalAmount
+                console.log('个人中心首页数据：', res);
                 if (res.STATUS == 1 && res.DATA) {
                     let data = res.DATA
 
@@ -119,12 +119,10 @@ $('#feedbackSubmit').click(function () {
                     }
 
                     // 充值页面的余额
-                    $('#rechargeAmount-2').init(data['rechargeAmount'].toFixed(2))
+                    $('.overage').init(data['totalAmount'].toFixed(2))
 
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
-                    let total = (rechargeAmountVal + lucreAmountVal).toFixed(2)
-                    $('#total').text(total)//账户余额
                     $('.headpic').init(data.headerImg || '../images/icon/user.png')//个人中心用户头像
 
                     let pieData = [{

@@ -125,6 +125,14 @@ gulp.task('js-debug', function () {
             stream: true
         }));
 });
+
+gulp.task('compress',function(){
+    gulp.src('dist/js/**/*')
+    .pipe($.uglify())
+    .pipe(gulp.dest('dist/js'))
+})
+
+
 //listen file modify
 gulp.task('watch', function () {
 

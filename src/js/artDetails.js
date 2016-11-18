@@ -13,7 +13,7 @@
             oldOpenId: $.GetQueryString('oldOpenId')
         },
         success: function (res) {
-            // console.log(res);
+            console.log('文章详情数据：',res);
             if (res.STATUS == 1) {
                 render(res)
             } else {
