@@ -4,11 +4,14 @@ http://wechat.94joy.com/html/index.html
   
   
 ## 运行依赖
-无
+微信环境
 
 ## 开发依赖
 - node
 - gulp
+
+## 项目部署
+请直接部署dist目录即可，除此目录以外的文件都不需要
 
 ## gulp命令
 - gulp 启动项目，并执行一次编译、开启监听
