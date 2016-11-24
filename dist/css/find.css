@@ -29,6 +29,8 @@
     .select-tools .select-switch i {
       margin-top: -.4rem;
       margin-left: .4rem; }
+    .select-tools .select-switch b {
+      font-weight: normal; }
     .select-tools .select-switch span {
       width: 100%;
       display: -ms-flexbox;

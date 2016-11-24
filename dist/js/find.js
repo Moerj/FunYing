@@ -50,51 +50,72 @@ setTimeout(function () {
 
     // 顶部筛选
     var $selectSwitch = $('.select-switch');
-    $selectSwitch.on('click', function (e) {
-        e.stopPropagation();
-        var $this = $(this);
-        var $thisArrow = $this.find('.fa');
-        $selectSwitch.find('.fa').not($thisArrow).removeClass('isopen');
-        $thisArrow.toggleClass('isopen');
-        $selectSwitch.not($this).picker('close');
-        if (!$thisArrow.hasClass('isopen')) {
-            setTimeout(function () {
+    function toggleArrow(eqIndex) {
+        $selectSwitch.eq(eqIndex).find('.fa').toggleClass('isopen');
+    }
 
-                $this.picker("close");
-            });
-        }
-    });
-    $selectSwitch.eq(0).picker({
+    var sortIndex = 0;
+    $selectSwitch.eq(sortIndex).picker({
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
             values: ['更新时间', '人气排行']
         }],
+        onOpen: function onOpen() {
+            toggleArrow(sortIndex);
+        },
         onClose: function onClose(picker) {
+            toggleArrow(sortIndex);
             sort = picker.value[0] == '更新时间' ? 1 : 2;
             loader.reload();
+
+            var value = picker.value;
+            $selectSwitch.eq(sortIndex).find('b').text(value);
         }
     });
-    $selectSwitch.eq(1).picker({
+
+    var areaIndex = 1;
+    $selectSwitch.eq(areaIndex).picker({
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
             values: ['全部', '内地', '韩国']
         }],
+        onOpen: function onOpen() {
+            toggleArrow(areaIndex);
+        },
         onClose: function onClose(picker) {
+            toggleArrow(areaIndex);
             area = picker.value[0] == '全部' ? null : picker.value[0];
             loader.reload();
+
+            var value = picker.value == '全部' ? '地区' : picker.value;
+            $selectSwitch.eq(areaIndex).find('b').text(value);
         }
     });
-    $selectSwitch.eq(2).picker({
+
+    var typeIndex = 2;
+    $selectSwitch.eq(typeIndex).picker({
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
             values: ['全部', '电视剧', '电影']
         }],
+        onOpen: function onOpen() {
+            toggleArrow(typeIndex);
+        },
         onClose: function onClose(picker) {
+            toggleArrow(typeIndex);
             type = picker.value[0] == '全部' ? null : picker.value[0];
             loader.reload();
+
+            var value = picker.value == '全部' ? '类型' : picker.value;
+            $selectSwitch.eq(typeIndex).find('b').text(value);
         }
+    });
+
+    // 选中筛选内容，并收起筛选器
+    $(document).on('click', '.picker-item', function () {
+        $.closeModal(".picker-modal.modal-in");
     });
 });
