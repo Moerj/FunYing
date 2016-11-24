@@ -340,18 +340,19 @@ $.payment = function (OPTS) {
 
 // 统一下单接口
 $.wxPay = function (payOption, payCallback) {
-    console.log(payOption);
+    let data = {
+        type: payOption.type, //充值类型 1,影片购买  2，充值
+        title: payOption.title,
+        openId: $.openId,
+        productId: payOption.productId,
+        url: location.href.split('#')[0]
+    }
+    console.log('统一下单接口参数', data);
 
     $.showIndicator()
     $.ajax({
-        url: "http://118.178.136.60:8001/rest/pay/toPay",
-        data: {
-            type: payOption.type, //充值类型 1,影片购买  2，充值
-            title: payOption.title,
-            openId: $.openId,
-            productId: payOption.productId,
-            url: location.href.split('#')[0]
-        },
+        url: "http://wechat.94joy.com/movie/rest/pay/toPay",
+        data: data,
         success: (res) => {
             console.log('统一下单接口：', res);
 

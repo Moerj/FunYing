@@ -115,7 +115,8 @@ setTimeout(function () {
                 if (data.IS_SUBSCRIBE == 1) {
                     // 支付
                     $.payment({
-                        movieId: movieId,
+                        // movieId: movieId,
+                        productId: movieId,
                         success: () => {
                             $Buttons.remove()
                             $('.numbox').show()

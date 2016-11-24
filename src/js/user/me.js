@@ -111,7 +111,7 @@
         // 将ftp返回的图片传给后台进行录入更新
         function _updateImg(imgUrl) {
             $.ajax({
-                url: "http://118.178.136.60:8001/rest/user/updateImg",
+                url: "http://wechat.94joy.com/wx/rest/user/updateImg",
                 data: {
                     openId: $.openId,
                     img: imgUrl

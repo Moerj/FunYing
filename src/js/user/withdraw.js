@@ -7,7 +7,7 @@
         console.log($.openId);
         console.log($withdrawInput.val());
         $.ajax({
-            url: "http://118.178.136.60:8001/rest/pay/cash",
+            url: "http://wechat.94joy.com/wx/rest/pay/cash",
             data: {
                 openId: $.openId,
                 price: $withdrawInput.val()

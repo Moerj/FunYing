@@ -81,7 +81,7 @@ $(function () {
     function initMain(res) {
         $('.recommended-2 a').each((i, el) => {
             let $el = $(el)
-            $el.attr('href', $.getArtDetails(res[i].id) )
+            $el.attr('href', $.getArtDetails(res[i].id))
             $el.find('img').attr('src', res[i].pictrueUrl)
             $el.find('.titleInfo').text(res[i].title)
             $el.find('.content-text').text(res[i].introduction)
@@ -114,6 +114,9 @@ $(function () {
 
 
     // 排行榜
+    let rankTab = $('.ranking .tab-link')
+    let rankContainer = $('.ranking .hotlist')
+
     function initRanking(contaier) {
         function _loadRank(contaier, data) {
             let tpl = ``
@@ -138,12 +141,14 @@ $(function () {
         }
         // 排行
         $.showPreloader();
+        let type = rankContainer.index(contaier) + 1
         $.ajax({
-            type: "get",
-            dataType: "json",
             url: "http://wechat.94joy.com/wx/rest/index/ranking",
+            data: {
+                type: type
+            },
             success: (res) => {
-                // console.log(res);
+                console.log(`排行type=${type}`, res);
 
                 if (res.STATUS == 1) {
                     _loadRank(contaier, res.RANK_LIST)
@@ -160,8 +165,7 @@ $(function () {
             }
         })
     }
-    let rankTab = $('.ranking .tab-link')
-    let rankContainer = $('.ranking .hotlist')
+
     rankTab.one('click', function () {
         initRanking(rankContainer[$(this).index()])
     })

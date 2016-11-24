@@ -88,7 +88,7 @@ setTimeout(function() {
 
             ajax: (data, callback) => {
                 $.ajax({
-                    url: 'http://118.178.136.60:8001/rest/pay/detail',
+                    url: 'http://wechat.94joy.com/wx/rest/pay/detail',
                     data: data,
                     success: (res) => {
                         console.log('收益明细：', res);
@@ -175,7 +175,7 @@ setTimeout(function() {
                     type: type
                 })
                 $.ajax({
-                    url: 'http://118.178.136.60:8001/rest/pay/twitterDetail',
+                    url: 'http://wechat.94joy.com/wx/rest/pay/twitterDetail',
                     data: data,
                     success: (res) => {
                         console.log(type + '级推客：', res);
