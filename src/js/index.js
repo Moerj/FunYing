@@ -178,6 +178,60 @@ $(function () {
 
     // 搜索功能
     let searchInputs = $('.search-tools input')
+
+    function search(searchName) {
+        if (!searchName) {
+            console.error('调用搜索失败，因为搜索值为空');
+            return
+        }
+        sessionStorage.searchName = searchName
+        let $ul = $('.search-list ul');
+        $.showPreloader();
+        $.ajax({
+            url: "http://wechat.94joy.com/wx/rest/index/search",
+            data: {
+                searchName: searchName
+            },
+            success: function (res) {
+                // console.log(res);
+                let listTpl = ``;
+                $ul.empty(); //先清空list
+                if (res.STATUS == 1) {
+                    let movs = res.MOVIES.content
+                    for (let i = 0; i < movs.length; i++) {
+                        let mov = res.MOVIES.content[i]
+                        let index = mov.id < 10 ? '0' + mov.id : mov.id
+                        listTpl += `
+                            <li>
+                                <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
+                                    <div class="imgbox">
+                                        <img src="${mov.poster}" />
+                                    </div>
+                                    <div class="info">
+                                        <span class="t"><span class="index">${index}</span>${mov.title}</span>
+                                        <p class="text">${mov.introduction}</p>
+                                        <span class="text2">更新到第${mov.updateSite}集</span>
+                                    </div>
+                                </a>
+                            </li>
+                           `
+                    }
+                    $ul.append(listTpl)
+                    $ul.show();
+                } else {
+                    $ul.hide();
+                }
+            },
+            error: function (e) {
+                console.log(e);
+                $.alert('搜索出错，请稍后再试')
+            },
+            complete: () => {
+                $.hidePreloader();
+            }
+        });
+    }
+
     searchInputs.on('input', function () {
         // 首页和搜索页的输入框双向绑定
         searchInputs.not($(this)).val($(this).val())
@@ -196,55 +250,24 @@ $(function () {
             if (!searchName) {
                 return;
             }
-            let $ul = $('.search-list ul');
-            $.showPreloader();
-            $.ajax({
-                type: "get",
-                url: "http://wechat.94joy.com/wx/rest/index/search",
-                data: {
-                    searchName: searchName
-                },
-                dataType: 'json',
-                success: function (res) {
-                    // console.log(res);
-                    let listTpl = ``;
-                    $ul.empty(); //先清空list
-                    if (res.STATUS == 1) {
-                        let movs = res.MOVIES.content
-                        for (let i = 0; i < movs.length; i++) {
-                            let mov = res.MOVIES.content[i]
-                            let index = mov.id < 10 ? '0' + mov.id : mov.id
-                            listTpl += `
-                            <li>
-                                <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
-                                    <div class="imgbox">
-                                        <img src="${mov.poster}" />
-                                    </div>
-                                    <div class="info">
-                                        <span class="t"><span class="index">${index}</span>${mov.title}</span>
-                                        <p class="text">${mov.introduction}</p>
-                                        <span class="text2">更新到第${mov.updateSite}集</span>
-                                    </div>
-                                </a>
-                            </li>
-                           `
-                        }
-                        $ul.append(listTpl)
-                        $ul.show();
-                    } else {
-                        $ul.hide();
-                    }
-                },
-                error: function (e) {
-                    console.log(e);
-                    $.alert('搜索出错，请稍后再试')
-                },
-                complete: () => {
-                    $.hidePreloader();
-                }
-            });
+            search(searchName)
         }
     })
+
+    // 返回此页面时，如果搜索框有内容，则需要进行一次搜索
+    if (sessionStorage.searchName) {
+        search(sessionStorage.searchName)
+        searchInputs.val(sessionStorage.searchName)
+    }
+
+
+    // 修复搜索页从影视详情返回，再返回首页时失败
+    $(window).on('popstate', function () {
+        if (location.hash == ``) {
+            $('.page').removeClass('page-current')
+            $('#index-default').addClass('page-current')
+        }
+    });
 
 
 

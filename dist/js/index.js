@@ -1,7 +1,5 @@
 "use strict";
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
 // updateStatus 更新状态 0未完结1完结
 // updateSite 就是更新的集数 数字标识
 
@@ -137,6 +135,47 @@ $(function () {
 
     // 搜索功能
     var searchInputs = $('.search-tools input');
+
+    function search(searchName) {
+        if (!searchName) {
+            console.error('调用搜索失败，因为搜索值为空');
+            return;
+        }
+        sessionStorage.searchName = searchName;
+        var $ul = $('.search-list ul');
+        $.showPreloader();
+        $.ajax({
+            url: "http://wechat.94joy.com/wx/rest/index/search",
+            data: {
+                searchName: searchName
+            },
+            success: function success(res) {
+                // console.log(res);
+                var listTpl = "";
+                $ul.empty(); //先清空list
+                if (res.STATUS == 1) {
+                    var movs = res.MOVIES.content;
+                    for (var i = 0; i < movs.length; i++) {
+                        var mov = res.MOVIES.content[i];
+                        var index = mov.id < 10 ? '0' + mov.id : mov.id;
+                        listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.poster + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
+                    }
+                    $ul.append(listTpl);
+                    $ul.show();
+                } else {
+                    $ul.hide();
+                }
+            },
+            error: function error(e) {
+                console.log(e);
+                $.alert('搜索出错，请稍后再试');
+            },
+            complete: function complete() {
+                $.hidePreloader();
+            }
+        });
+    }
+
     searchInputs.on('input', function () {
         // 首页和搜索页的输入框双向绑定
         searchInputs.not($(this)).val($(this).val());
@@ -151,50 +190,25 @@ $(function () {
 
         // 进行搜索
         if ($this.hasClass('search-btn')) {
-            var _ret = function () {
-                var searchName = $.trim($this.parent().find('input').val());
-                if (!searchName) {
-                    return {
-                        v: void 0
-                    };
-                }
-                var $ul = $('.search-list ul');
-                $.showPreloader();
-                $.ajax({
-                    type: "get",
-                    url: "http://wechat.94joy.com/wx/rest/index/search",
-                    data: {
-                        searchName: searchName
-                    },
-                    dataType: 'json',
-                    success: function success(res) {
-                        // console.log(res);
-                        var listTpl = "";
-                        $ul.empty(); //先清空list
-                        if (res.STATUS == 1) {
-                            var movs = res.MOVIES.content;
-                            for (var i = 0; i < movs.length; i++) {
-                                var mov = res.MOVIES.content[i];
-                                var index = mov.id < 10 ? '0' + mov.id : mov.id;
-                                listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.poster + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
-                            }
-                            $ul.append(listTpl);
-                            $ul.show();
-                        } else {
-                            $ul.hide();
-                        }
-                    },
-                    error: function error(e) {
-                        console.log(e);
-                        $.alert('搜索出错，请稍后再试');
-                    },
-                    complete: function complete() {
-                        $.hidePreloader();
-                    }
-                });
-            }();
+            var searchName = $.trim($this.parent().find('input').val());
+            if (!searchName) {
+                return;
+            }
+            search(searchName);
+        }
+    });
 
-            if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
+    // 返回此页面时，如果搜索框有内容，则需要进行一次搜索
+    if (sessionStorage.searchName) {
+        search(sessionStorage.searchName);
+        searchInputs.val(sessionStorage.searchName);
+    }
+
+    // 修复搜索页从影视详情返回，再返回首页时失败
+    $(window).on('popstate', function () {
+        if (location.hash == "") {
+            $('.page').removeClass('page-current');
+            $('#index-default').addClass('page-current');
         }
     });
 });

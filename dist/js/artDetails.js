@@ -8,6 +8,9 @@
             var data = res.ARTICLE;
             // console.log(data);
 
+            // 页面标题
+            $('title').text(data.title);
+
             $('.text').append(data.context);
             $('.time').text(data.updateTime);
             $('.Title').text(data.title);

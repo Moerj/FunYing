@@ -58,15 +58,19 @@ setTimeout(function () {
         const mov = data.MOVIE //当前电影数据
         const series = data.MOVIE_SERIES //当前电影选集数据
 
+        // 页面标题
+        $('title').text(data.MOVIE.title)
+
         // 加载二维码
         $('#qrcode').attr('src', data.QR_CODE)
 
         // 显示底部按钮
         $Buttons.removeClass('hide')
 
-        // 会员隐藏二维码
+        // 会员隐藏
         if (data.IS_SUBSCRIBE == 1) {
-            $('#qrcodeBox').remove()
+            $('#qrcodeBox').remove()//二维码
+            $('.tab-link').last().hide()//我要报错标签页
         }
 
         // 是否在购物车
