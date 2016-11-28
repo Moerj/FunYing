@@ -1,7 +1,7 @@
 // updateStatus 更新状态 0未完结1完结
 // updateSite 就是更新的集数 数字标识
 
-$(function () {
+setTimeout(function () {
 
     // 开启loading效果
     $.showPreloader();
@@ -271,4 +271,4 @@ $(function () {
 
 
 
-});
+},100);
