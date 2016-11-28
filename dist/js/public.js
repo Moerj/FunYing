@@ -240,8 +240,6 @@ $.fn.init = function (data) {
     } else {
         this.removeClass('hide');
     }
-
-    return this;
 };
 
 // $ 下的公共方法 ==============

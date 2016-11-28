@@ -52,7 +52,6 @@
 
     $.page_me_reload()
 
-
     // 我的二维码
     $.ajax({
         url: "http://wechat.94joy.com/wx/rest/user/getQrcode",
@@ -61,11 +60,12 @@
         },
         success: function (res) {
             // console.log(res);
-            $('#myqrcode').init(res.code)
+            $('#myqrcode')
             .click(function(){
                 // 二维码点击放大
                 $(this).toggleClass('qrcodeBig')
             })
+            .init(res.code)
         },
         error: function (e) {
             console.error('我的二维码加载失败', e);

@@ -183,10 +183,10 @@ $('#feedbackSubmit').click(function () {
             },
             success: function success(res) {
                 // console.log(res);
-                $('#myqrcode').init(res.code).click(function () {
+                $('#myqrcode').click(function () {
                     // 二维码点击放大
                     $(this).toggleClass('qrcodeBig');
-                });
+                }).init(res.code);
             },
             error: function error(e) {
                 console.error('我的二维码加载失败', e);

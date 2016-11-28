@@ -218,7 +218,6 @@ $.fn.init = function (data) {
         this.removeClass('hide')
     }
 
-    return this;
 }
 
 
