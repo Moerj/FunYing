@@ -62,6 +62,10 @@
         success: function (res) {
             // console.log(res);
             $('#myqrcode').init(res.code)
+            .click(function(){
+                // 二维码点击放大
+                $(this).toggleClass('qrcodeBig')
+            })
         },
         error: function (e) {
             console.error('我的二维码加载失败', e);

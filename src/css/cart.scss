@@ -142,6 +142,7 @@ $navHeight: 2.5rem;
             }
             .text {
                 color: $ui-color-dark2;
+                @include text-clamp($clamp: 3);
             }
             .site {
                 color: $ui-color;

@@ -270,6 +270,14 @@
       justify-content: center;
   -ms-flex-align: center;
       align-items: center; }
+  .qrcode .qrcodeBig {
+    position: absolute;
+    width: 100vw !important;
+    height: auto !important;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20; }
   .qrcode .headerTools {
     position: absolute;
     top: 0;
@@ -292,7 +300,6 @@
     height: 19.1rem;
     background: white;
     z-index: 1;
-    position: relative;
     font-size: 0.6rem;
     color: rgba(0, 0, 0, 0.54);
     display: -ms-flexbox;
@@ -666,7 +673,14 @@
             font-size: 0.6rem;
             margin-right: 0.8rem; }
         .myMovie .myMovieList .box .info .text {
-          color: rgba(0, 0, 0, 0.54); }
+          color: rgba(0, 0, 0, 0.54);
+          text-overflow: ellipsis;
+          white-space: normal;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden; }
         .myMovie .myMovieList .box .info .text2 {
           border-bottom: 1px solid #ddd;
           display: block;

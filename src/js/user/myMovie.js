@@ -44,16 +44,16 @@ setTimeout(function() {
                         state: 1 //我的影片
                     },
                     success: (res) => {
-                        // console.log('我的影片：',res);
-                        if (res.DATA) {
+                        console.log('我的影片：',res);
+                        if (res.DATA.length) {
                             callback(res.DATA)
                         } else {
                             console.log('我的影片没有数据');
                         }
                     },
                     error: (e) => {
-                        console.log('我的影片加载失败', e);
-                        // $.alert('刷新失败，请稍后再试！')
+                        console.warn('我的影片加载失败', e);
+                        $.alert('加载失败，请稍后再试！')
                     },
                     complete: () => {
                         if ($contanier.find('.box').length == 0) {

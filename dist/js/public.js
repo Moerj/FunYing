@@ -224,18 +224,24 @@ $(document).on('click', '.getMovie', function () {
 // dom加载ajax数据
 $.fn.init = function (data) {
 
-    for (var i = 0; i < this.length; i++) {
-        var thisJq = $(this[i]);
-        // console.log(thisJq);
-        if (this[i].localName === 'img') {
-            thisJq.attr('src', data);
-        } else if (thisJq.val() == undefined) {
-            thisJq.text(data);
-        } else {
-            thisJq.val(data);
+    if (data) {
+        for (var i = 0; i < this.length; i++) {
+            var thisJq = $(this[i]);
+            // console.log(thisJq);
+            if (this[i].localName === 'img') {
+                thisJq.attr('src', data);
+            } else if (thisJq.val() == undefined) {
+                thisJq.text(data);
+            } else {
+                thisJq.val(data);
+            }
+            thisJq.removeClass('hide').show();
         }
-        thisJq.removeClass('hide').show();
+    } else {
+        this.removeClass('hide');
     }
+
+    return this;
 };
 
 // $ 下的公共方法 ==============

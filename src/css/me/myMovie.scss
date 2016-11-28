@@ -79,6 +79,7 @@
                 }
                 .text {
                     color: $ui-color-dark2;
+                    @include text-clamp($clamp: 3);
                 }
                 .text2 {
                     border-bottom: $ui-border;

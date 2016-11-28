@@ -57,9 +57,10 @@ setTimeout(() => {
                 data: newData,
                 cache: false,
                 success: (res) => {
-                    // console.log(res);
-                    if (res.DATA) {
+                    console.log(res);
+                    if (res.DATA.length > 0) {
                         callback(res.DATA)
+                        $('.headerTools,.tools').init()
                     } else {
                         console.log(window.location.hash + ' 没有数据');
                     }
@@ -173,23 +174,27 @@ setTimeout(() => {
 
     // 删除单个
     $(document).on('click', '.delete', function () {
-        deleteOneMovie(this)
-        changeBtnStatus()
-        deleteEmpty()
+        // $.confirm('确认删除选中商品？', () => {
+            deleteOneMovie(this)
+            changeBtnStatus()
+            deleteEmpty()
+        // });
     })
 
     // 删除全部
     $('.deleteAll').click(function () {
-        deleteOneMovie($('.select:checked'))
-        changeBtnStatus()
-        deleteEmpty()
+        $.confirm('确认清空购物车？', () => {
+            deleteOneMovie($('.select:checked'))
+            changeBtnStatus()
+            deleteEmpty()
+        });
     })
 
     // 全部删完后设置购物车空状态
     function deleteEmpty() {
         let $list = $('.list>li')
         if ($list.length == 0) {
-            $('.list,.tools,.edit').hide();
+            $('.list,.tools,.headerTools').hide();
         }
     }
 
@@ -237,5 +242,5 @@ setTimeout(() => {
 
     })
 
-    
-},100)
+
+}, 100)

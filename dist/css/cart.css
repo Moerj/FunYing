@@ -135,7 +135,14 @@
         font-size: 0.8rem;
         margin-bottom: 0.4rem; }
       .list .listcontent .info .text {
-        color: rgba(0, 0, 0, 0.54); }
+        color: rgba(0, 0, 0, 0.54);
+        text-overflow: ellipsis;
+        white-space: normal;
+        word-break: break-all;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden; }
       .list .listcontent .info .site {
         color: #FF9800; }
       .list .listcontent .info .price {

@@ -104,6 +104,11 @@ setTimeout(function() {
                             // 累计收益
                             $('#profit-yestAmt').text(res.LucreAmt.toFixed(2))
 
+                            // 推客收益总和
+                            $('#profit-oneAmt').text(res.oneAmt.toFixed(2))
+                            $('#profit-secondAmt').text(res.secondAmt.toFixed(2))
+                            $('#profit-threeAmt').text(res.threeAmt.toFixed(2))
+
 
                         } else {
                             console.log('收益明细没有数据');

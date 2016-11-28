@@ -121,7 +121,7 @@ $(function () {
         function _loadRank(contaier, data) {
             let tpl = ``
             for (let i = 0; i < data.length; i++) {
-                let mov = data[0]
+                let mov = data[i]
                 tpl += `
                 <li>
                     <a class="external flexlist" href="${$.getMovDetails(mov.id)}">

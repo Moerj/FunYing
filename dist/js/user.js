@@ -183,7 +183,10 @@ $('#feedbackSubmit').click(function () {
             },
             success: function success(res) {
                 // console.log(res);
-                $('#myqrcode').init(res.code);
+                $('#myqrcode').init(res.code).click(function () {
+                    // 二维码点击放大
+                    $(this).toggleClass('qrcodeBig');
+                });
             },
             error: function error(e) {
                 console.error('我的二维码加载失败', e);
@@ -385,16 +388,16 @@ setTimeout(function () {
                         state: 1 //我的影片
                     },
                     success: function success(res) {
-                        // console.log('我的影片：',res);
-                        if (res.DATA) {
+                        console.log('我的影片：', res);
+                        if (res.DATA.length) {
                             callback(res.DATA);
                         } else {
                             console.log('我的影片没有数据');
                         }
                     },
                     error: function error(e) {
-                        console.log('我的影片加载失败', e);
-                        // $.alert('刷新失败，请稍后再试！')
+                        console.warn('我的影片加载失败', e);
+                        $.alert('加载失败，请稍后再试！');
                     },
                     complete: function complete() {
                         if ($contanier.find('.box').length == 0) {
@@ -502,6 +505,11 @@ setTimeout(function () {
 
                             // 累计收益
                             $('#profit-yestAmt').text(res.LucreAmt.toFixed(2));
+
+                            // 推客收益总和
+                            $('#profit-oneAmt').text(res.oneAmt.toFixed(2));
+                            $('#profit-secondAmt').text(res.secondAmt.toFixed(2));
+                            $('#profit-threeAmt').text(res.threeAmt.toFixed(2));
                         } else {
                             console.log('收益明细没有数据');
                         }

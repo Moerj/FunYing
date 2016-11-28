@@ -49,7 +49,7 @@
         $('#qrcode').attr('src', data.QR_CODE)
 
         // 判断是否会员，然后隐藏二维码
-        if (res.IS_SUBSCRIBE) {
+        if (res.IS_SUBSCRIBE==1 && $.openId) {
             $('#SUBSCRIBE').hide()
         }
     }

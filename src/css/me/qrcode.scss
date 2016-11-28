@@ -3,6 +3,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    .qrcodeBig{
+        position: absolute;
+        width: 100vw !important;
+        height:auto !important;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+    }
     .headerTools {
         position: absolute;
         top: 0;
@@ -26,7 +35,7 @@
         height: rem(382px);
         background: white;
         z-index: 1;
-        position: relative;
+        // position: relative;
         font-size: rem(12px);
         color: $ui-color-dark2;
         display: flex;

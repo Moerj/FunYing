@@ -156,7 +156,7 @@
     .list {
         display: block;
         overflow: auto;
-        ul{
+        ul {
             display: block;
             width: 9999px;
         }
@@ -290,6 +290,9 @@
                 font-size: .6rem;
                 margin: .4rem 0;
                 color: $ui-color-dark2;
+                @include text-clamp($clamp: 3);
+                height: 2.7rem;
+                margin-bottom: 0.8rem;
             }
             .text2 {
                 font-size: .6rem;

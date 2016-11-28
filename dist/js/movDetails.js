@@ -67,9 +67,15 @@ setTimeout(function () {
         // 显示底部按钮
         $Buttons.removeClass('hide');
 
+        // 作为分享页
+        if (!$.openId) {
+            $('.tab-link').last().hide(); //我要报错标签页
+        }
+
         // 会员隐藏
         if (data.IS_SUBSCRIBE == 1) {
             $('#qrcodeBox').remove(); //二维码
+        } else {
             $('.tab-link').last().hide(); //我要报错标签页
         }
 
@@ -149,27 +155,33 @@ setTimeout(function () {
             var index = $(this).index();
             var buttons = [{
                 text: '主线资源',
-                // bold: true,
-                // color: 'danger',
                 onClick: function onClick() {
                     // $.alert("你选择了“主线资源“");
                     openVedio(series[index].resourceUrl);
                 }
-            }, {
-                text: '备用地址1',
-                onClick: function onClick() {
-                    // $.alert("你选择了“备用地址1“");
-                    openVedio(series[index].otherOne);
-                }
-            }, {
-                text: '备用地址2',
-                onClick: function onClick() {
-                    // $.alert("你选择了“备用地址2“");
-                    openVedio(series[index].otherTwo);
-                }
-            }, {
-                text: '取消'
             }];
+            if (series[index].otherOne) {
+                buttons.push({
+                    text: '备用地址1',
+                    onClick: function onClick() {
+                        // $.alert("你选择了“备用地址1“");
+                        openVedio(series[index].otherOne);
+                    }
+                });
+            }
+            if (series[index].otherTwo) {
+                buttons.push({
+                    text: '备用地址2',
+                    onClick: function onClick() {
+                        // $.alert("你选择了“备用地址2“");
+                        openVedio(series[index].otherTwo);
+                    }
+                });
+            }
+            buttons.push({
+                text: '取消'
+            });
+
             $.actions(buttons);
         });
     }

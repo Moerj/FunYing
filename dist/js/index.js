@@ -94,7 +94,7 @@ $(function () {
         function _loadRank(contaier, data) {
             var tpl = "";
             for (var i = 0; i < data.length; i++) {
-                var mov = data[0];
+                var mov = data[i];
                 tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + mov.poster + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + mov.title + "</span>\n                            <p class=\"text\">" + mov.introduction + "</p>\n                            <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
             }
             $(contaier).empty().append(tpl);
