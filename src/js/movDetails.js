@@ -7,6 +7,7 @@ setTimeout(function () {
     const $feedback = $('#detail-tab3'); //反馈快捷标签
     const $feedbackContext = $('#feedbackContext') //反馈的内容
     const $feedbackSubmit = $('#feedbackSubmit') //反馈提交按钮
+    const $tabs = $('.tabs')//tab区域
 
     // 开启loading效果
     $.showPreloader();
@@ -86,7 +87,9 @@ setTimeout(function () {
 
         // 是否已购
         if (data.IS_BUY == 1) {
-            $Buttons.remove();
+            // $Buttons.remove();
+            // 隐藏购买按钮，并调整布局
+            $tabs.addClass('isBuy')
         } else {
             $('.numbox').hide();
         }
@@ -98,7 +101,7 @@ setTimeout(function () {
                 if ($dom[0].localName == 'img') {
                     $dom.attr('src', mov.poster)
                 } else {
-                    $dom.text(mov[key])
+                    $dom.html(mov[key])
                 }
             }
         }

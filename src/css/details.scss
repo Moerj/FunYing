@@ -83,6 +83,16 @@
         bottom: 0;
         left: 0;
         padding-bottom: 48px !important;
+        // 在tabs上添加isBuy类，隐藏购买按钮
+        &.isBuy{
+            padding-bottom: 0 !important;
+            & .tab{
+                bottom:0 !important;
+            }
+            & .button-group{
+                display: none !important;
+            }
+        }
         .board {
             position: relative;
             padding: 16px;

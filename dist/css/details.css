@@ -70,6 +70,12 @@
     bottom: 0;
     left: 0;
     padding-bottom: 48px !important; }
+    .details .tabs.isBuy {
+      padding-bottom: 0 !important; }
+      .details .tabs.isBuy .tab {
+        bottom: 0 !important; }
+      .details .tabs.isBuy .button-group {
+        display: none !important; }
     .details .tabs .board {
       position: relative;
       padding: 16px;
