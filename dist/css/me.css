@@ -664,16 +664,29 @@
         .myMovie .myMovieList .box .info .Title {
           font-size: 0.8rem;
           width: 100%;
-          color: rgba(0, 0, 0, 0.87); }
+          color: rgba(0, 0, 0, 0.87);
+          position: relative;
+          padding-right: 1.5rem;
+          text-overflow: ellipsis;
+          white-space: normal;
+          word-break: break-all;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden; }
           .myMovie .myMovieList .box .info .Title:after {
             content: '>';
             float: right;
             transform: scale3d(1, 1.8, 1);
             color: #c1bfbf;
             font-size: 0.6rem;
-            margin-right: 0.8rem; }
+            margin-right: 0.8rem;
+            position: absolute;
+            top: 0;
+            right: 0; }
         .myMovie .myMovieList .box .info .text {
           color: rgba(0, 0, 0, 0.54);
+          padding-right: 0.8rem;
           text-overflow: ellipsis;
           white-space: normal;
           word-break: break-all;

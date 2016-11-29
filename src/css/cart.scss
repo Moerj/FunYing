@@ -139,6 +139,7 @@ $navHeight: 2.5rem;
             .Title {
                 font-size: rem(16px);
                 margin-bottom: rem(8px);
+                @include text-clamp($clamp: 1);
             }
             .text {
                 color: $ui-color-dark2;

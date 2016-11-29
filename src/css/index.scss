@@ -281,6 +281,7 @@
                 margin: 0;
                 font-size: .8rem;
                 color: $ui-color-dark1;
+                @include text-clamp($clamp: 1);
                 .index {
                     color: $ui-color;
                     margin-right: 8px;

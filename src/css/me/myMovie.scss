@@ -68,6 +68,9 @@
                     font-size: rem(16px);
                     width: 100%;
                     color: $ui-color-dark1;
+                    position: relative;
+                    padding-right: 1.5rem;
+                    @include text-clamp($clamp: 1);
                     &:after {
                         content: '>';
                         float: right;
@@ -75,10 +78,14 @@
                         color: #c1bfbf;
                         font-size: rem(12px);
                         margin-right: rem(16px);
+                        position: absolute;
+                        top: 0;
+                        right: 0;
                     }
                 }
                 .text {
                     color: $ui-color-dark2;
+                    padding-right: rem(16px);
                     @include text-clamp($clamp: 3);
                 }
                 .text2 {
