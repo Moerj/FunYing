@@ -5,7 +5,6 @@ setTimeout(function () {
 
     var movieId = $.GetQueryString('movieId');
     var $addCart = $('#addCart'); //加入购物车按钮
-    var $Buttons = $('#isbuy'); //立即购买按钮
     var $feedback = $('#detail-tab3'); //反馈快捷标签
     var $feedbackContext = $('#feedbackContext'); //反馈的内容
     var $feedbackSubmit = $('#feedbackSubmit'); //反馈提交按钮
@@ -66,7 +65,7 @@ setTimeout(function () {
         $('#qrcode').attr('src', data.QR_CODE);
 
         // 显示底部按钮
-        $Buttons.removeClass('hide');
+        $tabs.removeClass('isBuy');
 
         // 作为分享页
         if (!$.openId) {
@@ -128,7 +127,8 @@ setTimeout(function () {
                         // movieId: movieId,
                         productId: movieId,
                         success: function success() {
-                            $Buttons.remove();
+                            // $Buttons.remove()
+                            $tabs.addClass('isBuy');
                             $('.numbox').show();
                             $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000);
                         },
@@ -255,10 +255,10 @@ setTimeout(function () {
     /*$('.tab-link').click(function(){
         let $this = $(this)
         if ($this.text()==='我要报错') {
-            $Buttons.hide()
+            $tabs.addClass('isBuy')
         }
         else{
-            $Buttons.attr('style','')
+            $tabs.removeClass('isBuy')
         }
     })*/
 }, 100);
