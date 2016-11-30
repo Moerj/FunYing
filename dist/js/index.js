@@ -60,7 +60,7 @@ setTimeout(function () {
         var tpl = "";
         for (var i = 0; i < movs.length; i++) {
             var mov = movs[i];
-            tpl += "\n            <li>\n            <a href=\"" + $.getMovDetails(mov.id) + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.poster + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n            <a href=\"" + $.getMovDetails(mov.id) + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.stills + "\" />\n                    <p class=\"name\">" + (mov.updateStatus == 0 ? '更新中' : '已完结') + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
         }
         $('#rec1 ul').append(tpl);
     }
@@ -81,7 +81,7 @@ setTimeout(function () {
         var tpl = "";
         for (var i = 0; i < res.length; i++) {
             var mov = res[i];
-            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.poster + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">0" + (i + 1) + "</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                    <div class=\"imgbox\">\n                        <img src=\"" + mov.stills + "\" alt=\"\">\n                    </div>\n                    <div class=\"info\">\n                        <span class=\"t\"><span class=\"index\">0" + (i + 1) + "</span>" + mov.title + "</span>\n                        <p class=\"text\">" + mov.introduction + "</p>\n                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                    </div>\n                </a>\n            </li>\n            ";
         }
         $('#rankTop').append(tpl);
     }
@@ -95,7 +95,7 @@ setTimeout(function () {
             var tpl = "";
             for (var i = 0; i < data.length; i++) {
                 var mov = data[i];
-                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + mov.poster + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + mov.title + "</span>\n                            <p class=\"text\">" + mov.introduction + "</p>\n                            <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
+                tpl += "\n                <li>\n                    <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                        <div class=\"imgbox\">\n                            <img src=\"" + mov.stills + "\" >\n                        </div>\n                        <div class=\"info\">\n                            <span class=\"t\"><span class=\"index\">" + (i + 1) + "</span>" + mov.title + "</span>\n                            <p class=\"text\">" + mov.introduction + "</p>\n                            <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                        </div>\n                    </a>\n                </li>\n                ";
             }
             $(contaier).empty().append(tpl);
         }
@@ -158,7 +158,7 @@ setTimeout(function () {
                     for (var i = 0; i < movs.length; i++) {
                         var mov = res.MOVIES.content[i];
                         var index = mov.id < 10 ? '0' + mov.id : mov.id;
-                        listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.poster + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
+                        listTpl += "\n                            <li>\n                                <a class=\"external flexlist\" href=\"" + $.getMovDetails(mov.id) + "\">\n                                    <div class=\"imgbox\">\n                                        <img src=\"" + mov.stills + "\" />\n                                    </div>\n                                    <div class=\"info\">\n                                        <span class=\"t\"><span class=\"index\">" + index + "</span>" + mov.title + "</span>\n                                        <p class=\"text\">" + mov.introduction + "</p>\n                                        <span class=\"text2\">更新到第" + mov.updateSite + "集</span>\n                                    </div>\n                                </a>\n                            </li>\n                           ";
                     }
                     $ul.append(listTpl);
                     $ul.show();

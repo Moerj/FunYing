@@ -422,7 +422,7 @@ setTimeout(function() {
                     html += `
                     <a class="box external" href="${$.getMovDetails(d.id)}">
                         <div class="imgbox">
-                            <img src="${d.poster}" alt="">
+                            <img src="${d.stills}" alt="">
                         </div>
                         <div class="info">
                             <span class="Title">${d.title}</span>

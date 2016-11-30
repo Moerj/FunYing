@@ -26,7 +26,7 @@ setTimeout(() => {
                         </span>
                         <div class="listcontent">
                             <div class="imgbox">
-                                <img src="${d.poster}">
+                                <img src="${d.stills}">
                             </div>
                             <div class="info">
                                 <h4 class="Title">${d.title}</h4>

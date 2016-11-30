@@ -66,7 +66,7 @@ setTimeout(function () {
             <li>
             <a href="${$.getMovDetails(mov.id)}" class="external">
                 <div class="imgbox">
-                    <img src="${mov.poster}" />
+                    <img src="${mov.stills}" />
                     <p class="name">${mov.updateStatus == 0 ? '更新中' : '已完结'}</p>
                 </div>
                 <p class="text">${mov.introduction}</p>
@@ -97,7 +97,7 @@ setTimeout(function () {
             <li>
                 <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                     <div class="imgbox">
-                        <img src="${mov.poster}" alt="">
+                        <img src="${mov.stills}" alt="">
                     </div>
                     <div class="info">
                         <span class="t"><span class="index">0${i+1}</span>${mov.title}</span>
@@ -126,7 +126,7 @@ setTimeout(function () {
                 <li>
                     <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                         <div class="imgbox">
-                            <img src="${mov.poster}" >
+                            <img src="${mov.stills}" >
                         </div>
                         <div class="info">
                             <span class="t"><span class="index">${i+1}</span>${mov.title}</span>
@@ -205,7 +205,7 @@ setTimeout(function () {
                             <li>
                                 <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                                     <div class="imgbox">
-                                        <img src="${mov.poster}" />
+                                        <img src="${mov.stills}" />
                                     </div>
                                     <div class="info">
                                         <span class="t"><span class="index">${index}</span>${mov.title}</span>
