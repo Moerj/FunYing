@@ -246,6 +246,7 @@
     .movlist .flexlist .info .t {
       margin: 0;
       font-size: .8rem;
+      height: .9rem;
       color: rgba(0, 0, 0, 0.87);
       text-overflow: ellipsis;
       white-space: normal;
@@ -268,8 +269,7 @@
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      height: 2.7rem;
-      margin-bottom: 0.8rem; }
+      height: 2.7rem; }
     .movlist .flexlist .info .text2 {
       font-size: .6rem;
       color: #FF9800; }

@@ -280,6 +280,7 @@
             .t {
                 margin: 0;
                 font-size: .8rem;
+                height: .9rem;
                 color: $ui-color-dark1;
                 @include text-clamp($clamp: 1);
                 .index {
@@ -293,7 +294,7 @@
                 color: $ui-color-dark2;
                 @include text-clamp($clamp: 3);
                 height: 2.7rem;
-                margin-bottom: 0.8rem;
+                // margin-bottom: 0.8rem;
             }
             .text2 {
                 font-size: .6rem;
