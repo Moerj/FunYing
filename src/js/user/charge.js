@@ -11,7 +11,7 @@
             tpl += `
                 <li>
                     <input type="radio" name="chargeRadio" id="chargeRadio-${i}" ${checked} data-productId=${i}>
-                    <label class="splitline" for="chargeRadio-${i}"><span class="price">${priceArry[i].toFixed(2)}</span><i class="fa fa-check"></i></label>
+                    <label class="splitline" for="chargeRadio-${i}"><span class="price">${$.formatAmount(priceArry[i])}</span><i class="fa fa-check"></i></label>
                 </li>
             `
         }

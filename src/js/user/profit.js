@@ -1,6 +1,6 @@
 // 收益明细
-setTimeout(function() {
-    
+setTimeout(function () {
+
 
     // 收益明细页数据
     function entry() {
@@ -95,19 +95,18 @@ setTimeout(function() {
                         if (res.STATUS == 1) {
                             callback(res.data)
 
-
                             // 昨日收益
-                            let yestAmt = res.yestAmt.toFixed(2)
+                            let yestAmt = res.yestAmt
                             yestAmt = yestAmt >= 0 ? `+${yestAmt}` : `-${yestAmt}`
-                            $('#profit-LucreAmt').text(yestAmt)
+                            $('#profit-yestAmt').text($.formatAmount(yestAmt))
 
                             // 累计收益
-                            $('#profit-yestAmt').text(res.LucreAmt.toFixed(2))
+                            $('#profit-LucreAmt').text($.formatAmount(res.LucreAmt))
 
                             // 推客收益总和
-                            $('#profit-oneAmt').text(res.oneAmt.toFixed(2))
-                            $('#profit-secondAmt').text(res.secondAmt.toFixed(2))
-                            $('#profit-threeAmt').text(res.threeAmt.toFixed(2))
+                            $('#profit-oneAmt').text($.formatAmount(res.oneAmt))
+                            $('#profit-secondAmt').text($.formatAmount(res.secondAmt))
+                            $('#profit-threeAmt').text($.formatAmount(res.threeAmt))
 
 
                         } else {
@@ -125,7 +124,7 @@ setTimeout(function() {
     }
 
 
-    // 一级推客明细
+    // 推客明细
     function twitter(pageId, type) {
         let TYPE
         switch (Number(type)) {
@@ -189,14 +188,14 @@ setTimeout(function() {
 
                             // 昨日收益
                             if (res.month) {
-                                let month = res.month.toFixed(2)
+                                let month = $.formatAmount(res.month)
                                 month = month >= 0 ? `+${month}` : `-${month}`
                                 $(`${pageId} .con1 .num`).text(month)
                             }
 
                             // 累计收益
                             if (res.totalAmt) {
-                                $(`${pageId} .con1 .total`).text(res.totalAmt.toFixed(2))
+                                $(`${pageId} .con1 .total`).text($.formatAmount(res.totalAmt))
                             }
 
                         } else {

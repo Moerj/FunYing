@@ -35,7 +35,7 @@ setTimeout(() => {
                                 </span>
                                 <p>
                                     <span class="site">更新至第${d.updateSite}集</span>
-                                    <span class="price">${Number(d.price).toFixed(2)}</span>
+                                    <span class="price">${$.formatAmount(d.price)}</span>
                                 </p>
                             </div>
                             <span class="delete" movieId="${d.id}">删除</span>
@@ -164,7 +164,7 @@ setTimeout(() => {
         })
         if (hasSelect) {
             $('.tools .btn').addClass('active')
-            $totalPrice.text(payTotal.toFixed(2))
+            $totalPrice.text($.formatAmount(payTotal))
         } else {
             $('.tools .btn').removeClass('active')
             $totalPrice.text(0)

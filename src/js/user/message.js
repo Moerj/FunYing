@@ -39,11 +39,11 @@ setTimeout(function() {
                     url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                     data: data,
                     success: (res) => {
-                        // console.log('系统消息：',res);
-                        if (res.DATA) {
+                        console.log('系统消息：',res);
+                        if (res.DATA.length) {
                             callback(res.DATA)
                         } else {
-                            console.log('路由页面没有数据>>');
+                            console.log('系统消息：没有数据');
                         }
                     },
                     error: (e) => {

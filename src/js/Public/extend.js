@@ -231,3 +231,11 @@ $.pageInit = function (opt) {
         $(opt.entry).off('click')
     }
 }
+
+$.formatAmount = function(num){
+    num = Number(num)
+    if (num) {
+        return num.toFixed(2)
+    }
+    return '--'
+}

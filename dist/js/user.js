@@ -10,7 +10,7 @@
             var priceArry = [20, 30, 50, 100, 200];
             for (var i = 1; i < len; i++) {
                 var checked = i == 1 ? 'checked' : '';
-                tpl += '\n                <li>\n                    <input type="radio" name="chargeRadio" id="chargeRadio-' + i + '" ' + checked + ' data-productId=' + i + '>\n                    <label class="splitline" for="chargeRadio-' + i + '"><span class="price">' + priceArry[i].toFixed(2) + '</span><i class="fa fa-check"></i></label>\n                </li>\n            ';
+                tpl += '\n                <li>\n                    <input type="radio" name="chargeRadio" id="chargeRadio-' + i + '" ' + checked + ' data-productId=' + i + '>\n                    <label class="splitline" for="chargeRadio-' + i + '"><span class="price">' + $.formatAmount(priceArry[i]) + '</span><i class="fa fa-check"></i></label>\n                </li>\n            ';
             }
             $('.chargelist').append(tpl);
         };
@@ -148,7 +148,7 @@ $('#feedbackSubmit').click(function () {
                         }
 
                         // 充值页面的余额
-                        $('.overage').init(data['totalAmount'].toFixed(2));
+                        $('.overage').init($.formatAmount(data['totalAmount']));
 
                         var rechargeAmountVal = Number($('#rechargeAmount').text());
                         var lucreAmountVal = Number($('#lucreAmount').text());
@@ -297,11 +297,11 @@ setTimeout(function () {
                     url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                     data: data,
                     success: function success(res) {
-                        // console.log('系统消息：',res);
-                        if (res.DATA) {
+                        console.log('系统消息：', res);
+                        if (res.DATA.length) {
                             callback(res.DATA);
                         } else {
-                            console.log('路由页面没有数据>>');
+                            console.log('系统消息：没有数据');
                         }
                     },
                     error: function error(e) {
@@ -499,17 +499,17 @@ setTimeout(function () {
                             callback(res.data);
 
                             // 昨日收益
-                            var yestAmt = res.yestAmt.toFixed(2);
+                            var yestAmt = res.yestAmt;
                             yestAmt = yestAmt >= 0 ? '+' + yestAmt : '-' + yestAmt;
-                            $('#profit-LucreAmt').text(yestAmt);
+                            $('#profit-yestAmt').text($.formatAmount(yestAmt));
 
                             // 累计收益
-                            $('#profit-yestAmt').text(res.LucreAmt.toFixed(2));
+                            $('#profit-LucreAmt').text($.formatAmount(res.LucreAmt));
 
                             // 推客收益总和
-                            $('#profit-oneAmt').text(res.oneAmt.toFixed(2));
-                            $('#profit-secondAmt').text(res.secondAmt.toFixed(2));
-                            $('#profit-threeAmt').text(res.threeAmt.toFixed(2));
+                            $('#profit-oneAmt').text($.formatAmount(res.oneAmt));
+                            $('#profit-secondAmt').text($.formatAmount(res.secondAmt));
+                            $('#profit-threeAmt').text($.formatAmount(res.threeAmt));
                         } else {
                             console.log('收益明细没有数据');
                         }
@@ -524,7 +524,7 @@ setTimeout(function () {
         });
     }
 
-    // 一级推客明细
+    // 推客明细
     function twitter(pageId, type) {
         var TYPE = void 0;
         switch (Number(type)) {
@@ -578,14 +578,14 @@ setTimeout(function () {
 
                             // 昨日收益
                             if (res.month) {
-                                var month = res.month.toFixed(2);
+                                var month = $.formatAmount(res.month);
                                 month = month >= 0 ? '+' + month : '-' + month;
                                 $(pageId + ' .con1 .num').text(month);
                             }
 
                             // 累计收益
                             if (res.totalAmt) {
-                                $(pageId + ' .con1 .total').text(res.totalAmt.toFixed(2));
+                                $(pageId + ' .con1 .total').text($.formatAmount(res.totalAmt));
                             }
                         } else {
                             console.log(TYPE + '级推客没有数据');

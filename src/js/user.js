@@ -11,7 +11,7 @@
             tpl += `
                 <li>
                     <input type="radio" name="chargeRadio" id="chargeRadio-${i}" ${checked} data-productId=${i}>
-                    <label class="splitline" for="chargeRadio-${i}"><span class="price">${priceArry[i].toFixed(2)}</span><i class="fa fa-check"></i></label>
+                    <label class="splitline" for="chargeRadio-${i}"><span class="price">${$.formatAmount(priceArry[i])}</span><i class="fa fa-check"></i></label>
                 </li>
             `
         }
@@ -119,7 +119,7 @@ $('#feedbackSubmit').click(function () {
                     }
 
                     // 充值页面的余额
-                    $('.overage').init(data['totalAmount'].toFixed(2))
+                    $('.overage').init($.formatAmount(data['totalAmount']))
 
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
@@ -331,11 +331,11 @@ setTimeout(function() {
                     url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                     data: data,
                     success: (res) => {
-                        // console.log('系统消息：',res);
-                        if (res.DATA) {
+                        console.log('系统消息：',res);
+                        if (res.DATA.length) {
                             callback(res.DATA)
                         } else {
-                            console.log('路由页面没有数据>>');
+                            console.log('系统消息：没有数据');
                         }
                     },
                     error: (e) => {
@@ -481,8 +481,8 @@ setTimeout(function() {
 
 }, 100);
 // 收益明细
-setTimeout(function() {
-    
+setTimeout(function () {
+
 
     // 收益明细页数据
     function entry() {
@@ -577,19 +577,18 @@ setTimeout(function() {
                         if (res.STATUS == 1) {
                             callback(res.data)
 
-
                             // 昨日收益
-                            let yestAmt = res.yestAmt.toFixed(2)
+                            let yestAmt = res.yestAmt
                             yestAmt = yestAmt >= 0 ? `+${yestAmt}` : `-${yestAmt}`
-                            $('#profit-LucreAmt').text(yestAmt)
+                            $('#profit-yestAmt').text($.formatAmount(yestAmt))
 
                             // 累计收益
-                            $('#profit-yestAmt').text(res.LucreAmt.toFixed(2))
+                            $('#profit-LucreAmt').text($.formatAmount(res.LucreAmt))
 
                             // 推客收益总和
-                            $('#profit-oneAmt').text(res.oneAmt.toFixed(2))
-                            $('#profit-secondAmt').text(res.secondAmt.toFixed(2))
-                            $('#profit-threeAmt').text(res.threeAmt.toFixed(2))
+                            $('#profit-oneAmt').text($.formatAmount(res.oneAmt))
+                            $('#profit-secondAmt').text($.formatAmount(res.secondAmt))
+                            $('#profit-threeAmt').text($.formatAmount(res.threeAmt))
 
 
                         } else {
@@ -607,7 +606,7 @@ setTimeout(function() {
     }
 
 
-    // 一级推客明细
+    // 推客明细
     function twitter(pageId, type) {
         let TYPE
         switch (Number(type)) {
@@ -671,14 +670,14 @@ setTimeout(function() {
 
                             // 昨日收益
                             if (res.month) {
-                                let month = res.month.toFixed(2)
+                                let month = $.formatAmount(res.month)
                                 month = month >= 0 ? `+${month}` : `-${month}`
                                 $(`${pageId} .con1 .num`).text(month)
                             }
 
                             // 累计收益
                             if (res.totalAmt) {
-                                $(`${pageId} .con1 .total`).text(res.totalAmt.toFixed(2))
+                                $(`${pageId} .con1 .total`).text($.formatAmount(res.totalAmt))
                             }
 
                         } else {

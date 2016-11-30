@@ -108,7 +108,7 @@ setTimeout(function () {
         }
         // 格式化价格
         var $price = $('#price');
-        $price.text(Number($price.text()).toFixed(2));
+        $price.text($.formatAmount($price.text()));
 
         // 构建选集
         var numTpl = '';

@@ -24,7 +24,7 @@
                     }
 
                     // 充值页面的余额
-                    $('.overage').init(data['totalAmount'].toFixed(2))
+                    $('.overage').init($.formatAmount(data['totalAmount']))
 
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())

@@ -19,7 +19,7 @@ setTimeout(function () {
             var html = '';
             for (var i = 0; i < data.length; i++) {
                 var d = data[i];
-                html += '\n                <li>\n                    <label for="list-' + (i + 1) + '">\n                        <span class="checkbox">\n                            <input type="checkbox" class="select" id="list-' + (i + 1) + '" movieId="' + d.id + '">\n                            <label for="list-' + (i + 1) + '"></label>\n                        </span>\n                        <div class="listcontent">\n                            <div class="imgbox">\n                                <img src="' + d.stills + '">\n                            </div>\n                            <div class="info">\n                                <h4 class="Title">' + d.title + '</h4>\n                                <span class="text">\n                                    ' + d.introduction + '\n                                </span>\n                                <p>\n                                    <span class="site">更新至第' + d.updateSite + '集</span>\n                                    <span class="price">' + Number(d.price).toFixed(2) + '</span>\n                                </p>\n                            </div>\n                            <span class="delete" movieId="' + d.id + '">删除</span>\n                        </div>\n                    </label>\n                </li>\n                ';
+                html += '\n                <li>\n                    <label for="list-' + (i + 1) + '">\n                        <span class="checkbox">\n                            <input type="checkbox" class="select" id="list-' + (i + 1) + '" movieId="' + d.id + '">\n                            <label for="list-' + (i + 1) + '"></label>\n                        </span>\n                        <div class="listcontent">\n                            <div class="imgbox">\n                                <img src="' + d.stills + '">\n                            </div>\n                            <div class="info">\n                                <h4 class="Title">' + d.title + '</h4>\n                                <span class="text">\n                                    ' + d.introduction + '\n                                </span>\n                                <p>\n                                    <span class="site">更新至第' + d.updateSite + '集</span>\n                                    <span class="price">' + $.formatAmount(d.price) + '</span>\n                                </p>\n                            </div>\n                            <span class="delete" movieId="' + d.id + '">删除</span>\n                        </div>\n                    </label>\n                </li>\n                ';
             }
             return html;
         },
@@ -133,7 +133,7 @@ setTimeout(function () {
         });
         if (hasSelect) {
             $('.tools .btn').addClass('active');
-            $totalPrice.text(payTotal.toFixed(2));
+            $totalPrice.text($.formatAmount(payTotal));
         } else {
             $('.tools .btn').removeClass('active');
             $totalPrice.text(0);
