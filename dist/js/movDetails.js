@@ -72,11 +72,14 @@ setTimeout(function () {
             $('.tab-link').last().hide(); //我要报错标签页
         }
 
-        // 会员隐藏
+        // 二维码隐藏
         if (data.IS_SUBSCRIBE == 1) {
             $('#qrcodeBox').remove(); //二维码
-        } else {
-            $('.tab-link').last().hide(); //我要报错标签页
+        }
+
+        // 是否显示我要报错
+        if (data.IS_SUBSCRIBE == 1 && data.IS_BUY == 1) {
+            $('.tab-link').last().init(); //我要报错标签页
         }
 
         // 是否在购物车
@@ -86,7 +89,6 @@ setTimeout(function () {
 
         // 是否已购
         if (data.IS_BUY == 1) {
-            // $Buttons.remove();
             // 隐藏购买按钮，并调整布局
             $tabs.addClass('isBuy');
         } else {
