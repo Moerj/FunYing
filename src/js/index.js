@@ -67,7 +67,7 @@ setTimeout(function () {
             <a href="${$.getMovDetails(mov.id)}" class="external">
                 <div class="imgbox">
                     <img src="${mov.stills}" />
-                    <p class="name">${mov.updateStatus == 0 ? '更新中' : '已完结'}</p>
+                    <p class="name">${$.getUpdateStatus(mov.updateStatus)}</p>
                 </div>
                 <p class="text">${mov.introduction}</p>
             </a>
@@ -102,7 +102,7 @@ setTimeout(function () {
                     <div class="info">
                         <span class="t"><span class="index">0${i+1}</span>${mov.title}</span>
                         <p class="text">${mov.introduction}</p>
-                        <span class="text2">更新到第${mov.updateSite}集</span>
+                        <span class="text2">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</span>
                     </div>
                 </a>
             </li>
@@ -131,7 +131,7 @@ setTimeout(function () {
                         <div class="info">
                             <span class="t"><span class="index">${i+1}</span>${mov.title}</span>
                             <p class="text">${mov.introduction}</p>
-                            <span class="text2">更新到第${mov.updateSite}集</span>
+                            <span class="text2">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</span>
                         </div>
                     </a>
                 </li>

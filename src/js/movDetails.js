@@ -95,6 +95,9 @@ setTimeout(function () {
             $('.numbox').hide();
         }
 
+        // 更新状态
+        $('#getUpdateStatus').init($.getUpdateStatus(mov.updateStatus,mov.updateSite))
+
         // 解构绑定后台数据
         for (let key in mov) {
             let $dom = $('#' + key)
@@ -108,7 +111,7 @@ setTimeout(function () {
         }
         // 格式化价格
         let $price = $('#price')
-        $price.text($.formatAmount($price.text()))
+        $price.init($.formatAmount($price.text()))
 
         // 构建选集
         let numTpl = ``

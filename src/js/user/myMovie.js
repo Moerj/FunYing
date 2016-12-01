@@ -24,7 +24,7 @@ setTimeout(function() {
                         <div class="info">
                             <span class="Title">${d.title}</span>
                             <p class="text">${d.introduction}</p>
-                            <span class="text2">更新到第${d.updateSite}集</span>
+                            <span class="text2">${$.getUpdateStatus(d.updateStatus,d.updateSite)}</span>
                         </div>
                         <span class="info2">
                             <span>下单时间: ${d.updateTime}</span>

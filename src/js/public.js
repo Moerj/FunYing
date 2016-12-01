@@ -430,10 +430,24 @@ $.pageInit = function (opt) {
     }
 }
 
+// 格式化价格
 $.formatAmount = function(num){
     num = Number(num)
     if (num) {
         return num.toFixed(2)
     }
     return '--'
+}
+
+/**
+ * @param updateStatus 更新状态 1更新中 0已完结
+ * @param updateSite 更新到的集数
+ * @return 返回更新状态字符串
+ */
+$.getUpdateStatus = function(updateStatus,updateSite){
+    if (updateStatus==1) {
+        return updateSite?`更新到第${updateSite}集`:`更新中`
+    }else{
+        return `已完结`
+    }
 }

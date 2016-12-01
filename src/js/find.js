@@ -21,7 +21,7 @@ setTimeout(function () {
                 <a href="${$.getMovDetails(d.id)}" class="find-list external">
                     <div class="imgbox">
                         <img src="${d.stills}" alt="">
-                        <div class="status">${d.updateStatus==0?'已完结':'更新中'}</div>
+                        <div class="status">${$.getUpdateStatus(d.updateStatus)}</div>
                     </div>
                     <p class="name">${d.title} ${d.updateSite}</p>
                 </a>

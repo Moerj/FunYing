@@ -34,7 +34,7 @@ setTimeout(() => {
                                     ${d.introduction}
                                 </span>
                                 <p>
-                                    <span class="site">更新至第${d.updateSite}集</span>
+                                    <span class="site">${$.getUpdateStatus(d.updateStatus,d.updateSite)}</span>
                                     <span class="price">${$.formatAmount(d.price)}</span>
                                 </p>
                             </div>
