@@ -14,7 +14,7 @@ setTimeout(function () {
         dataType: "json",
         url: "http://wechat.94joy.com/wx/rest/index/index",
         success: function success(res) {
-            // console.log(res);
+            console.log('首页数据', res);
 
             initBanner(res.headerRes);
             initBest(res.bestMovies);
