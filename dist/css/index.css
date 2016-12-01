@@ -240,7 +240,7 @@
     height: 100%;
     width: 22%; }
     .movlist .flexlist .imgbox img {
-      height: 100%; }
+      width: 100%; }
   .movlist .flexlist .info {
     width: 75%; }
     .movlist .flexlist .info .t {
