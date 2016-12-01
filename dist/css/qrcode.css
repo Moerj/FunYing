@@ -1,0 +1,65 @@
+.qrcode {
+  bottom: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+  .qrcode .qrcodeBig {
+    position: absolute;
+    width: 100vw !important;
+    height: auto !important;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20; }
+  .qrcode .headerTools {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0.6rem;
+    z-index: 1; }
+  .qrcode .backgroundImages {
+    -webkit-filter: blur(10px);
+            filter: blur(10px);
+    background: url("../images/qrcodeBackground.png") no-repeat center;
+    background-size: cover;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; }
+  .qrcode .box {
+    width: 13.2rem;
+    height: 19.1rem;
+    background: white;
+    z-index: 1;
+    font-size: 0.6rem;
+    color: rgba(0, 0, 0, 0.54);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-pack: start;
+        justify-content: flex-start;
+    -ms-flex-align: center;
+        align-items: center; }
+  .qrcode .info {
+    transform: translateY(-30%); }
+    .qrcode .info p {
+      margin: 0;
+      text-align: center; }
+  .qrcode .qrcodebg {
+    height: 7.2rem;
+    width: 100%; }
+  .qrcode .headpic {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 2px white solid;
+    transform: translateY(-50%); }
+  .qrcode .code {
+    width: 5.2rem;
+    height: 5.2rem; }

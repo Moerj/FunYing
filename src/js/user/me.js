@@ -6,23 +6,6 @@
     const $headimg = $('#headerImg'); //头像img
 
 
-    // 回到个人中心，修改title
-    $(window).on('popstate', function () {
-        if (location.hash == ``) {
-            $('title').text('个人中心')
-        }
-    });
-
-    // 进入二维码，修改title
-    $('#entry-qrcode').click(function () {
-        $('title').text('我的二维码')
-    })
-
-    // 初始进入二维码页面，修改title
-    if (location.hash == `#page-qrcode`) {
-        $('title').text('我的二维码')
-    }
-
     // 我的页面数据
     $.page_me_reload = function () {
         $.ajax({
@@ -70,25 +53,6 @@
 
     $.page_me_reload()
 
-    // 我的二维码
-    $.ajax({
-        url: "http://wechat.94joy.com/wx/rest/user/getQrcode",
-        data: {
-            openId: $.openId
-        },
-        success: function (res) {
-            // console.log(res);
-            $('#myqrcode')
-                .click(function () {
-                    // 二维码点击放大
-                    $(this).toggleClass('qrcodeBig')
-                })
-                .init(res.code)
-        },
-        error: function (e) {
-            console.error('我的二维码加载失败', e);
-        }
-    });
 
     // 账户余额
     function makePie(data) {

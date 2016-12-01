@@ -4,7 +4,7 @@ setTimeout(function () {
 
     // 筛选参数，页面独有
     var sort = 1; //排序 1.更新时间 2.人气排行
-    var area = null; //地区 直接传中文字符，'全部'传空
+    var first_type = null; //地区 直接传中文字符，'全部'传空
     var type = null; //电影类型，同地区
 
     var loader = new ScrollLoad({
@@ -26,7 +26,7 @@ setTimeout(function () {
             // 合并入筛选参数
             data = $.extend({}, data, {
                 sort: sort,
-                area: area,
+                first_type: first_type,
                 type: type
             });
 
@@ -51,6 +51,7 @@ setTimeout(function () {
 
     // 顶部筛选
     var $selectSwitch = $('.select-switch');
+
     function toggleArrow(eqIndex) {
         $selectSwitch.eq(eqIndex).find('.fa').toggleClass('isopen');
     }
@@ -80,14 +81,14 @@ setTimeout(function () {
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
-            values: ['全部', '内地', '韩国']
+            values: ['全部', '华语', '爱情', '游戏', '科幻', '悬疑', '喜剧', '欧美', '日本', '韩国', '恐怖', '豆瓣高分', '经典', '动作', '高分冷门']
         }],
         onOpen: function onOpen() {
             toggleArrow(areaIndex);
         },
         onClose: function onClose(picker) {
             toggleArrow(areaIndex);
-            area = picker.value[0] == '全部' ? null : picker.value[0];
+            first_type = picker.value[0] == '全部' ? null : picker.value[0];
             loader.reload();
 
             var value = picker.value == '全部' ? '地区' : picker.value;
@@ -100,7 +101,7 @@ setTimeout(function () {
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
-            values: ['全部', '电视剧', '电影']
+            values: ['全部', '经典', '华语', '爱情', '科幻', '悬疑', '喜剧', '动作', '欧美', '日本', '韩国', '恐怖', '豆瓣高分', '高分冷门']
         }],
         onOpen: function onOpen() {
             toggleArrow(typeIndex);

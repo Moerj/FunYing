@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>我的二维码</title>
+
+    <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://g.alicdn.com/msui/sm/0.6.2/css/??sm.min.css,sm-extend.min.css">
+    <link rel="stylesheet" href="../css/ui.css">
+    
+<link rel="stylesheet" href="../css/qrcode.css">
+
+</head>
+<body>
+    
+<div class="page-group">
+    <div class="page page-current" id='page-default'>
+        <div class="content qrcode">
+            <div class="backgroundImages"></div>
+            <!--<div class="headerTools">
+        我的推客二维码
+        <a class="btn back" href="#"><i class="fa fa-long-arrow-left"></i></a>
+    </div>-->
+            <div class="box">
+                <img class="qrcodebg" src="../images/qrcodeBackground.png">
+                <img class="headpic hide" src="#">
+                <div class="info">
+                    <p>转发二维码</p>
+                    <p>成为推客</p>
+                    <p>边看剧边赚钱！</p>
+                </div>
+                <img class="code hide" id="myqrcode" src="#">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!--lib-->
+    <!--<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>-->
+    <script src="../lib/zepto/zepto.min.js"></script>
+    <script src="../lib/zepto/touch.js"></script>
+
+    <!-- <script src='https://g.alicdn.com/msui/sm/0.6.2/js/'></script> -->
+    <script src="../lib/sui/sm.js"></script>
+
+    <script src="../lib/swiper/swiper.min.js"></script>
+    
+    <!--js-->
+    <script src="../js/Public.js"></script>
+
+
+    
+
+<!--js-->
+<script src="../js/qrcode.js"></script>
+
+    <script>
+        $.init();
+    </script>
+</body>
+</html>
