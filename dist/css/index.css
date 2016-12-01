@@ -134,7 +134,7 @@
         width: 100%;
         margin-bottom: 0.4rem; }
         .recommended-1 .list li .imgbox img {
-          height: 100%; }
+          width: 100%; }
         .recommended-1 .list li .imgbox .name {
           font-size: .6rem;
           position: absolute;
