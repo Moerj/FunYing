@@ -269,6 +269,16 @@ setTimeout(function () {
         }
     });
 
+    // 点击记录首页顶部tab
+    const $tablist = $('#tablist a')
+    $tablist.click(function(){
+        let index = $(this).index()
+        sessionStorage.indexTab = index
+    })
+    if (sessionStorage.indexTab) {
+        $tablist.eq(sessionStorage.indexTab).click()
+    }
+
 
 
 },100);

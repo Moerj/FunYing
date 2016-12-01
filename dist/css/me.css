@@ -606,7 +606,7 @@
 
 .myMovie {
   bottom: 0;
-  background: #eee url("../images/empty_mov.png") no-repeat center;
+  background: #eee url("../images/empty_myMovieList.png") no-repeat center;
   background-size: 8.4rem; }
   .myMovie .tools {
     height: 2.2rem;

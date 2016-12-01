@@ -5,6 +5,24 @@
     const $uploadPicker = $('#headpicUpload'); //头像input file
     const $headimg = $('#headerImg'); //头像img
 
+
+    // 回到个人中心，修改title
+    $(window).on('popstate', function () {
+        if (location.hash == ``) {
+            $('title').text('个人中心')
+        }
+    });
+
+    // 进入二维码，修改title
+    $('#entry-qrcode').click(function () {
+        $('title').text('我的二维码')
+    })
+
+    // 初始进入二维码页面，修改title
+    if (location.hash == `#page-qrcode`) {
+        $('title').text('我的二维码')
+    }
+
     // 我的页面数据
     $.page_me_reload = function () {
         $.ajax({
@@ -28,7 +46,7 @@
 
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
-                    $('.headpic').init(data.headerImg || '../images/icon/user.png')//个人中心用户头像
+                    $('.headpic').init(data.headerImg || '../images/icon/user.png') //个人中心用户头像
 
                     let pieData = [{
                         name: '收益余额',
@@ -61,11 +79,11 @@
         success: function (res) {
             // console.log(res);
             $('#myqrcode')
-            .click(function(){
-                // 二维码点击放大
-                $(this).toggleClass('qrcodeBig')
-            })
-            .init(res.code)
+                .click(function () {
+                    // 二维码点击放大
+                    $(this).toggleClass('qrcodeBig')
+                })
+                .init(res.code)
         },
         error: function (e) {
             console.error('我的二维码加载失败', e);
@@ -144,51 +162,51 @@
         let localImgSrc = window.URL.createObjectURL($uploadPicker[0].files[0]);
 
         $.showPreloader('正在压缩图片')
-        // 压缩
-        lrz(fileObj[0],{
-            width: 120
-        })
-        .then(function (rst) {
-            // 处理成功会执行
-            console.log('图片已压缩：',rst);
+            // 压缩
+        lrz(fileObj[0], {
+                width: 120
+            })
+            .then(function (rst) {
+                // 处理成功会执行
+                console.log('图片已压缩：', rst);
 
-            formdata.append("imgFile", rst.file);
-            $.showPreloader('正在上传头像')
+                formdata.append("imgFile", rst.file);
+                $.showPreloader('正在上传头像')
 
-            // 上传到ftp
-            $.ajax({
-                url: url,
-                type: 'post',
-                data: formdata,
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: "json",
-                success: (data) => {
-                    console.log('上传结果：', data);
-                    if (data[0].result) {
-                        $headimg.attr('src', localImgSrc); //更新新头像
-                        _updateImg('http://wechat.94joy.com/img' + data[0].result)
+                // 上传到ftp
+                $.ajax({
+                    url: url,
+                    type: 'post',
+                    data: formdata,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    dataType: "json",
+                    success: (data) => {
+                        console.log('上传结果：', data);
+                        if (data[0].result) {
+                            $headimg.attr('src', localImgSrc); //更新新头像
+                            _updateImg('http://wechat.94joy.com/img' + data[0].result)
+                        }
+                    },
+                    error: () => {
+                        $.alert('上传失败，请稍后再试！')
+                        console.error('ftp部分头像上传失败')
+                        $.hidePreloader();
                     }
-                },
-                error: () => {
-                    $.alert('上传失败，请稍后再试！')
-                    console.error('ftp部分头像上传失败')
-                    $.hidePreloader();
-                }
-            });
-            
-        })
-        .catch(function (err) {
-            // 处理失败会执行
-            $.alert('图片压缩失败，请换一张试试')
-            $.hidePreloader();
-        })
-        .always(function () {
-            // 不管是成功失败，都会执行
-        });
+                });
 
-        
+            })
+            .catch(function (err) {
+                // 处理失败会执行
+                $.alert('图片压缩失败，请换一张试试')
+                $.hidePreloader();
+            })
+            .always(function () {
+                // 不管是成功失败，都会执行
+            });
+
+
         return false;
     });
 

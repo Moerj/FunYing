@@ -129,6 +129,24 @@ $('#feedbackSubmit').click(function () {
         var $uploadPicker = $('#headpicUpload'); //头像input file
         var $headimg = $('#headerImg'); //头像img
 
+
+        // 回到个人中心，修改title
+        $(window).on('popstate', function () {
+            if (location.hash == '') {
+                $('title').text('个人中心');
+            }
+        });
+
+        // 进入二维码，修改title
+        $('#entry-qrcode').click(function () {
+            $('title').text('我的二维码');
+        });
+
+        // 初始进入二维码页面，修改title
+        if (location.hash == '#page-qrcode') {
+            $('title').text('我的二维码');
+        }
+
         // 我的页面数据
         $.page_me_reload = function () {
             $.ajax({

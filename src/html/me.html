@@ -11,16 +11,16 @@
 
     <div class="page page-current" id='page-default'>
         <div class="content">
-            <div class="userinfo alist endone">
-                <label class="headpicBox">
+            <label class="userinfo alist endone" for="headpicUpload">
+                <div class="headpicBox">
                     <input type="file" id="headpicUpload">
                     <img src="#" id="headerImg" class="headpic hide">
-                </label>
+                </div>
                 <div class="text">
                     <span class="name" id="nickName"></span>
                     <span class="city"><i class="fa fa-map-marker"></i> <span id="city"></span></span>
                 </div>
-            </div>
+            </label>
             <div class="money endone">
                 <div class="circle">
                     <div class="echart"></div>
@@ -76,7 +76,7 @@
                     <span class="name">系统消息</span>
                 </a>
                 <div class="line"></div>
-                <a class="alist endone" href="#page-qrcode">
+                <a class="alist endone" href="#page-qrcode" id="entry-qrcode">
                     <i class="fa fa-qrcode ico"></i>
                     <span class="name">我的推客二维码</span>
                 </a>
