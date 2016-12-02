@@ -1,4 +1,4 @@
-
+// 注册 overscroll 容器
 setTimeout(function () {
     let $el = $('.scroll')
     if ($el.length==0) {

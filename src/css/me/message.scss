@@ -54,6 +54,7 @@
         padding: rem(16px);
         position: relative;
         transition: .3s;
+        -webkit-transition: .3s;
         &.showDelete {
             transform: translate3d(-$deleteWidth, 0, 0);
         }

@@ -49,6 +49,7 @@
       justify-content: space-around;
   height: 44px;
   transition: .3s;
+  -webkit-transition: .3s;
   overflow: hidden; }
   .search-tools.search-outside {
     padding-left: 12px; }

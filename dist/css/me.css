@@ -691,7 +691,8 @@
     display: block;
     padding: 0.8rem;
     position: relative;
-    transition: .3s; }
+    transition: .3s;
+    -webkit-transition: .3s; }
     .message-contanier .message.showDelete {
       transform: translate3d(-4rem, 0, 0); }
     .message-contanier .message p {

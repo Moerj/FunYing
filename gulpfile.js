@@ -2,7 +2,6 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
-var spriter = require('gulp-css-spriter');
 var glob = require("glob")
 
 var paths = {
@@ -58,13 +57,6 @@ gulp.task('sass', function () {
     gulp.src(paths.sass.entry)
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer('last 2 version', 'android 4'))
-        // .pipe(spriter({
-        //     // The path and file name of where we will save the sprite sheet
-        //     'spriteSheet': './dist/images/spritesheet.png',
-        //     // Because we don't know where you will end up saving the CSS file at this point in the pipe,
-        //     // we need a litle help identifying where it will be.
-        //     'pathToSpriteSheetFromCSS': '../images/spritesheet.png'
-        // }))
         .pipe(gulp.dest('./dist/css/'))
         .pipe(reload({
             stream: true

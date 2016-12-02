@@ -6,7 +6,7 @@
     color: white;
     font-size: rem(14px);
     text-align: center;
-    line-height: 3;
+    line-height: 2.4rem;
 }
 
 $red:#F36C60;
@@ -165,6 +165,7 @@ $navHeight: 2.5rem;
             font-size: rem(14px);
             line-height: $listHeight;
             transition: .3s;
+            -webkit-transition: .3s;
             transform: translate3d(100%,0,0);
             &.show{
                 transform: translate3d(0,0,0);
