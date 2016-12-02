@@ -59,7 +59,9 @@
     height: 3rem;
     border-radius: 50%;
     border: 2px white solid;
-    transform: translateY(-50%); }
+    background-color: white;
+    transform: translateY(-50%);
+    visibility: hidden; }
   .qrcode .code {
     width: 5.2rem;
     height: 5.2rem; }

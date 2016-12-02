@@ -14,10 +14,10 @@ $.fn.init = function (data) {
             } else {
                 thisJq.val(data)
             }
-            thisJq.removeClass('hide').show()
+            thisJq.removeClass('hide').css('visibility','visible').show()
         }
     }else{
-        this.removeClass('hide')
+        this.removeClass('hide').css('visibility','visible')
     }
 
 }

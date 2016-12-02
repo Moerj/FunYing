@@ -61,7 +61,9 @@
         height: rem(60px);
         border-radius: 50%;
         border: 2px white solid;
+        background-color: white;
         transform: translateY(-50%);
+        visibility: hidden;
     }
     .code {
         width: rem(104px);
