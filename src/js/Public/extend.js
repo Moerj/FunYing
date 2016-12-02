@@ -14,10 +14,10 @@ $.fn.init = function (data) {
             } else {
                 thisJq.val(data)
             }
-            thisJq.removeClass('hide').css('visibility','visible').show()
+            thisJq.removeClass('hide').css('visibility', 'visible').show()
         }
-    }else{
-        this.removeClass('hide').css('visibility','visible')
+    } else {
+        this.removeClass('hide').css('visibility', 'visible')
     }
 
 }
@@ -233,7 +233,7 @@ $.pageInit = function (opt) {
 }
 
 // 格式化价格
-$.formatAmount = function(num){
+$.formatAmount = function (num) {
     num = Number(num)
     if (num) {
         return num.toFixed(2)
@@ -246,10 +246,10 @@ $.formatAmount = function(num){
  * @param updateSite 更新到的集数
  * @return 返回更新状态字符串
  */
-$.getUpdateStatus = function(updateStatus,updateSite){
-    if (updateStatus==1) {
-        return updateSite?`↑第${updateSite}集`:`更新中`
-    }else{
+$.getUpdateStatus = function (updateStatus, updateSite) {
+    if (updateStatus == 1) {
+        return updateSite ? `↑第${updateSite}集` : `更新中`
+    } else {
         return `已完结`
     }
 }

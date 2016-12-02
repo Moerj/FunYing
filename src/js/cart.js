@@ -175,10 +175,10 @@ setTimeout(() => {
     // 删除单个
     $(document).on('click', '.delete', function () {
         // $.confirm('确认删除选中商品？', () => {
-            deleteOneMovie(this)
-            changeBtnStatus()
-            deleteEmpty()
-        // });
+        deleteOneMovie(this)
+        changeBtnStatus()
+        deleteEmpty()
+            // });
     })
 
     // 删除全部

@@ -8,7 +8,7 @@
         background: white;
         @include box-shadow-bottom;
         text-align: center;
-        position: relative;
+        position: fixed;
         z-index: 2;
         >* {
             position: absolute;
