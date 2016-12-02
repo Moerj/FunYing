@@ -54,20 +54,27 @@ var ScrollLoad = function () {
             skip: 1, //当前页
             limit: this.perload //每页条数
         }, function (data) {
-            if (data.length) {
-                _this.currentPage++;
-                _this.render(data);
-            }
-            if (data.length < _this.perload) {
-                _this.finish();
-            }
+            _this._ajax(data);
         });
     }
 
-    // 滚动逻辑
-
-
     _createClass(ScrollLoad, [{
+        key: '_ajax',
+        value: function _ajax(data) {
+            if (data.length) {
+                this.currentPage++;
+                this.render(data);
+                if (data.length < this.perload) {
+                    this.finish();
+                }
+            } else {
+                this.finish();
+            }
+        }
+
+        // 滚动逻辑
+
+    }, {
         key: 'scroll',
         value: function scroll() {
             var _this2 = this;
@@ -97,14 +104,7 @@ var ScrollLoad = function () {
                 // 重置加载flag
                 _this2.loading = false;
 
-                // 数据加载完
-                if (data.length <= 0) {
-                    _this2.finish();
-                    return;
-                }
-
-                _this2.currentPage++;
-                _this2.render(data);
+                _this2._ajax(data);
             });
         }
 
@@ -141,15 +141,7 @@ var ScrollLoad = function () {
                 limit: this.perload //每页条数
             }, function (data) {
                 _this3.listContanier.empty();
-                if (data.length) {
-                    _this3.currentPage++;
-                    _this3.render(data);
-                    if (data.length < _this3.perload) {
-                        _this3.finish();
-                    }
-                } else {
-                    _this3.finish();
-                }
+                _this3._ajax(data);
                 $.hideIndicator();
             });
         }

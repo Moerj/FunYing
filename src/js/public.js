@@ -48,14 +48,20 @@ class ScrollLoad {
             skip: 1, //当前页
             limit: this.perload //每页条数
         }, (data) => {
-            if (data.length) {
-                this.currentPage++;
-                this.render(data)
-            }
+            this._ajax(data)
+        })
+    }
+
+    _ajax(data) {
+        if (data.length) {
+            this.currentPage++;
+            this.render(data)
             if (data.length < this.perload) {
                 this.finish();
             }
-        })
+        } else {
+            this.finish();
+        }
     }
 
     // 滚动逻辑
@@ -85,14 +91,7 @@ class ScrollLoad {
             // 重置加载flag
             this.loading = false;
 
-            // 数据加载完
-            if (data.length <= 0) {
-                this.finish();
-                return;
-            }
-
-            this.currentPage++;
-            this.render(data)
+            this._ajax(data)
 
         })
     }
@@ -125,15 +124,7 @@ class ScrollLoad {
             limit: this.perload //每页条数
         }, (data) => {
             this.listContanier.empty()
-            if (data.length) {
-                this.currentPage++;
-                this.render(data)
-                if (data.length < this.perload) {
-                    this.finish();
-                }
-            } else {
-                this.finish();
-            }
+            this._ajax(data)
             $.hideIndicator();
         })
     }
