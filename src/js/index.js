@@ -67,7 +67,7 @@ setTimeout(function () {
             <a href="${$.getMovDetails(mov.id)}" class="external">
                 <div class="imgbox">
                     <img src="${mov.stills}" />
-                    <p class="name">${$.getUpdateStatus(mov.updateStatus)}</p>
+                    <p class="name">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</p>
                 </div>
                 <p class="text">${mov.introduction}</p>
             </a>

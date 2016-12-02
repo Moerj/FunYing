@@ -449,7 +449,7 @@ $.formatAmount = function (num) {
  */
 $.getUpdateStatus = function (updateStatus, updateSite) {
     if (updateStatus == 1) {
-        return updateSite ? '更新到第' + updateSite + '集' : '更新中';
+        return updateSite ? '↑第' + updateSite + '集' : '更新中';
     } else {
         return '已完结';
     }

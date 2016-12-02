@@ -60,7 +60,7 @@ setTimeout(function () {
         var tpl = "";
         for (var i = 0; i < movs.length; i++) {
             var mov = movs[i];
-            tpl += "\n            <li>\n            <a href=\"" + $.getMovDetails(mov.id) + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.stills + "\" />\n                    <p class=\"name\">" + $.getUpdateStatus(mov.updateStatus) + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
+            tpl += "\n            <li>\n            <a href=\"" + $.getMovDetails(mov.id) + "\" class=\"external\">\n                <div class=\"imgbox\">\n                    <img src=\"" + mov.stills + "\" />\n                    <p class=\"name\">" + $.getUpdateStatus(mov.updateStatus, mov.updateSite) + "</p>\n                </div>\n                <p class=\"text\">" + mov.introduction + "</p>\n            </a>\n            </li>\n            ";
         }
         $('#rec1 ul').append(tpl);
     }
