@@ -1,4 +1,3 @@
-
 // 无限滚动的懒加载
 class ScrollLoad {
     constructor(opt) {
@@ -129,6 +128,9 @@ class ScrollLoad {
             if (data.length) {
                 this.currentPage++;
                 this.render(data)
+                if (data.length < this.perload) {
+                    this.finish();
+                }
             } else {
                 this.finish();
             }
@@ -169,7 +171,6 @@ class ScrollLoad {
 
     }
 }
-
 
 setTimeout(function () {
     let $el = $('.scroll')

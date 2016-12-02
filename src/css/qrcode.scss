@@ -35,7 +35,7 @@
     .box {
         width: rem(264px);
         height: rem(382px);
-        background: white;
+        background: linear-gradient(transparent rem(144px), white 0%);
         z-index: 1;
         // position: relative;
         font-size: rem(12px);

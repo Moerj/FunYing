@@ -296,7 +296,7 @@ setTimeout(function() {
                 <li class="messageList">
                     <a href=${$.getArtDetails(d.id)} class="message external">
                         <p class="Title">
-                            <span class="name">${d.title}</span>
+                            <span class="name">${d.title?d.title:''}</span>
                             <span class="day">${d.addTime}</span>
                         </p>
                         <p class="details">${d.context}</p>

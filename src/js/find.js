@@ -65,6 +65,7 @@ setTimeout(function () {
         $selectSwitch.eq(eqIndex).find('.fa').toggleClass('isopen')
     }
 
+    // 排序
     const sortIndex = 0
     $selectSwitch.eq(sortIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
@@ -85,12 +86,13 @@ setTimeout(function () {
         }
     });
 
+    // 类型
     const areaIndex = 1
     $selectSwitch.eq(areaIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
         cols: [{
             textAlign: 'center',
-            values: ['全部', `华语`, `爱情`, `游戏`, `科幻`, `悬疑`, `喜剧`, `欧美`, `日本`, `韩国`, `恐怖`, `豆瓣高分`, `经典`, `动作`, `高分冷门`]
+            values: ['全部', `电影`, `电视剧`, `动画`, `演唱会`, `娱乐`, `体育`, `游戏`, `周边`, `其他`]
         }],
         onOpen: () => {
             toggleArrow(areaIndex)
@@ -100,18 +102,19 @@ setTimeout(function () {
             first_type = picker.value[0] == '全部' ? null : picker.value[0]
             loader.reload()
 
-            let value = picker.value == '全部' ? '地区' : picker.value
+            let value = picker.value == '全部' ? '类型' : picker.value
             $selectSwitch.eq(areaIndex).find('b').text(value)
         }
     });
 
+    // fun类
     const typeIndex = 2
     $selectSwitch.eq(typeIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
         cols: [{
             textAlign: 'center',
             values: [
-                `全部`, `经典`, '华语', '爱情', '科幻', '悬疑', `喜剧`, `动作`, `欧美`, `日本`, `韩国`, `恐怖`, `豆瓣高分`, `高分冷门`
+                `全部`, `经典`, `华语`, `欧美`, `韩国`, `日本`, `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`, `豆瓣高分`, `冷门佳片`
             ]
         }],
         onOpen: () => {
@@ -122,7 +125,7 @@ setTimeout(function () {
             type = picker.value[0] == '全部' ? null : picker.value[0]
             loader.reload()
 
-            let value = picker.value == '全部' ? '类型' : picker.value
+            let value = picker.value == '全部' ? 'fun类' : picker.value
             $selectSwitch.eq(typeIndex).find('b').text(value)
         }
     });
@@ -133,4 +136,4 @@ setTimeout(function () {
     })
 
 
-})
+}, 100)

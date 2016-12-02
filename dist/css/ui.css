@@ -38,6 +38,9 @@ li {
   padding: 0;
   list-style: none; }
 
+img {
+  pointer-events: none; }
+
 .infinite-scroll-preloader {
   font-size: .6rem;
   color: rgba(0, 0, 0, 0.38); }

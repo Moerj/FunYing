@@ -144,6 +144,9 @@ var ScrollLoad = function () {
                 if (data.length) {
                     _this3.currentPage++;
                     _this3.render(data);
+                    if (data.length < _this3.perload) {
+                        _this3.finish();
+                    }
                 } else {
                     _this3.finish();
                 }

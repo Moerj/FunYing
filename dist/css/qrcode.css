@@ -34,7 +34,7 @@
   .qrcode .box {
     width: 13.2rem;
     height: 19.1rem;
-    background: white;
+    background: linear-gradient(transparent 7.2rem, white 0%);
     z-index: 1;
     font-size: 0.6rem;
     color: rgba(0, 0, 0, 0.54);
