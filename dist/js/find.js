@@ -72,6 +72,7 @@ setTimeout(function () {
             sort = picker.value[0] == '更新时间' ? 1 : 2;
             loader.reload();
 
+            // 设置文本
             var value = picker.value;
             $selectSwitch.eq(sortIndex).find('b').text(value);
         }
@@ -93,6 +94,7 @@ setTimeout(function () {
             first_type = picker.value[0] == '全部' ? null : picker.value[0];
             loader.reload();
 
+            // 设置文本
             var value = picker.value == '全部' ? '类型' : picker.value;
             $selectSwitch.eq(areaIndex).find('b').text(value);
         }
@@ -114,6 +116,7 @@ setTimeout(function () {
             type = picker.value[0] == '全部' ? null : picker.value[0];
             loader.reload();
 
+            // 设置文本
             var value = picker.value == '全部' ? 'fun类' : picker.value;
             $selectSwitch.eq(typeIndex).find('b').text(value);
         }

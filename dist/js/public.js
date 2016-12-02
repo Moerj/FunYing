@@ -58,7 +58,7 @@ var ScrollLoad = function () {
                 _this.currentPage++;
                 _this.render(data);
             }
-            if (data.length <= _this.perload) {
+            if (data.length < _this.perload) {
                 _this.finish();
             }
         });

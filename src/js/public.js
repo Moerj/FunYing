@@ -52,7 +52,7 @@ class ScrollLoad {
                 this.currentPage++;
                 this.render(data)
             }
-            if (data.length <= this.perload) {
+            if (data.length < this.perload) {
                 this.finish();
             }
         })
