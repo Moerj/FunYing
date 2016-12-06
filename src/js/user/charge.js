@@ -36,19 +36,6 @@
             title: `个人中心-余额充值`
 
         }, () => {
-            /*// 测试
-                $('.chargelist .test').remove()
-                let div = $('<div class="test" style="white-space: pre-line;font-size:.7rem;"></div>')
-                $('.chargelist').append(div)
-                div.text(`
-                appId: ${res.appId}
-                timeStamp: ${res.timestamp}
-                nonceStr: ${res.nonceStr}
-                package: prepay_id=${res.prepay_id}
-                signType: ${res.signType}
-                paySign: ${res.paySign}
-            `)*/
-
             $.msg({
                 text: '充值成功，可以买片啦！',
                 timeout: 5000,
