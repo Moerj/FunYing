@@ -6,13 +6,14 @@
     function ajax_cash() {
         console.log($.openId);
         console.log($withdrawInput.val());
+        $.showIndicator()
         $.ajax({
             url: "http://wechat.94joy.com/wx/rest/pay/cash",
             data: {
                 openId: $.openId,
                 price: $withdrawInput.val()
             },
-            success: function (res) {
+            success:  (res) =>{
                 // console.log(res);
                 if (res.STATUS == 1) {
                     $.msg('提现成功，荷包胀起来了！',5000)
@@ -23,6 +24,12 @@
                 } else {
                     $.msg('提现失败，请小主稍后再试！',5000)
                 }
+            },
+            error:() => {
+                $.alert('提现失败，服务器繁忙！')
+            },
+            complete:() => {
+                $.hideIndicator()
             }
         });
 

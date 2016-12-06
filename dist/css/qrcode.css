@@ -64,4 +64,5 @@
     visibility: hidden; }
   .qrcode .code {
     width: 5.2rem;
-    height: 5.2rem; }
+    height: 5.2rem;
+    pointer-events: auto; }

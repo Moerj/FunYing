@@ -178,7 +178,8 @@
     .details .other .code {
       width: 100px;
       height: 100px;
-      margin-left: 16px; }
+      margin-left: 16px;
+      pointer-events: auto; }
     .details .other .infobox {
       text-align: center;
       font-size: .6rem;
