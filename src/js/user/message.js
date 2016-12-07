@@ -1,5 +1,5 @@
-setTimeout(function() {
-    
+setTimeout(function () {
+
 
 
     function messageInit() {
@@ -18,18 +18,20 @@ setTimeout(function() {
                 let html = '';
                 for (let i = 0; i < data.length; i++) {
                     let d = data[i]
-                    html += `
-                <li class="messageList">
-                    <a href=${$.getArtDetails(d.id)} class="message external">
-                        <p class="Title">
-                            <span class="name">${d.title?d.title:''}</span>
-                            <span class="day">${d.addTime}</span>
-                        </p>
-                        <p class="details">${d.context}</p>
-                        <span class="delete" msgId=${d.id}></span>
-                    </a>
-                </li>
-                `
+                    if (d) {
+                        html += `
+                        <li class="messageList">
+                            <a href=${$.getArtDetails(d.id)} class="message external">
+                                <p class="Title">
+                                    <span class="name">${d.title?d.title:''}</span>
+                                    <span class="day">${d.addTime}</span>
+                                </p>
+                                <p class="details">${d.context}</p>
+                                <span class="delete" msgId=${d.id}></span>
+                            </a>
+                        </li>
+                        `
+                    }
                 }
                 return html
             },
@@ -39,7 +41,7 @@ setTimeout(function() {
                     url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
                     data: data,
                     success: (res) => {
-                        console.log('系统消息：',res);
+                        console.log('系统消息：', res);
                         if (res.DATA.length) {
                             callback(res.DATA)
                         } else {
