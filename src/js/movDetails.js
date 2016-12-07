@@ -74,7 +74,7 @@ setTimeout(function () {
 
         // 二维码隐藏
         if (data.IS_SUBSCRIBE == 1) {
-            $('#qrcodeBox').remove() //二维码
+            // $('#qrcodeBox').remove() //二维码
         } 
         
         // 是否显示我要报错
