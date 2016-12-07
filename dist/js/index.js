@@ -69,7 +69,7 @@ setTimeout(function () {
     function initMain(res) {
         $('.recommended-2 a').each(function (i, el) {
             var $el = $(el);
-            $el.attr('href', $.getArtDetails(res[i].id));
+            $el.attr('href', $.getArtDetails(res[i].resUrl));
             $el.find('img').attr('src', res[i].pictrueUrl);
             $el.find('.titleInfo').text(res[i].title);
             $el.find('.content-text').text(res[i].introduction);
