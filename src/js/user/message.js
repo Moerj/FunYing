@@ -5,7 +5,6 @@ setTimeout(function () {
     function messageInit() {
 
         const $contanier = $('.message-contanier ul')
-            // const $emptyBackground = $contanier.find('.empty')
 
         new ScrollLoad({
 
