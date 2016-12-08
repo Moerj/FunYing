@@ -93,7 +93,7 @@ $.msg = function (opts, timeout) {
     }
 }
 
-// 付款
+// 影片付款
 $.payment = function (OPTS) {
 
     // 余额支付
@@ -103,7 +103,7 @@ $.payment = function (OPTS) {
             url: "http://wechat.94joy.com/wx/rest/pay/payByRecharge",
             data: {
                 openId: $.openId,
-                movieId: OPTS.movieId
+                movieId: OPTS.productId
             },
             success: (res) => {
                 console.log('余额支付接口', res);

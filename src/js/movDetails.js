@@ -132,10 +132,8 @@ setTimeout(function () {
                 if (data.IS_SUBSCRIBE == 1) {
                     // 支付
                     $.payment({
-                        // movieId: movieId,
                         productId: movieId,
                         success: () => {
-                            // $Buttons.remove()
                             $tabs.addClass('isBuy')
                             $('.numbox').show()
                             $.msg('该影片购买成功,您可以在详情页查看资源地址了！', 5000)

@@ -222,7 +222,6 @@ setTimeout(() => {
 
         $.payment({
             productId: productId,
-            movieId: productId,
             success: () => {
 
                 $.msg({
