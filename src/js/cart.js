@@ -58,10 +58,11 @@ setTimeout(() => {
                 cache: false,
                 success: (res) => {
                     console.log(res);
-                    if (res.DATA.length > 0) {
+                    if (res.STATUS == 1 && res.DATA.length > 0) {
                         callback(res.DATA)
                         $('.headerTools,.tools').init()
                     } else {
+                        $.alert('用户信息读取失败！')
                         console.log(window.location.hash + ' 没有数据');
                     }
                 },
