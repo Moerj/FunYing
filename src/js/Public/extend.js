@@ -242,12 +242,12 @@ $.formatAmount = function (num) {
 }
 
 /**
- * @param updateStatus 更新状态 1更新中 0已完结
+ * @param updateStatus 更新状态 0更新中 1已完结
  * @param updateSite 更新到的集数
  * @return 返回更新状态字符串
  */
 $.getUpdateStatus = function (updateStatus, updateSite) {
-    if (updateStatus == 1) {
+    if (updateStatus == 0) {
         return updateSite ? `第${updateSite}集` : `更新中`
     } else {
         return `已完结`
