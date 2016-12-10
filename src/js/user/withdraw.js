@@ -40,6 +40,10 @@
             $.msg('提现金额不能为空')
             return
         }
+        if ($withdrawInput.val()<10) {
+            $.msg('提现金额不能低于限制')
+            return
+        }
 
         ajax_cash();
     })

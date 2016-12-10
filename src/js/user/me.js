@@ -24,13 +24,9 @@
                         $('#' + key).text(data[key])
                     }
 
-                    // 充值页面的余额
-                    $('.overage').init($.formatAmount(data['totalAmount']))
-
+                    // 生成echart
                     let rechargeAmountVal = Number($('#rechargeAmount').text())
                     let lucreAmountVal = Number($('#lucreAmount').text())
-                    $('.headpic').init(data.headerImg || '../images/icon/user.png') //个人中心用户头像
-
                     let pieData = [{
                         name: '收益余额',
                         color: '#F36C60',
@@ -40,9 +36,17 @@
                         color: '#FFC107',
                         value: rechargeAmountVal
                     }]
-
-                    // 生成echart
                     makePie(pieData);
+
+                    // 充值页面的余额
+                    $('.overage').init($.formatAmount(data['totalAmount']))
+
+                    // 提现页面余额（可提现金额）
+                    $('#withdraw-amount').init(lucreAmountVal)
+
+
+                    //个人中心用户头像
+                    $('.headpic').init(data.headerImg || '../images/icon/user.png') 
 
                 } else {
                     $.alert('用户信息读取失败')

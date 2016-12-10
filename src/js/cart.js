@@ -184,7 +184,7 @@ setTimeout(() => {
 
     // 删除全部
     $('.deleteAll').click(function () {
-        $.confirm('确认清空购物车？', () => {
+        $.confirm('确认删除所选商品？', () => {
             deleteOneMovie($('.select:checked'))
             changeBtnStatus()
             deleteEmpty()
