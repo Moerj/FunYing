@@ -4,14 +4,14 @@
     // 充值金额列表
     function addChargeList() {
         let tpl = ``
-        let len = 5
-        let priceArry = [20, 30, 50, 100, 200]
-        for (let i = 1; i < len; i++) {
-            let checked = i == 1 ? 'checked' : '';
+        let priceArry = [20, 50, 100, 200]
+        for (let i = 0; i < priceArry.length; i++) {
+            let checked = i == 0 ? 'checked' : '';
+            let index = i+1
             tpl += `
                 <li>
-                    <input type="radio" name="chargeRadio" id="chargeRadio-${i}" ${checked} data-productId=${i}>
-                    <label class="splitline" for="chargeRadio-${i}"><span class="price">${$.formatAmount(priceArry[i])}</span><i class="fa fa-check"></i></label>
+                    <input type="radio" name="chargeRadio" id="chargeRadio-${index}" ${checked} data-productId=${index}>
+                    <label class="splitline" for="chargeRadio-${index}"><span class="price">${$.formatAmount(priceArry[i])}</span><i class="fa fa-check"></i></label>
                 </li>
             `
         }
