@@ -553,7 +553,8 @@ setTimeout(function () {
                             $('#profit-yestAmt').text($.formatAmount(yestAmt))
 
                             // 累计收益
-                            $('#profit-LucreAmt').text($.formatAmount(res.LucreAmt))
+                            // $('#profit-LucreAmt').text($.formatAmount(res.LucreAmt))
+                            $('#profit-LucreAmt').text($.formatAmount(res.oneAmt + res.secondAmt + res.threeAmt))
 
                             // 推客收益总和
                             $('#profit-oneAmt').text($.formatAmount(res.oneAmt))
