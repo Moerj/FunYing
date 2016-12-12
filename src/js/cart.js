@@ -62,8 +62,7 @@ setTimeout(() => {
                         callback(res.DATA)
                         $('.headerTools,.tools').init()
                     } else {
-                        $.alert('用户信息读取失败！')
-                        console.log(window.location.hash + ' 没有数据');
+                        console.log('购物车接口没有数据');
                     }
                 },
                 error: (e) => {
@@ -71,6 +70,7 @@ setTimeout(() => {
                     $.alert('刷新失败，请稍后再试！')
                 },
                 complete: () => {
+                    // 如果没有数据，隐藏掉容器，这样会显示出购物车为空的背景图片
                     if ($contanier.children('li').length == 0) {
                         $contanier.hide();
                     }

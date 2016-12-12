@@ -19,7 +19,7 @@ setTimeout(function(){
                         <img src="${d.stills}" alt="">
                         <div class="status">${$.getUpdateStatus(d.updateStatus)}</div>
                     </div>
-                    <p class="name">${d.title} ${d.updateSite}</p>
+                    <p class="name">${d.title}</p>
                 </a>
                 `
             }

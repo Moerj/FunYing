@@ -39,14 +39,14 @@
                     makePie(pieData);
 
                     // 充值页面的余额
-                    $('.overage').init($.formatAmount(data['totalAmount']))
+                    $('.overage').init($.formatAmount(rechargeAmountVal + lucreAmountVal))
 
                     // 提现页面余额（可提现金额）
                     $('#withdraw-amount').init(lucreAmountVal)
 
 
                     //个人中心用户头像
-                    $('.headpic').init(data.headerImg || '../images/icon/user.png') 
+                    $('.headpic').init(data.headerImg || '../images/icon/user.png')
 
                 } else {
                     $.alert('用户信息读取失败')

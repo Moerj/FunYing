@@ -128,7 +128,7 @@ $.payment = function (OPTS) {
         onClick: function () {
             _payByRecharge()
         }
-    }, {
+    }/*, {
         text: '微信支付',
         onClick: function () {
             OPTS.wxPay.productId = OPTS.productId
@@ -137,7 +137,7 @@ $.payment = function (OPTS) {
             })
 
         }
-    }, {
+    }*/, {
         text: '取消'
     }];
     $.actions(buttons);
