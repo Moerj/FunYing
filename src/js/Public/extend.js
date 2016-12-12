@@ -3,7 +3,7 @@
 // dom加载ajax数据
 $.fn.init = function (data) {
 
-    if (data) {
+    if (data!=null) {
         for (let i = 0; i < this.length; i++) {
             let thisJq = $(this[i])
                 // console.log(thisJq);
@@ -238,7 +238,7 @@ $.formatAmount = function (num) {
     if (num) {
         return num.toFixed(2)
     }
-    return '--'
+    return 0
 }
 
 /**
