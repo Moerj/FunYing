@@ -44,7 +44,7 @@
                 console.log('详情数据：', res);
 
                 // 文章详情 系统消息
-                if (res.STATUS == 1 || res.status == 1) {
+                if (res.STATUS == 1) {
                     render(res);
                     return;
                 }
