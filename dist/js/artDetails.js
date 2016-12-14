@@ -1,49 +1,61 @@
-"use strict";
+'use strict';
 
 // 文章详情
 
 {
     (function () {
         var render = function render(res) {
-            var data = res.ARTICLE;
-            // console.log(data);
-
+            var data = res.ARTICLE || res.DATA;
 
             $('.text').append(data.context);
             $('.time').text(data.updateTime);
             $('.Title').text(data.title);
 
-            // 加载二维码
-            $('#qrcode').attr('src', data.QR_CODE);
+            if (qs.articleId) {
+                // 加载二维码
+                $('#qrcode').attr('src', data.QR_CODE);
 
-            // 判断是否会员，然后隐藏二维码
-            if (res.IS_SUBSCRIBE == 1 && $.openId) {
-                $('#SUBSCRIBE').hide();
+                // 判断是否会员，然后隐藏二维码
+                if (res.IS_SUBSCRIBE != 1) {
+                    $('#SUBSCRIBE').init();
+                }
             }
         };
 
         $.showPreloader();
 
+        var qs = {
+            id: $.GetQueryString('id'),
+            articleId: $.GetQueryString('articleId'),
+            articleUrl: 'http://wechat.94joy.com/wx/rest/index/getArticle',
+            messageUrl: 'http://wechat.94joy.com/wx/rest/user/systemMsgDetail'
+
+        };
+
         $.ajax({
-            type: "get",
-            url: "http://wechat.94joy.com/wx/rest/index/getArticle",
+            url: qs.id ? qs.messageUrl : qs.articleUrl,
             data: {
-                articleId: $.GetQueryString('articleId'),
+                id: qs.id,
+                articleId: qs.articleId,
                 openId: $.openId,
                 oldOpenId: $.GetQueryString('oldOpenId')
             },
             success: function success(res) {
-                console.log('文章详情数据：', res);
-                if (res.STATUS == 1) {
+                console.log('详情数据：', res);
+
+                // 文章详情 系统消息
+                if (res.STATUS == 1 || res.status == 1) {
                     render(res);
-                } else {
-                    $.alert('文章详情不存在！', function () {
-                        $.router.back();
-                    });
+                    return;
                 }
+
+                // 没有数据
+                $.alert('文章详情不存在！', function () {
+                    $.router.back();
+                });
             },
             error: function error(e) {
-                var str = "文章详情获取失败，稍后再试！";
+                var str = '文章详情获取失败，稍后再试！';
                 console.log(str, e);
                 $.alert(str, function () {
                     $.router.back();

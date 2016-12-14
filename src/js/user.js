@@ -285,7 +285,7 @@ setTimeout(function () {
                     if (d) {
                         html += `
                         <li class="messageList">
-                            <a href=${$.getArtDetails(d.id)} class="message external">
+                            <a href=${`./articleDetails.html?id=${d.id}&oldOpenId=${$.openId}`} class="message external">
                                 <p class="Title">
                                     <span class="name">${d.title?d.title:''}</span>
                                     <span class="day">${d.addTime}</span>

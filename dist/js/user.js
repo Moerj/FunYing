@@ -260,7 +260,7 @@ setTimeout(function () {
                 for (var i = 0; i < data.length; i++) {
                     var d = data[i];
                     if (d) {
-                        html += '\n                        <li class="messageList">\n                            <a href=' + $.getArtDetails(d.id) + ' class="message external">\n                                <p class="Title">\n                                    <span class="name">' + (d.title ? d.title : '') + '</span>\n                                    <span class="day">' + d.addTime + '</span>\n                                </p>\n                                <p class="details">' + d.context + '</p>\n                                <span class="delete" msgId=' + d.id + '></span>\n                            </a>\n                        </li>\n                        ';
+                        html += '\n                        <li class="messageList">\n                            <a href=' + ('./articleDetails.html?id=' + d.id + '&oldOpenId=' + $.openId) + ' class="message external">\n                                <p class="Title">\n                                    <span class="name">' + (d.title ? d.title : '') + '</span>\n                                    <span class="day">' + d.addTime + '</span>\n                                </p>\n                                <p class="details">' + d.context + '</p>\n                                <span class="delete" msgId=' + d.id + '></span>\n                            </a>\n                        </li>\n                        ';
                     }
                 }
                 return html;
