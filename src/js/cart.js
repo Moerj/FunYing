@@ -53,7 +53,7 @@ setTimeout(() => {
             })
 
             $.ajax({
-                url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
+                url: 'http://www.funying.cn/wx/rest/user/myMovie',
                 data: newData,
                 cache: false,
                 success: (res) => {
@@ -88,7 +88,7 @@ setTimeout(() => {
             let movieId = $($deleteBtn[i]).attr('movieId')
             console.log('deleteId:' + movieId);
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/delMyMovie",
+                url: "http://www.funying.cn/wx/rest/user/delMyMovie",
                 data: {
                     openId: $.openId,
                     movieId: movieId

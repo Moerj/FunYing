@@ -88,7 +88,7 @@ setTimeout(function () {
 
             ajax: (data, callback) => {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/pay/detail',
+                    url: 'http://www.funying.cn/wx/rest/pay/detail',
                     data: data,
                     success: (res) => {
                         console.log('收益明细：', res);
@@ -180,7 +180,7 @@ setTimeout(function () {
                     type: type
                 })
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/pay/twitterDetail',
+                    url: 'http://www.funying.cn/wx/rest/pay/twitterDetail',
                     data: data,
                     success: (res) => {
                         console.log(type + '级推客：', res);

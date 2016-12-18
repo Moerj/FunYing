@@ -240,7 +240,7 @@ $(document).on('click', '.getMovie', function () {
     var movieId = $this.attr('movieId');
     $.ajax({
         type: "get",
-        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
+        url: "http://www.funying.cn/wx/rest/index/getMovie",
         data: {
             movieId: movieId
         },
@@ -343,7 +343,7 @@ $.payment = function (OPTS) {
     function _payByRecharge() {
         $.showPreloader('购买中，稍等...');
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/pay/payByRecharge",
+            url: "http://www.funying.cn/wx/rest/pay/payByRecharge",
             data: {
                 openId: $.openId,
                 movieId: OPTS.productId
@@ -398,7 +398,7 @@ $.wxPay = function (payOption, payCallback) {
 
     $.showIndicator();
     $.ajax({
-        url: "http://wechat.94joy.com/movie/rest/pay/toPay",
+        url: "http://www.funying.cn/movie/rest/pay/toPay",
         data: data,
         success: function success(res) {
             console.log('统一下单接口：', res);

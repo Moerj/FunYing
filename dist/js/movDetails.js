@@ -28,7 +28,7 @@ setTimeout(function () {
         }
 
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/index/addMovie",
+            url: "http://www.funying.cn/wx/rest/index/addMovie",
             data: {
                 openId: $.openId,
                 movieId: movieId
@@ -194,7 +194,7 @@ setTimeout(function () {
 
     // 初始请求数据
     $.ajax({
-        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
+        url: "http://www.funying.cn/wx/rest/index/getMovie",
         // cache:false,
         data: {
             movieId: movieId,
@@ -239,7 +239,7 @@ setTimeout(function () {
         $this.prop('disabled', true);
 
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/index/feedback",
+            url: "http://www.funying.cn/wx/rest/index/feedback",
             data: {
                 context: $('#feedbackContext').val(),
                 movieId: movieId

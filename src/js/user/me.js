@@ -9,7 +9,7 @@
     // 我的页面数据
     $.page_me_reload = function () {
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/user/index",
+            url: "http://www.funying.cn/wx/rest/user/index",
             data: {
                 openId: $.openId
             },
@@ -101,7 +101,7 @@
         // 将ftp返回的图片传给后台进行录入更新
         function _updateImg(imgUrl) {
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/updateImg",
+                url: "http://www.funying.cn/wx/rest/user/updateImg",
                 data: {
                     openId: $.openId,
                     img: imgUrl
@@ -154,7 +154,7 @@
                         console.log('上传结果：', data);
                         if (data[0].result) {
                             $headimg.attr('src', localImgSrc); //更新新头像
-                            _updateImg('http://wechat.94joy.com/img' + data[0].result)
+                            _updateImg('http://www.funying.cn/img' + data[0].result)
                         }
                     },
                     error: () => {

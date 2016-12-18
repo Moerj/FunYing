@@ -52,7 +52,7 @@ $(document).on('click', '.getMovie', function () {
     let movieId = $this.attr('movieId')
     $.ajax({
         type: "get",
-        url: "http://wechat.94joy.com/wx/rest/index/getMovie",
+        url: "http://www.funying.cn/wx/rest/index/getMovie",
         data: {
             movieId: movieId
         },

@@ -1,6 +1,6 @@
 # 微信影视
 
-http://wechat.94joy.com/html/index.html
+http://www.funying.cn/html/index.html
   
   
 ## 运行依赖

@@ -1,7 +1,7 @@
 $('#feedbackSubmit').click(function () {
 
     $.ajax({
-        url: "http://wechat.94joy.com/wx/rest/user/addFeedBack",
+        url: "http://www.funying.cn/wx/rest/user/addFeedBack",
         data: {
             openId: $.openId,
             content: $('#feedbackText').val()

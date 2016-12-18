@@ -27,8 +27,8 @@
         var qs = {
             id: $.GetQueryString('id'),
             articleId: $.GetQueryString('articleId'),
-            articleUrl: 'http://wechat.94joy.com/wx/rest/index/getArticle',
-            messageUrl: 'http://wechat.94joy.com/wx/rest/user/systemMsgDetail'
+            articleUrl: 'http://www.funying.cn/wx/rest/index/getArticle',
+            messageUrl: 'http://www.funying.cn/wx/rest/user/systemMsgDetail'
 
         };
 

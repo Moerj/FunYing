@@ -46,7 +46,7 @@
 $('#feedbackSubmit').click(function () {
 
     $.ajax({
-        url: "http://wechat.94joy.com/wx/rest/user/addFeedBack",
+        url: "http://www.funying.cn/wx/rest/user/addFeedBack",
         data: {
             openId: $.openId,
             content: $('#feedbackText').val()
@@ -120,7 +120,7 @@ $('#feedbackSubmit').click(function () {
         // 我的页面数据
         $.page_me_reload = function () {
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/index",
+                url: "http://www.funying.cn/wx/rest/user/index",
                 data: {
                     openId: $.openId
                 },
@@ -169,7 +169,7 @@ $('#feedbackSubmit').click(function () {
             // 将ftp返回的图片传给后台进行录入更新
             function _updateImg(imgUrl) {
                 $.ajax({
-                    url: "http://wechat.94joy.com/wx/rest/user/updateImg",
+                    url: "http://www.funying.cn/wx/rest/user/updateImg",
                     data: {
                         openId: $.openId,
                         img: imgUrl
@@ -221,7 +221,7 @@ $('#feedbackSubmit').click(function () {
                         console.log('上传结果：', data);
                         if (data[0].result) {
                             $headimg.attr('src', localImgSrc); //更新新头像
-                            _updateImg('http://wechat.94joy.com/img' + data[0].result);
+                            _updateImg('http://www.funying.cn/img' + data[0].result);
                         }
                     },
                     error: function error() {
@@ -268,7 +268,7 @@ setTimeout(function () {
 
             ajax: function ajax(data, callback) {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
+                    url: 'http://www.funying.cn/wx/rest/user/systemMsg',
                     data: data,
                     success: function success(res) {
                         console.log('系统消息：', res);
@@ -302,7 +302,7 @@ setTimeout(function () {
             showEmpty();
 
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/delSystemMsg",
+                url: "http://www.funying.cn/wx/rest/user/delSystemMsg",
                 data: {
                     openId: $.openId,
                     msgId: msgId
@@ -356,7 +356,7 @@ setTimeout(function () {
 
             ajax: function ajax(data, callback) {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
+                    url: 'http://www.funying.cn/wx/rest/user/myMovie',
                     data: {
                         openId: $.openId,
                         state: 1 //我的影片
@@ -465,7 +465,7 @@ setTimeout(function () {
 
             ajax: function ajax(data, callback) {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/pay/detail',
+                    url: 'http://www.funying.cn/wx/rest/pay/detail',
                     data: data,
                     success: function success(res) {
                         console.log('收益明细：', res);
@@ -544,7 +544,7 @@ setTimeout(function () {
                     type: type
                 });
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/pay/twitterDetail',
+                    url: 'http://www.funying.cn/wx/rest/pay/twitterDetail',
                     data: data,
                     success: function success(res) {
                         console.log(type + '级推客：', res);
@@ -601,7 +601,7 @@ setTimeout(function () {
             console.log($withdrawInput.val());
             $.showIndicator();
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/pay/cash",
+                url: "http://www.funying.cn/wx/rest/pay/cash",
                 data: {
                     openId: $.openId,
                     price: $withdrawInput.val()

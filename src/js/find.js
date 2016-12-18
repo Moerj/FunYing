@@ -39,7 +39,7 @@ setTimeout(function () {
             })
 
             $.ajax({
-                url: 'http://wechat.94joy.com/wx/rest/find/all',
+                url: 'http://www.funying.cn/wx/rest/find/all',
                 data: data,
                 success: function (res) {
                     console.log('发现', res);

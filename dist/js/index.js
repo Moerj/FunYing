@@ -12,7 +12,7 @@ setTimeout(function () {
     $.ajax({
         type: "get",
         dataType: "json",
-        url: "http://wechat.94joy.com/wx/rest/index/index",
+        url: "http://www.funying.cn/wx/rest/index/index",
         success: function success(res) {
             console.log('首页数据', res);
 
@@ -103,7 +103,7 @@ setTimeout(function () {
         $.showPreloader();
         var type = rankContainer.index(contaier) + 1;
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/index/ranking",
+            url: "http://www.funying.cn/wx/rest/index/ranking",
             data: {
                 type: type
             },
@@ -145,7 +145,7 @@ setTimeout(function () {
         var $ul = $('.search-list ul');
         $.showPreloader();
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/index/search",
+            url: "http://www.funying.cn/wx/rest/index/search",
             data: {
                 searchName: searchName
             },

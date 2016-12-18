@@ -37,7 +37,7 @@ setTimeout(function () {
 
             ajax: (data, callback) => {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/user/systemMsg',
+                    url: 'http://www.funying.cn/wx/rest/user/systemMsg',
                     data: data,
                     success: (res) => {
                         console.log('系统消息：', res);
@@ -71,7 +71,7 @@ setTimeout(function () {
             showEmpty()
 
             $.ajax({
-                url: "http://wechat.94joy.com/wx/rest/user/delSystemMsg",
+                url: "http://www.funying.cn/wx/rest/user/delSystemMsg",
                 data: {
                     openId: $.openId,
                     msgId: msgId

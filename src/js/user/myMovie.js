@@ -38,7 +38,7 @@ setTimeout(function() {
 
             ajax: (data, callback) => {
                 $.ajax({
-                    url: 'http://wechat.94joy.com/wx/rest/user/myMovie',
+                    url: 'http://www.funying.cn/wx/rest/user/myMovie',
                     data: {
                         openId: $.openId,
                         state: 1 //我的影片

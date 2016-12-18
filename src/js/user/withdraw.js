@@ -8,7 +8,7 @@
         console.log($withdrawInput.val());
         $.showIndicator()
         $.ajax({
-            url: "http://wechat.94joy.com/wx/rest/pay/cash",
+            url: "http://www.funying.cn/wx/rest/pay/cash",
             data: {
                 openId: $.openId,
                 price: $withdrawInput.val()

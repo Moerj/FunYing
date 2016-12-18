@@ -8,7 +8,7 @@ if (!location.search) {
 
 // 我的二维码
 $.ajax({
-    url: "http://wechat.94joy.com/wx/rest/user/getQrcode",
+    url: "http://www.funying.cn/wx/rest/user/getQrcode",
     data: {
         openId: $.openId
     },
@@ -26,7 +26,7 @@ $.ajax({
 
 // 头像
 $.ajax({
-    url: "http://wechat.94joy.com/wx/rest/user/index",
+    url: "http://www.funying.cn/wx/rest/user/index",
     data: {
         openId: $.openId
     },
