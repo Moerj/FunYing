@@ -16,7 +16,7 @@ setTimeout(function(){
                 html += `
                 <a href="${$.getMovDetails(d.id)}" class="find-list external">
                     <div class="imgbox">
-                        <img src="${d.stills}" alt="">
+                        <img src="${d.poster}" alt="">
                         <div class="status">${$.getUpdateStatus(d.updateStatus)}</div>
                     </div>
                     <p class="name">${d.title}</p>

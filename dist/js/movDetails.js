@@ -103,7 +103,7 @@ setTimeout(function () {
             var $dom = $('#' + key);
             if ($dom.length) {
                 if ($dom[0].localName == 'img') {
-                    $dom.attr('src', mov.poster);
+                    $dom.attr('src', mov.stills);
                 } else {
                     $dom.html(mov[key]);
                 }

@@ -66,7 +66,7 @@ setTimeout(function () {
             <li>
             <a href="${$.getMovDetails(mov.id)}" class="external">
                 <div class="imgbox">
-                    <img src="${mov.stills}" />
+                    <img src="${mov.poster}" />
                     <p class="name">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</p>
                 </div>
                 <p class="text">${mov.introduction}</p>
@@ -97,7 +97,7 @@ setTimeout(function () {
             <li>
                 <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                     <div class="imgbox">
-                        <img src="${mov.stills}" alt="">
+                        <img src="${mov.poster}" alt="">
                     </div>
                     <div class="info">
                         <span class="t"><span class="index">0${i+1}</span>${mov.title}</span>
@@ -126,7 +126,7 @@ setTimeout(function () {
                 <li>
                     <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                         <div class="imgbox">
-                            <img src="${mov.stills}" >
+                            <img src="${mov.poster}" >
                         </div>
                         <div class="info">
                             <span class="t"><span class="index">${i+1}</span>${mov.title}</span>
