@@ -425,17 +425,14 @@ setTimeout(function() {
                         if (res.DATA.length) {
                             callback(res.DATA)
                         } else {
+                            $contanier.hide()
                             console.log('我的影片没有数据');
                         }
+
                     },
                     error: (e) => {
                         console.warn('我的影片加载失败', e);
                         $.alert('加载失败，请稍后再试！')
-                    },
-                    complete: () => {
-                        if ($contanier.find('.box').length == 0) {
-                            $contanier.hide()
-                        }
                     }
                 });
             }
