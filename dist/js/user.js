@@ -158,7 +158,7 @@ $('#feedbackSubmit').click(function () {
                         //个人中心用户头像
                         $('.headpic').init(data.headerImg || '../images/icon/user.png');
                     } else {
-                        $.alert('用户信息读取失败');
+                        $.alert(res.MSG);
                     }
                 }
             });

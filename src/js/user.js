@@ -131,7 +131,7 @@ $('#feedbackSubmit').click(function () {
                     $('.headpic').init(data.headerImg || '../images/icon/user.png')
 
                 } else {
-                    $.alert('用户信息读取失败')
+                    $.alert(res.MSG)
                 }
             }
         });
