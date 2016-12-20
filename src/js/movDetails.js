@@ -59,7 +59,7 @@ setTimeout(function () {
         const series = data.MOVIE_SERIES //当前电影选集数据
 
         // 页面标题
-        // $('title').text(data.MOVIE.title)
+        $('title').text(data.MOVIE.title)
 
         // 加载二维码
         $('#qrcode').attr('src', data.QR_CODE)
