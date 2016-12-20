@@ -7,6 +7,8 @@
         var render = function render(res) {
             var data = res.ARTICLE || res.DATA;
 
+            $('title').text(data.title);
+
             $('.text').append(data.context);
             $('.time').text(data.updateTime);
             $('.Title').text(data.title);

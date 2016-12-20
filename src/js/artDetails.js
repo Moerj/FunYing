@@ -49,6 +49,8 @@
     function render(res) {
         const data = res.ARTICLE || res.DATA
 
+        $('title').text(data.title)
+        
         $('.text').append(data.context)
         $('.time').text(data.updateTime)
         $('.Title').text(data.title)
