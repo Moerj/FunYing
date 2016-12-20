@@ -13,7 +13,7 @@ setTimeout(function () {
         dataType: "json",
         url: "http://www.funying.cn/wx/rest/index/index",
         success: (res) => {
-            console.log('首页数据',res);
+            console.log('首页数据', res);
 
             initBanner(res.headerRes)
             initBest(res.bestMovies)
@@ -39,7 +39,7 @@ setTimeout(function () {
         })
         $('#banner a').each((i, a) => {
             let $a = $(a)
-            $a.attr('href', res[i].url)
+            $a.attr('href', $.getArtDetails(res[i].url))
         })
 
         // 初始化 swiper组件
@@ -81,7 +81,7 @@ setTimeout(function () {
     function initMain(res) {
         $('.recommended-2 a').each((i, el) => {
             let $el = $(el)
-            $el.attr('href', $.getArtDetails(res[i].resUrl) )
+            $el.attr('href', $.getArtDetails(res[i].resUrl))
             $el.find('img').attr('src', res[i].pictrueUrl)
             $el.find('.titleInfo').text(res[i].title)
             $el.find('.content-text').text(res[i].introduction)
@@ -271,7 +271,7 @@ setTimeout(function () {
 
     // 点击记录首页顶部tab
     const $tablist = $('#tablist a')
-    $tablist.click(function(){
+    $tablist.click(function () {
         let index = $(this).index()
         sessionStorage.indexTab = index
     })
@@ -281,4 +281,4 @@ setTimeout(function () {
 
 
 
-},100);
+}, 100);

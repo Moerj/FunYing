@@ -39,7 +39,7 @@ setTimeout(function () {
         });
         $('#banner a').each(function (i, a) {
             var $a = $(a);
-            $a.attr('href', res[i].url);
+            $a.attr('href', $.getArtDetails(res[i].url));
         });
 
         // 初始化 swiper组件
