@@ -27,7 +27,7 @@
             $.shareConfig(function (res) {
                 console.log('分享配置', res);
                 wx.config({
-                    debug: true,
+                    // debug: true,
                     appId: res.appId, // 必填，公众号的唯一标识
                     timestamp: res.timestamp, // 必填，生成签名的时间戳
                     nonceStr: res.noncestr, // 必填，生成签名的随机串
