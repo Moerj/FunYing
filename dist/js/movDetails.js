@@ -204,11 +204,13 @@ setTimeout(function () {
             });
             wx.ready(function () {
                 wx.onMenuShareTimeline({ //分享到朋友圈
-                    title: mov.title
+                    title: mov.title,
+                    imgUrl: mov.stills
                 });
                 wx.onMenuShareAppMessage({ //分享给朋友
                     title: mov.title,
-                    desc: mov.star
+                    desc: mov.star,
+                    imgUrl: mov.stills
                 });
             });
         });
