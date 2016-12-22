@@ -234,7 +234,7 @@ $(document).on('click', '.getMovie', function () {
 // dom加载ajax数据
 $.fn.init = function (data) {
 
-    if (data!=null) {
+    if (data != null) {
         for (let i = 0; i < this.length; i++) {
             let thisJq = $(this[i])
                 // console.log(thisJq);
@@ -355,22 +355,25 @@ $.payment = function (OPTS) {
     }
 
     var buttons = [{
-        text: '账户余额支付',
-        onClick: function () {
-            _payByRecharge()
+            text: '账户余额支付',
+            onClick: function () {
+                _payByRecharge()
+            }
         }
-    }/*, {
-        text: '微信支付',
-        onClick: function () {
-            OPTS.wxPay.productId = OPTS.productId
-            $.wxPay(OPTS.wxPay, () => {
-                OPTS.success();
-            })
+        /*, {
+                text: '微信支付',
+                onClick: function () {
+                    OPTS.wxPay.productId = OPTS.productId
+                    $.wxPay(OPTS.wxPay, () => {
+                        OPTS.success();
+                    })
 
+                }
+            }*/
+        , {
+            text: '取消'
         }
-    }*/, {
-        text: '取消'
-    }];
+    ];
     $.actions(buttons);
 }
 
@@ -483,4 +486,16 @@ $.getUpdateStatus = function (updateStatus, updateSite) {
     } else {
         return `已完结`
     }
+}
+
+$.shareConfig = function (callback) {
+    $.ajax({
+        url: "http://www.funying.cn/wx/rest/pay/getSignConf",
+        data: {
+            url: location.href.split('#')[0]
+        },
+        success: function (res) {
+            callback(res)
+        }
+    });
 }

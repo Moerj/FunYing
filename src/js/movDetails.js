@@ -6,7 +6,7 @@ setTimeout(function () {
     const $feedback = $('#detail-tab3'); //反馈快捷标签
     const $feedbackContext = $('#feedbackContext') //反馈的内容
     const $feedbackSubmit = $('#feedbackSubmit') //反馈提交按钮
-    const $tabs = $('.tabs')//tab区域
+    const $tabs = $('.tabs') //tab区域
 
     // 开启loading效果
     $.showPreloader();
@@ -75,10 +75,10 @@ setTimeout(function () {
         // 二维码隐藏
         if (data.IS_SUBSCRIBE == 1) {
             $('#qrcodeBox').remove() //二维码
-        } 
-        
+        }
+
         // 是否显示我要报错
-        if(data.IS_SUBSCRIBE == 1 && data.IS_BUY == 1) {
+        if (data.IS_SUBSCRIBE == 1 && data.IS_BUY == 1) {
             $('.tab-link').last().init() //我要报错标签页
         }
 
@@ -96,7 +96,7 @@ setTimeout(function () {
         }
 
         // 更新状态
-        $('#getUpdateStatus').init($.getUpdateStatus(mov.updateStatus,mov.updateSite))
+        $('#getUpdateStatus').init($.getUpdateStatus(mov.updateStatus, mov.updateSite))
 
         // 解构绑定后台数据
         for (let key in mov) {
@@ -193,6 +193,32 @@ setTimeout(function () {
             })
 
             $.actions(buttons);
+        })
+
+
+        // 分享配置
+        $.shareConfig((res) => {
+            console.log('分享配置',res);
+            wx.config({
+                // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                appId: res.appId, // 必填，公众号的唯一标识
+                timestamp: res.timestamp, // 必填，生成签名的时间戳
+                nonceStr: res.noncestr, // 必填，生成签名的随机串
+                signature: res.signature, // 必填，签名，见附录1
+                jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+            });
+            wx.ready(function () {
+                wx.onMenuShareTimeline({ //分享到朋友圈
+                    title: mov.title,
+                    imgUrl:  mov.poster
+                });
+                wx.onMenuShareAppMessage({ //分享给朋友
+                    title: mov.title,
+                    desc: mov.star,
+                    imgUrl: mov.poster
+                });
+
+            });
         })
     }
 

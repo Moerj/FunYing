@@ -22,6 +22,28 @@
                     $('#SUBSCRIBE').init();
                 }
             }
+
+            // 分享配置
+            $.shareConfig(function (res) {
+                console.log('分享配置', res);
+                wx.config({
+                    debug: true,
+                    appId: res.appId, // 必填，公众号的唯一标识
+                    timestamp: res.timestamp, // 必填，生成签名的时间戳
+                    nonceStr: res.noncestr, // 必填，生成签名的随机串
+                    signature: res.signature, // 必填，签名，见附录1
+                    jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
+                });
+                wx.ready(function () {
+                    wx.onMenuShareTimeline({ //分享到朋友圈
+                        title: data.title
+                    });
+                    wx.onMenuShareAppMessage({ //分享给朋友
+                        title: data.title,
+                        desc: data.context
+                    });
+                });
+            });
         };
 
         $.showPreloader();
