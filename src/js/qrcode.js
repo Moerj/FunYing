@@ -11,13 +11,21 @@ $.ajax({
         openId: $.openId
     },
     success: function (res) {
-        // console.log(res);
-        $('#myqrcode')
-            .click(function () {
-                // 二维码点击放大
-                $(this).toggleClass('qrcodeBig')
-            })
-            .init(res.code)
+        console.log('二维码', res);
+
+        let $codeImg = $('#myqrcode')
+
+        if (res.STATUS == 1) {
+            $codeImg.click(function () {
+                    // 二维码点击放大
+                    $(this).toggleClass('qrcodeBig')
+                })
+                .init(res.code)
+            $codeImg.after('b').hide()
+        } else if (res.STATUS == 2) {
+            $codeImg.after(`<b>${res.MSG}</b>`)
+        }
+
     },
     error: function (e) {
         console.error('我的二维码加载失败', e);

@@ -240,6 +240,7 @@
                 margin: 0;
                 padding: 4px;
                 @include name-background;
+                @include text-clamp($clamp:1);
             }
             img {
                 width: 100%;
