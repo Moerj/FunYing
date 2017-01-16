@@ -79,12 +79,26 @@ setTimeout(function () {
 
     // 加载主打推荐 - 跳转文章详情
     function initMain(res) {
-        $('.recommended-2 a').each((i, el) => {
-            let $el = $(el)
-            $el.attr('href', $.getArtDetails(res[i].resUrl))
-            $el.find('img').attr('src', res[i].pictrueUrl)
-            $el.find('.titleInfo').text(res[i].title)
-            $el.find('.content-text').text(res[i].introduction)
+        let $first = $('.recommended-2 .box1')
+        let $other = $('.recommended-2 .box2 a')
+        let otherData = []
+
+        for (let i = 0; i < res.length; i++) {
+            if (res[i].type == 1) {
+                $first.attr('href', $.getArtDetails(res[i].resUrl))
+                $first.find('img').attr('src', res[i].pictrueUrl)
+                $first.find('.titleInfo').text(res[i].title)
+                $first.find('.content-text').text(res[i].introduction)
+            } else {
+                otherData.push(res[i])
+            }
+        }
+
+        $other.each((i,el) => {
+            el.href = $.getArtDetails(otherData[i].resUrl)
+            el.querySelector('img').src = otherData[i].pictrueUrl
+            el.querySelector('.titleInfo').innerHTML = otherData[i].title
+            el.querySelector('.content-text').innerHTML = otherData[i].introduction
         })
     }
 
@@ -239,7 +253,7 @@ setTimeout(function () {
     $(document).on('click', '.search', function (e) {
         e.stopPropagation();
         let $this = $(this)
-            // 搜索框的展开和收起
+        // 搜索框的展开和收起
         if ($this.hasClass('search-open')) {
             $('.search-tools').toggleClass('search-show');
         }
