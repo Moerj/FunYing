@@ -21,7 +21,6 @@ $.ajax({
                     $(this).toggleClass('qrcodeBig')
                 })
                 .init(res.code)
-            $codeImg.after('b').hide()
         } else if (res.STATUS == 2) {
             $codeImg.after(`<b>${res.MSG}</b>`)
         }
