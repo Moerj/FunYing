@@ -102,8 +102,12 @@ setTimeout(function () {
         for (let key in mov) {
             let $dom = $('#' + key)
             if ($dom.length) {
-                if ($dom[0].localName == 'img') {
-                    $dom.attr('src', mov.stills)
+                if ($dom.attr('id') == 'stills') {
+                    // $dom.attr('src', mov.stills)
+                    $dom.css({
+                        background: `url(\"${mov.stills}\")`,
+                        bacckgoundSize: 'cover'
+                    })
                 } else {
                     $dom.html(mov[key])
                 }
@@ -198,7 +202,7 @@ setTimeout(function () {
 
         // 分享配置
         $.shareConfig((res) => {
-            console.log('分享配置',res);
+            console.log('分享配置', res);
             wx.config({
                 // debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                 appId: res.appId, // 必填，公众号的唯一标识
@@ -210,7 +214,7 @@ setTimeout(function () {
             wx.ready(function () {
                 wx.onMenuShareTimeline({ //分享到朋友圈
                     title: mov.title,
-                    imgUrl:  mov.stills
+                    imgUrl: mov.stills
                 });
                 wx.onMenuShareAppMessage({ //分享给朋友
                     title: mov.title,
