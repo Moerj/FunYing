@@ -48,7 +48,7 @@ li {
     list-style: none;
 }
 
-img{
+img {
     pointer-events: none;
 }
 
@@ -283,4 +283,9 @@ input[type=button] {
         width: 24px;
         opacity: 1;
     }
+}
+
+// tab
+.tab-link {
+    background-color: white;
 }

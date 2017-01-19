@@ -208,3 +208,6 @@ input[type=button] {
 .swiper-container .swiper-pagination-bullet-active {
   width: 24px;
   opacity: 1; }
+
+.tab-link {
+  background-color: white; }

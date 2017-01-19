@@ -239,6 +239,7 @@
                 font-size: .6rem;
                 margin: 0;
                 padding: 4px;
+                padding-bottom: 0;
                 @include name-background;
                 @include text-clamp($clamp:1);
             }
