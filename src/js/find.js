@@ -3,9 +3,9 @@ setTimeout(function () {
 
 
     // 筛选参数，页面独有
-    let sort = 1 //排序 1.更新时间 2.人气排行
-    let first_type = null //地区 直接传中文字符，'全部'传空
-    let type = null //电影类型，同地区
+    sessionStorage.sort = sessionStorage.sort || 1 //排序 1.更新时间 2.人气排行
+    sessionStorage.first_type = sessionStorage.first_type || '' //地区 直接传中文字符，'全部'传空
+    sessionStorage.type = sessionStorage.type || '' //电影类型，同地区
 
     let loader = new ScrollLoad({
 
@@ -31,11 +31,12 @@ setTimeout(function () {
         },
 
         ajax: (data, callback) => {
+
             // 合并入筛选参数
             data = $.extend({}, data, {
-                sort: sort,
-                first_type: first_type,
-                type: type
+                sort: Number(sessionStorage.sort),
+                first_type: sessionStorage.first_type,
+                type: sessionStorage.type
             })
 
             $.ajax({
@@ -78,7 +79,7 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(sortIndex)
-            sort = picker.value[0] == '更新时间' ? 1 : 2
+            sessionStorage.sort = picker.value[0] == '更新时间' ? 1 : 2
             loader.reload()
 
             // 设置文本
@@ -100,7 +101,7 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(areaIndex)
-            first_type = picker.value[0] == '全部' ? null : picker.value[0]
+            sessionStorage.first_type = picker.value[0] == '全部' ? '' : picker.value[0]
             loader.reload()
 
             // 设置文本
@@ -108,6 +109,9 @@ setTimeout(function () {
             $selectSwitch.eq(areaIndex).find('b').text(value)
         }
     });
+    if (sessionStorage.first_type !== '') {
+        $selectSwitch.eq(areaIndex).find('b').text(sessionStorage.first_type) //当前筛选条件
+    }
 
     // fun类
     const typeIndex = 2
@@ -124,14 +128,18 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(typeIndex)
-            type = picker.value[0] == '全部' ? null : picker.value[0]
+            sessionStorage.type = picker.value[0] == '全部' ? '' : picker.value[0]
             loader.reload()
 
             // 设置文本
             let value = picker.value == '全部' ? 'fun类' : picker.value
             $selectSwitch.eq(typeIndex).find('b').text(value)
         }
-    });
+    })
+    if (sessionStorage.type !== '') {
+        $selectSwitch.eq(typeIndex).find('b').text(sessionStorage.type) //当前筛选条件
+    }
+
 
     // 选中筛选内容，并收起筛选器
     $(document).on('click', '.picker-item', function () {
