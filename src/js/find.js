@@ -3,9 +3,9 @@ setTimeout(function () {
 
 
     // 筛选参数，页面独有
-    sessionStorage.sort = sessionStorage.sort || 1 //排序 1.更新时间 2.人气排行
-    sessionStorage.first_type = sessionStorage.first_type || '' //地区 直接传中文字符，'全部'传空
-    sessionStorage.type = sessionStorage.type || '' //电影类型，同地区
+    localStorage.sort = localStorage.sort || 1 //排序 1.更新时间 2.人气排行
+    localStorage.first_type = localStorage.first_type || '' //地区 直接传中文字符，'全部'传空
+    localStorage.type = localStorage.type || '' //电影类型，同地区
 
     let loader = new ScrollLoad({
 
@@ -34,9 +34,9 @@ setTimeout(function () {
 
             // 合并入筛选参数
             data = $.extend({}, data, {
-                sort: Number(sessionStorage.sort),
-                first_type: sessionStorage.first_type,
-                type: sessionStorage.type
+                sort: Number(localStorage.sort),
+                first_type: localStorage.first_type,
+                type: localStorage.type
             })
 
             $.ajax({
@@ -83,7 +83,7 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(sortIndex)
-            sessionStorage.sort = picker.value[0] == '更新时间' ? 1 : 2
+            localStorage.sort = picker.value[0] == '更新时间' ? 1 : 2
             loader.reload()
 
             // 设置文本
@@ -105,7 +105,7 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(areaIndex)
-            sessionStorage.first_type = picker.value[0] == '全部' ? '' : picker.value[0]
+            localStorage.first_type = picker.value[0] == '全部' ? '' : picker.value[0]
             loader.reload()
 
             // 设置文本
@@ -113,8 +113,8 @@ setTimeout(function () {
             setSelectName(areaIndex, value)
         }
     });
-    if (sessionStorage.first_type !== '') {
-        setSelectName(areaIndex, sessionStorage.first_type)
+    if (localStorage.first_type !== '') {
+        setSelectName(areaIndex, localStorage.first_type)
     }
 
     // fun类
@@ -132,7 +132,7 @@ setTimeout(function () {
         },
         onClose: (picker) => {
             toggleArrow(typeIndex)
-            sessionStorage.type = picker.value[0] == '全部' ? '' : picker.value[0]
+            localStorage.type = picker.value[0] == '全部' ? '' : picker.value[0]
             loader.reload()
 
             // 设置文本
@@ -140,8 +140,8 @@ setTimeout(function () {
             setSelectName(typeIndex, value)
         }
     })
-    if (sessionStorage.type !== '') {
-        setSelectName(typeIndex, sessionStorage.type)
+    if (localStorage.type !== '') {
+        setSelectName(typeIndex, localStorage.type)
     }
 
 
