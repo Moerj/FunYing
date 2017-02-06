@@ -66,6 +66,10 @@ setTimeout(function () {
         $selectSwitch.eq(eqIndex).find('.fa').toggleClass('isopen')
     }
 
+    function setSelectName(eqIndex, value) {
+        $selectSwitch.eq(eqIndex).find('b').text(value)
+    }
+
     // 排序
     const sortIndex = 0
     $selectSwitch.eq(sortIndex).picker({
@@ -84,7 +88,7 @@ setTimeout(function () {
 
             // 设置文本
             let value = picker.value
-            $selectSwitch.eq(sortIndex).find('b').text(value)
+            setSelectName(sortIndex, value)
         }
     });
 
@@ -106,11 +110,11 @@ setTimeout(function () {
 
             // 设置文本
             let value = picker.value == '全部' ? '类型' : picker.value
-            $selectSwitch.eq(areaIndex).find('b').text(value)
+            setSelectName(areaIndex, value)
         }
     });
     if (sessionStorage.first_type !== '') {
-        $selectSwitch.eq(areaIndex).find('b').text(sessionStorage.first_type) //当前筛选条件
+        setSelectName(areaIndex, sessionStorage.first_type)
     }
 
     // fun类
@@ -133,11 +137,11 @@ setTimeout(function () {
 
             // 设置文本
             let value = picker.value == '全部' ? 'fun类' : picker.value
-            $selectSwitch.eq(typeIndex).find('b').text(value)
+            setSelectName(typeIndex, value)
         }
     })
     if (sessionStorage.type !== '') {
-        $selectSwitch.eq(typeIndex).find('b').text(sessionStorage.type) //当前筛选条件
+        setSelectName(typeIndex, sessionStorage.type)
     }
 
 
