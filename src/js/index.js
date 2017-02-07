@@ -207,7 +207,7 @@ setTimeout(function () {
                 searchName: searchName
             },
             success: function (res) {
-                // console.log(res);
+                console.log('搜索数据：',res);
                 let listTpl = ``;
                 $ul.empty(); //先清空list
                 if (res.STATUS == 1) {
@@ -219,7 +219,7 @@ setTimeout(function () {
                             <li>
                                 <a class="external flexlist" href="${$.getMovDetails(mov.id)}">
                                     <div class="imgbox">
-                                        <img src="${mov.stills}" />
+                                        <img src="${mov.poster}" />
                                     </div>
                                     <div class="info">
                                         <span class="t"><span class="index">${index}</span>${mov.title}</span>
