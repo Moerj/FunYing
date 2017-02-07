@@ -15,7 +15,6 @@
   -ms-flex-pack: center;
       justify-content: center;
   -ms-flex-align: center;
-      -ms-grid-row-align: center;
       align-items: center; }
   .center-tab .tab-link {
     width: 68px !important;
@@ -157,7 +156,6 @@
         word-break: break-all;
         display: -webkit-box;
         -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
         overflow: hidden; }
 
 .recommended-2 .content-text {
@@ -179,7 +177,6 @@
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
     overflow: hidden; }
 
 .recommended-2 .box2 {
@@ -210,7 +207,6 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
       overflow: hidden; }
     .recommended-2 .box2 .imgbox img {
       width: 100%; }
@@ -221,7 +217,6 @@
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
     overflow: hidden;
     padding-top: .6rem; }
 
@@ -262,7 +257,6 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
       overflow: hidden; }
       .movlist .flexlist .info .t .index {
         color: #FF9800;
@@ -276,7 +270,6 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
       overflow: hidden;
       height: 2.7rem; }
     .movlist .flexlist .info .text2 {

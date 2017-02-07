@@ -21,8 +21,7 @@
     left: 0.6rem;
     z-index: 1; }
   .qrcode .backgroundImages {
-    -webkit-filter: blur(10px);
-            filter: blur(10px);
+    filter: blur(10px);
     background: url("../images/qrcodeBackground.png") no-repeat center;
     background-size: cover;
     z-index: 0;

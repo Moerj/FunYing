@@ -605,7 +605,6 @@
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
           overflow: hidden; }
           .myMovie .myMovieList .box .info .Title:after {
             content: '>';
@@ -625,7 +624,6 @@
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
           overflow: hidden; }
         .myMovie .myMovieList .box .info .text2 {
           border-bottom: 1px solid #ddd;
@@ -711,7 +709,6 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
       overflow: hidden; }
     .message-contanier .message .delete {
       position: absolute;

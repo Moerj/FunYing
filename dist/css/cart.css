@@ -139,7 +139,6 @@
         word-break: break-all;
         display: -webkit-box;
         -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
         overflow: hidden; }
       .list .listcontent .info .text {
         color: rgba(0, 0, 0, 0.54);
@@ -148,7 +147,6 @@
         word-break: break-all;
         display: -webkit-box;
         -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
         overflow: hidden; }
       .list .listcontent .info .site {
         color: #FF9800; }
