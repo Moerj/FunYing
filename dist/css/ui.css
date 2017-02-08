@@ -9,12 +9,15 @@ body {
     right: 0;
     background: rgba(0, 0, 0, 0.5);
     z-index: 99999;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: center;
-        justify-content: center;
-    -ms-flex-align: center;
-        align-items: center; }
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
     body .mask .msg {
       color: white;
       padding: .8rem;
@@ -101,12 +104,15 @@ a {
       z-index: 0;
       font-size: 0.7rem; }
     .headerTool .tool .button-group {
+      display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-      -ms-flex-align: center;
-          align-items: center;
+      -webkit-justify-content: space-between;
+          -ms-flex-pack: justify;
+              justify-content: space-between;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
       z-index: 1; }
       .headerTool .tool .button-group .btn {
         font-size: 0.9rem; }
@@ -156,6 +162,7 @@ input[type=button] {
     background: #ddd; }
 
 .checkbox {
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
   .checkbox input {
@@ -171,12 +178,15 @@ input[type=button] {
     height: 0.9rem;
     border-radius: 50%;
     border: 1px solid #ddd;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: center;
-        justify-content: center;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
     font: normal normal normal 14px/1 FontAwesome;
     font-size: inherit;
     text-rendering: auto;

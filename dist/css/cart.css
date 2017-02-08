@@ -8,12 +8,15 @@
   bottom: 0;
   right: 0;
   left: 0;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: center;
-      justify-content: center;
-  -ms-flex-align: center;
-      align-items: center; }
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .empty_cart:after {
     content: '';
     background: url("../images/empty_cart.png") no-repeat center;
@@ -25,12 +28,15 @@
   height: 2.2rem;
   background: white;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: end;
-      justify-content: flex-end;
-  -ms-flex-align: center;
-      align-items: center;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 0 0.6rem;
   font-size: 0.7rem;
   color: #FF9800;
@@ -50,12 +56,15 @@
   border: 1px #ddd solid;
   border-right: 0;
   border-left: 0;
+  display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -ms-flex-pack: justify;
-      justify-content: space-between;
-  -ms-flex-align: center;
-      align-items: center; }
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
   .tools .btn {
     height: 100%;
     width: 4rem;
@@ -68,14 +77,18 @@
       background: #F36C60;
       color: white; }
   .tools .selectAll {
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-align: center;
-        align-items: center;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
     padding-left: 0.4rem; }
     .tools .selectAll label {
       font-size: 0.7rem;
@@ -95,12 +108,15 @@
   background: #eee;
   overflow: auto; }
   .list > li > label {
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: start;
-        justify-content: flex-start;
-    -ms-flex-align: center;
-        align-items: center;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center;
     border-bottom: 1px #ddd solid;
     background: white;
     height: 7.2rem;
@@ -109,14 +125,18 @@
   .list .checkbox {
     margin: 0 0.4rem; }
   .list .listcontent {
-    -ms-flex-positive: 1;
-        flex-grow: 1;
+    -webkit-flex-grow: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-pack: justify;
-        justify-content: space-between;
-    -ms-flex-align: center;
-        align-items: center; }
+    -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
     .list .listcontent .imgbox {
       display: inline-block;
       width: 4rem;
@@ -127,8 +147,9 @@
     .list .listcontent .info {
       display: inline-block;
       width: 11.15rem;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+      -webkit-flex-grow: 1;
+          -ms-flex-positive: 1;
+              flex-grow: 1;
       font-size: 0.6rem;
       padding: 0 0.8rem; }
       .list .listcontent .info .Title {
@@ -166,6 +187,8 @@
       line-height: 7.2rem;
       transition: .3s;
       -webkit-transition: .3s;
-      transform: translate3d(100%, 0, 0); }
+      -webkit-transform: translate3d(100%, 0, 0);
+              transform: translate3d(100%, 0, 0); }
       .list .listcontent .delete.show {
-        transform: translate3d(0, 0, 0); }
+        -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0); }
