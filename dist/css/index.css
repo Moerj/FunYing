@@ -6,15 +6,18 @@
 
 .board {
   background: #fff;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.03);
   margin: 0;
   margin-bottom: 16px;
   padding: 0 16px 16px; }
 
 .center-tab {
+  -webkit-box-pack: center;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center; }
@@ -31,9 +34,11 @@
     background: transparent;
     font-size: 1rem;
     padding: 0 8px;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
@@ -44,9 +49,11 @@
     width: 100%; }
 
 .search-tools {
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
@@ -60,6 +67,7 @@
   .search-tools.search-outside {
     padding-left: 12px; }
   .search-tools input {
+    -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
@@ -97,7 +105,8 @@
   right: 0;
   z-index: 10;
   background: white;
-  box-sizing: 0 1px 1px rgba(0, 0, 0, 0.1); }
+  -webkit-box-sizing: 0 1px 1px rgba(0, 0, 0, 0.1);
+          box-sizing: 0 1px 1px rgba(0, 0, 0, 0.1); }
 
 .buttons-tab .search-tools {
   position: absolute;
@@ -152,6 +161,8 @@
           margin: 0;
           color: #fff;
           padding-left: 4px;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.87)));
+          background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.87) 100%);
           background-image: linear-gradient(-180deg, transparent 0%, rgba(0, 0, 0, 0.87) 100%); }
       .recommended-1 .list li .text {
         display: block;
@@ -164,6 +175,7 @@
         word-break: break-all;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
         overflow: hidden; }
 
 .recommended-2 .content-text {
@@ -185,13 +197,16 @@
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
     overflow: hidden; }
 
 .recommended-2 .box2 {
   width: 100%;
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -211,12 +226,15 @@
       margin: 0;
       padding: 4px;
       padding-bottom: 0;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.87)));
+      background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0, 0, 0, 0.87) 100%);
       background-image: linear-gradient(-180deg, transparent 0%, rgba(0, 0, 0, 0.87) 100%);
       text-overflow: ellipsis;
       white-space: normal;
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
       overflow: hidden; }
     .recommended-2 .box2 .imgbox img {
       width: 100%; }
@@ -227,6 +245,7 @@
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     padding-top: .6rem; }
 
@@ -240,10 +259,12 @@
     border-bottom: 0; }
 
 .movlist .flexlist {
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   height: 112px;
+  -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -269,6 +290,7 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
       overflow: hidden; }
       .movlist .flexlist .info .t .index {
         color: #FF9800;
@@ -282,6 +304,7 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       overflow: hidden;
       height: 2.7rem; }
     .movlist .flexlist .info .text2 {
@@ -294,15 +317,18 @@
     border: 1px solid #FF9800;
     border-radius: 5px;
     height: 28px;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
         -ms-flex-pack: justify;
             justify-content: space-between;
     margin-bottom: 24px; }
     .ranking .button-group > * {
       font-size: .6rem;
+      -webkit-box-flex: 1;
       -webkit-flex-grow: 1;
           -ms-flex-positive: 1;
               flex-grow: 1;

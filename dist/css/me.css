@@ -3,18 +3,22 @@
   bottom: 2.5rem; }
 
 .endone {
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   margin-bottom: 0.8rem; }
 
 .alist {
   height: 2.8rem;
   background: white;
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: start;
   -webkit-justify-content: flex-start;
       -ms-flex-pack: start;
           justify-content: flex-start;
+  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
@@ -36,12 +40,15 @@
     width: 1.2rem;
     height: 1.2rem;
     overflow: hidden;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-pack: center;
     -webkit-justify-content: center;
         -ms-flex-pack: center;
             justify-content: center; }
@@ -60,13 +67,16 @@
   .alist.noarrow:after {
     display: none; }
   .alist .btn {
+    -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
     height: 100%;
+    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center; }
@@ -120,12 +130,15 @@
     position: relative;
     width: 9.3rem;
     height: 9.3rem;
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-pack: center;
     -webkit-justify-content: center;
         -ms-flex-pack: center;
             justify-content: center;
+    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
@@ -151,12 +164,15 @@
       .money .circle .total .numinfo {
         width: 100%; }
   .money .circle-details {
+    display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
     -webkit-align-items: center;
         -ms-flex-align: center;
             align-items: center;
+    -webkit-box-pack: justify;
     -webkit-justify-content: space-between;
         -ms-flex-pack: justify;
             justify-content: space-between;
@@ -172,9 +188,11 @@
       background: #F36C60; }
     .money .circle-details .numdetails {
       font-size: 0.7rem;
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
@@ -216,12 +234,15 @@
     font-size: 0.7rem; }
     .withdraw .top .info,
     .charge .top .info {
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
+      -webkit-box-pack: justify;
       -webkit-justify-content: space-between;
           -ms-flex-pack: justify;
               justify-content: space-between;
@@ -287,9 +308,12 @@
       display: block; }
 
 .profit {
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column; }
@@ -297,12 +321,15 @@
     background: #F36C60;
     color: white; }
     .profit .con1 .top .headerTools {
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-pack: end;
       -webkit-justify-content: flex-end;
           -ms-flex-pack: end;
               justify-content: flex-end;
+      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
@@ -324,15 +351,20 @@
         border: 2px solid white; }
     .profit .con1 .center {
       height: 5.3rem;
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-orient: vertical;
+      -webkit-box-direction: normal;
       -webkit-flex-direction: column;
           -ms-flex-direction: column;
               flex-direction: column;
+      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
+      -webkit-box-pack: start;
       -webkit-justify-content: flex-start;
           -ms-flex-pack: start;
               justify-content: flex-start;
@@ -350,28 +382,38 @@
         color: rgba(255, 255, 255, 0.7); }
     .profit .con1 .bottom {
       height: 2.75rem;
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-align: stretch;
       -webkit-align-items: stretch;
           -ms-flex-align: stretch;
               align-items: stretch;
+      background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255, 0.16)), to(rgba(255, 255, 255, 0.04)));
+      background-image: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%);
       background-image: linear-gradient(-180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 100%); }
       .profit .con1 .bottom > a {
         color: white; }
       .profit .con1 .bottom .childPageEnter {
+        -webkit-box-flex: 1;
         -webkit-flex-grow: 1;
             -ms-flex-positive: 1;
                 flex-grow: 1;
+        display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
         -webkit-flex-direction: column;
             -ms-flex-direction: column;
                 flex-direction: column;
+        -webkit-box-pack: center;
         -webkit-justify-content: center;
             -ms-flex-pack: center;
                 justify-content: center;
+        -webkit-box-align: center;
         -webkit-align-items: center;
             -ms-flex-align: center;
                 align-items: center;
@@ -395,6 +437,7 @@
         font-size: 0.6rem;
         color: rgba(255, 255, 255, 0.7); }
   .profit .con2 {
+    -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
         -ms-flex-positive: 1;
             flex-grow: 1;
@@ -402,9 +445,11 @@
     .profit .con2 .list {
       border-bottom: 1px solid #ddd; }
       .profit .con2 .list li {
+        display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        -webkit-box-pack: start;
         -webkit-justify-content: flex-start;
             -ms-flex-pack: start;
                 justify-content: flex-start;
@@ -503,15 +548,20 @@
         width: 3.8rem;
         height: 100%;
         text-align: center;
+        display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
         -webkit-flex-direction: column;
             -ms-flex-direction: column;
                 flex-direction: column;
+        -webkit-box-pack: center;
         -webkit-justify-content: center;
             -ms-flex-pack: center;
                 justify-content: center;
+        -webkit-box-align: center;
         -webkit-align-items: center;
             -ms-flex-align: center;
                 align-items: center; }
@@ -521,9 +571,11 @@
           font-size: 0.6rem;
           color: rgba(0, 0, 0, 0.54); }
       .profit .con2 .list .info {
+        display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        -webkit-box-align: center;
         -webkit-align-items: center;
             -ms-flex-align: center;
                 align-items: center;
@@ -531,6 +583,7 @@
         position: relative;
         border-bottom: 1px solid #ddd;
         margin-left: 0.8rem;
+        -webkit-box-flex: 1;
         -webkit-flex-grow: 1;
             -ms-flex-positive: 1;
                 flex-grow: 1; }
@@ -541,12 +594,16 @@
           margin-right: 0.4rem; }
         .profit .con2 .list .info .i2 {
           font-size: 0.7rem;
+          display: -webkit-box;
           display: -webkit-flex;
           display: -ms-flexbox;
           display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
           -webkit-flex-direction: column;
               -ms-flex-direction: column;
                   flex-direction: column;
+          -webkit-box-pack: center;
           -webkit-justify-content: center;
               -ms-flex-pack: center;
                   justify-content: center; }
@@ -582,15 +639,19 @@
   margin: 0; }
 
 .profit-in .con2 .text {
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: center;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -609,7 +670,8 @@
     height: 2.2rem;
     width: 100%;
     background: white;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     text-align: center;
     position: fixed;
     z-index: 2; }
@@ -631,7 +693,8 @@
       height: 1.2rem;
       z-index: 10; }
   .myMovie .myMovieList {
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
     position: absolute;
     top: 2.2rem;
     bottom: 0;
@@ -670,6 +733,7 @@
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
           overflow: hidden; }
           .myMovie .myMovieList .box .info .Title:after {
             content: '>';
@@ -690,6 +754,7 @@
           word-break: break-all;
           display: -webkit-box;
           -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
           overflow: hidden; }
         .myMovie .myMovieList .box .info .text2 {
           border-bottom: 1px solid #ddd;
@@ -697,15 +762,18 @@
           padding-bottom: 0.8rem; }
       .myMovie .myMovieList .box .info2 {
         height: 2.2rem;
+        display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
         margin-left: 0.8rem;
         padding-left: 4.9rem;
         padding-right: 0.8rem;
+        -webkit-box-pack: justify;
         -webkit-justify-content: space-between;
             -ms-flex-pack: justify;
                 justify-content: space-between;
+        -webkit-box-align: center;
         -webkit-align-items: center;
             -ms-flex-align: center;
                 align-items: center;
@@ -780,6 +848,7 @@
       word-break: break-all;
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
       overflow: hidden; }
     .message-contanier .message .delete {
       position: absolute;
@@ -790,12 +859,15 @@
       background: #F36C60;
       color: white;
       font-size: 0.7rem;
+      display: -webkit-box;
       display: -webkit-flex;
       display: -ms-flexbox;
       display: flex;
+      -webkit-box-pack: center;
       -webkit-justify-content: center;
           -ms-flex-pack: center;
               justify-content: center;
+      -webkit-box-align: center;
       -webkit-align-items: center;
           -ms-flex-align: center;
               align-items: center;
@@ -823,9 +895,12 @@
 
 .feedback {
   top: 0;
+  display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column; }
