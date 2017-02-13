@@ -130,6 +130,11 @@ $('#feedbackSubmit').click(function () {
                     //个人中心用户头像
                     $('.headpic').init(data.headerImg || '../images/icon/user.png')
 
+                    // 二维码url加上openid
+                    let $qrcodeLink = $('#entry-qrcode')
+                    $qrcodeLink.attr('href', $qrcodeLink.attr('href') + `?openid=${$.openId}`)
+
+
                 } else {
                     $.alert(res.MSG)
                 }
@@ -212,7 +217,7 @@ $('#feedbackSubmit').click(function () {
         let localImgSrc = window.URL.createObjectURL($uploadPicker[0].files[0]);
 
         $.showPreloader('正在压缩图片')
-            // 压缩
+        // 压缩
         lrz(fileObj[0], {
                 width: 120
             })
