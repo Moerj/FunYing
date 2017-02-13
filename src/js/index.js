@@ -69,7 +69,7 @@ setTimeout(function () {
                     <img src="${mov.poster}" />
                     <p class="name">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</p>
                 </div>
-                <p class="text">${mov.introduction}</p>
+                <p class="text">${mov.title}</p>
             </a>
             </li>
             `
