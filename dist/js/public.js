@@ -50,13 +50,17 @@ var ScrollLoad = function () {
         });
 
         // 首次加载
-        this.ajax({
-            openId: $.openId,
-            skip: 1, //当前页
-            limit: this.perload //每页条数
-        }, function (data) {
-            _this._ajax(data);
-        });
+        if (this.cache && history.state.data) {
+            this.render(history.state.data);
+        } else {
+            this.ajax({
+                openId: $.openId,
+                skip: 1, //当前页
+                limit: this.perload //每页条数
+            }, function (data) {
+                _this._ajax(data);
+            });
+        }
     }
 
     _createClass(ScrollLoad, [{
@@ -64,7 +68,7 @@ var ScrollLoad = function () {
         value: function _ajax(data) {
             if (data.length) {
                 this.currentPage++;
-                this.render(this._cache(data));
+                this.render(data);
                 if (data.length < this.perload) {
                     this.finish();
                 }
@@ -73,7 +77,14 @@ var ScrollLoad = function () {
             }
         }
 
-        // 对数据进行缓存，返回页面时能记录render的数据以及滚动条位置
+        /**
+         * 对数据进行缓存，返回页面时能记录render的数据以及滚动条位置
+         * 
+         * @param {Object} data
+         * @returns {Object} newData
+         * 
+         * @memberOf ScrollLoad
+         */
 
     }, {
         key: '_cache',
@@ -90,24 +101,30 @@ var ScrollLoad = function () {
             var oldLen = oldData.length;
             var reData = void 0; //返回出去供render使用
             // console.log('oldData', oldData);
-            // console.log('oldLen', oldLen);
             // console.log('ajaxData', res.DATA);
 
             // 记录滚动条位置
             if (!this._cache.run) {
                 (function () {
                     var onscroll = false;
-                    _this2.scrollContanier.on('scroll click', function () {
+                    _this2.scrollContanier.on('scroll click', function (e) {
+                        var _this3 = this;
+
+                        var saveScroll = function saveScroll() {
+                            var scrollTop = $(_this3).scrollTop();
+                            var data = Object.assign(history.state, {
+                                scrollTop: scrollTop
+                            });
+                            history.replaceState(data, '', '');
+                        };
+
                         if (!onscroll) {
                             onscroll = true;
                             setTimeout(function () {
                                 onscroll = false;
-                            }, 500);
-                            var scrollTop = $(this).scrollTop();
-                            var _data = Object.assign(history.state, {
-                                scrollTop: scrollTop
-                            });
-                            history.replaceState(_data, '', '');
+                                if (e.type === 'scroll') saveScroll();
+                            }, 300);
+                            if (e.type === 'click') saveScroll();
                         }
                     });
                 })();
@@ -173,7 +190,7 @@ var ScrollLoad = function () {
     }, {
         key: 'scroll',
         value: function scroll() {
-            var _this3 = this;
+            var _this4 = this;
 
             // 滚动到接近底部时加载数据
             if (this.scrollContanier.scrollTop() + this.scrollContanier.height() + 100 < this.scrollContanier[0].scrollHeight) {
@@ -198,9 +215,9 @@ var ScrollLoad = function () {
                 limit: this.perload //每页条数
             }, function (data) {
                 // 重置加载flag
-                _this3.loading = false;
+                _this4.loading = false;
 
-                _this3._ajax(data);
+                _this4._ajax(data);
             });
         }
 
@@ -209,7 +226,7 @@ var ScrollLoad = function () {
     }, {
         key: 'reload',
         value: function reload() {
-            var _this4 = this;
+            var _this5 = this;
 
             // 滚动条置顶
             this.scrollContanier[0].scrollTop = 0;
@@ -225,7 +242,7 @@ var ScrollLoad = function () {
 
             // 开启无限加载
             this.scrollContanier.on('scroll', function () {
-                _this4.scroll();
+                _this5.scroll();
             });
 
             // loading效果
@@ -236,8 +253,8 @@ var ScrollLoad = function () {
                 skip: 1, //当前页
                 limit: this.perload //每页条数
             }, function (data) {
-                _this4.listContanier.empty();
-                _this4._ajax(data);
+                _this5.listContanier.empty();
+                _this5._ajax(data);
                 $.hideIndicator();
             });
         }
@@ -265,6 +282,9 @@ var ScrollLoad = function () {
     }, {
         key: 'render',
         value: function render(data) {
+            // 缓存过滤
+            data = this._cache(data);
+
             // 根据每页条数限制data长度
             // 后台返回的数据，有可能超过自定分页长度
             // 缓存模式开启时，不限制。因为缓存功能会一次性加载多页数据

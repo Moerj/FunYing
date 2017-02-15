@@ -14,7 +14,7 @@ class ScrollLoad {
             currentPage: 1, //当前页
             listContanier: opt.scrollContanier, //list容器，默认等于scroll容器
             scrollContanier: opt.scrollContanier,
-            cache: true//默认开启页面缓存，记录数据以及滚动条位置
+            cache: true //默认开启页面缓存，记录数据以及滚动条位置
         }
 
         opt = $.extend({}, DEFAULT, opt)
@@ -44,19 +44,24 @@ class ScrollLoad {
         });
 
         // 首次加载
-        this.ajax({
-            openId: $.openId,
-            skip: 1, //当前页
-            limit: this.perload //每页条数
-        }, (data) => {
-            this._ajax(data)
-        })
+        if (this.cache && history.state.data) {
+            this.render(history.state.data)
+
+        } else {
+            this.ajax({
+                openId: $.openId,
+                skip: 1, //当前页
+                limit: this.perload //每页条数
+            }, (data) => {
+                this._ajax(data)
+            })
+        }
     }
 
     _ajax(data) {
         if (data.length) {
             this.currentPage++;
-            this.render(this._cache(data))
+            this.render(data)
             if (data.length < this.perload) {
                 this.finish();
             }
@@ -65,7 +70,15 @@ class ScrollLoad {
         }
     }
 
-    // 对数据进行缓存，返回页面时能记录render的数据以及滚动条位置
+
+    /**
+     * 对数据进行缓存，返回页面时能记录render的数据以及滚动条位置
+     * 
+     * @param {Object} data
+     * @returns {Object} newData
+     * 
+     * @memberOf ScrollLoad
+     */
     _cache(data) {
 
         if (!this.cache) {
@@ -76,26 +89,31 @@ class ScrollLoad {
         let oldData = history.state.data || {}
         let ajaxData = data
         let oldLen = oldData.length
-        let reData//返回出去供render使用
+        let reData //返回出去供render使用
         // console.log('oldData', oldData);
-        // console.log('oldLen', oldLen);
         // console.log('ajaxData', res.DATA);
 
         // 记录滚动条位置
         if (!this._cache.run) {
             let onscroll = false
-            this.scrollContanier.on('scroll click', function () {
-                if (!onscroll) {
-                    onscroll = true
-                    setTimeout(() => {
-                        onscroll = false
-                    }, 500)
+            this.scrollContanier.on('scroll click', function (e) {
+                const saveScroll = () => {
                     let scrollTop = $(this).scrollTop()
                     let data = Object.assign(history.state, {
                         scrollTop: scrollTop
                     })
                     history.replaceState(data, '', '')
                 }
+
+                if (!onscroll) {
+                    onscroll = true
+                    setTimeout(() => {
+                        onscroll = false
+                        if (e.type === 'scroll') saveScroll();
+                    }, 300)
+                    if (e.type === 'click') saveScroll();
+                }
+
             })
         }
 
@@ -234,6 +252,9 @@ class ScrollLoad {
 
     // 进行渲染
     render(data) {
+        // 缓存过滤
+        data = this._cache(data)
+
         // 根据每页条数限制data长度
         // 后台返回的数据，有可能超过自定分页长度
         // 缓存模式开启时，不限制。因为缓存功能会一次性加载多页数据
