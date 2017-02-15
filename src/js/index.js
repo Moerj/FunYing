@@ -94,7 +94,7 @@ setTimeout(function () {
             }
         }
 
-        $other.each((i,el) => {
+        $other.each((i, el) => {
             el.href = $.getArtDetails(otherData[i].resUrl)
             el.querySelector('img').src = otherData[i].pictrueUrl
             el.querySelector('.titleInfo').innerHTML = otherData[i].title
@@ -191,13 +191,14 @@ setTimeout(function () {
 
 
     // 搜索功能
-    let searchInputs = $('.search-tools input')
+    let $searchInputs = $('.search-tools input')
 
     function search(searchName) {
         if (!searchName) {
             console.error('调用搜索失败，因为搜索值为空');
             return
         }
+        searchName = $.trim(searchName)
         sessionStorage.searchName = searchName
         let $ul = $('.search-list ul');
         $.showPreloader();
@@ -207,7 +208,7 @@ setTimeout(function () {
                 searchName: searchName
             },
             success: function (res) {
-                console.log('搜索数据：',res);
+                console.log('搜索数据：', res);
                 let listTpl = ``;
                 $ul.empty(); //先清空list
                 if (res.STATUS == 1) {
@@ -246,10 +247,18 @@ setTimeout(function () {
         });
     }
 
-    searchInputs.on('input', function () {
-        // 首页和搜索页的输入框双向绑定
-        searchInputs.not($(this)).val($(this).val())
-    })
+    $searchInputs
+        .on('input', function () {
+            // 首页和搜索页的输入框双向绑定
+            $searchInputs.not($(this)).val($(this).val())
+        })
+        .on('keyup', function () {
+            // 回车键进行搜索
+            if (event.keyCode == 13) {
+                // search($(this).val())
+                $('.search-btn').eq(0).click()
+            }
+        })
     $(document).on('click', '.search', function (e) {
         e.stopPropagation();
         let $this = $(this)
@@ -260,10 +269,7 @@ setTimeout(function () {
 
         // 进行搜索
         if ($this.hasClass('search-btn')) {
-            let searchName = $.trim($this.parent().find('input').val());
-            if (!searchName) {
-                return;
-            }
+            let searchName = $this.parent().find('input').val()
             search(searchName)
         }
     })
@@ -271,7 +277,7 @@ setTimeout(function () {
     // 返回此页面时，如果搜索框有内容，则需要进行一次搜索
     if (sessionStorage.searchName) {
         search(sessionStorage.searchName)
-        searchInputs.val(sessionStorage.searchName)
+        $searchInputs.val(sessionStorage.searchName)
     }
 
 

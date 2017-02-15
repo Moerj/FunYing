@@ -148,13 +148,14 @@ setTimeout(function () {
     });
 
     // 搜索功能
-    var searchInputs = $('.search-tools input');
+    var $searchInputs = $('.search-tools input');
 
     function search(searchName) {
         if (!searchName) {
             console.error('调用搜索失败，因为搜索值为空');
             return;
         }
+        searchName = $.trim(searchName);
         sessionStorage.searchName = searchName;
         var $ul = $('.search-list ul');
         $.showPreloader();
@@ -190,9 +191,15 @@ setTimeout(function () {
         });
     }
 
-    searchInputs.on('input', function () {
+    $searchInputs.on('input', function () {
         // 首页和搜索页的输入框双向绑定
-        searchInputs.not($(this)).val($(this).val());
+        $searchInputs.not($(this)).val($(this).val());
+    }).on('keyup', function () {
+        // 回车键进行搜索
+        if (event.keyCode == 13) {
+            // search($(this).val())
+            $('.search-btn').eq(0).click();
+        }
     });
     $(document).on('click', '.search', function (e) {
         e.stopPropagation();
@@ -204,10 +211,7 @@ setTimeout(function () {
 
         // 进行搜索
         if ($this.hasClass('search-btn')) {
-            var searchName = $.trim($this.parent().find('input').val());
-            if (!searchName) {
-                return;
-            }
+            var searchName = $this.parent().find('input').val();
             search(searchName);
         }
     });
@@ -215,7 +219,7 @@ setTimeout(function () {
     // 返回此页面时，如果搜索框有内容，则需要进行一次搜索
     if (sessionStorage.searchName) {
         search(sessionStorage.searchName);
-        searchInputs.val(sessionStorage.searchName);
+        $searchInputs.val(sessionStorage.searchName);
     }
 
     // 修复搜索页从影视详情返回，再返回首页时失败
