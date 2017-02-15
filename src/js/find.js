@@ -125,7 +125,7 @@ setTimeout(function() {
             let cols = $selectSwitch.eq(typeIndex)[0].__eleData.picker.params.cols[0]
             switch (value[0]) {
                 case '电影':
-                    cols.values = ['全部',`动作`,`喜剧`,`爱情`,`科幻`,`悬疑`,`恐怖`]
+                    cols.values = ['全部',`动作`,`喜剧`,`爱情`,`科幻`,`悬疑`,`恐怖`,`剧情`]
                     break;
                 case '动画':
                     cols.values = ['全部',`欧美`,`日本`,`华语`]
@@ -159,7 +159,7 @@ setTimeout(function() {
 
     // fun类
     const typeIndex = 2
-    const typeValues = [`全部`, `经典`, `华语`, `欧美`, `韩国`, `日本`, `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`, `豆瓣高分`, `冷门佳片`]
+    const typeValues = [`全部`, `经典`, `华语`, `欧美`, `韩国`, `日本`, `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`,`剧情`, `豆瓣高分`, `冷门佳片`]
     $selectSwitch.eq(typeIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
         cols: [{
