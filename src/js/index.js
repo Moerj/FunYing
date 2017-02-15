@@ -225,7 +225,7 @@ setTimeout(function () {
                                     <div class="info">
                                         <span class="t"><span class="index">${index}</span>${mov.title}</span>
                                         <p class="text">${mov.introduction}</p>
-                                        <span class="text2">更新到第${mov.updateSite}集</span>
+                                        <span class="text2">${$.getUpdateStatus(mov.updateStatus,mov.updateSite)}</span>
                                     </div>
                                 </a>
                             </li>
