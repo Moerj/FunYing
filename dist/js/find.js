@@ -7,6 +7,23 @@ setTimeout(function () {
     sessionStorage.first_type = sessionStorage.first_type || ''; //地区 直接传中文字符，'全部'传空
     sessionStorage.type = sessionStorage.type || ''; //电影类型，同地区
 
+    // 记录滚动条高度
+    // const $findContent = $('.content')
+    // let onscroll = false
+    // $findContent.on('scroll', function() {
+    //     if (!onscroll) {
+    //         onscroll = true
+    //         setTimeout(() => {
+    //             onscroll = false
+    //         }, 500)
+    //         let scrollTop = $(this).scrollTop()
+    //         let data = Object.assign(history.state, {
+    //             scrollTop: scrollTop
+    //         })
+    //         history.replaceState(data, '', '')
+    //     }
+    // })
+
     var loader = new ScrollLoad({
 
         scrollContanier: '.infinite-scroll', //滚动父容器
@@ -19,6 +36,7 @@ setTimeout(function () {
                 var d = data[i];
                 html += '\n                <a href="' + $.getMovDetails(d.id) + '" class="find-list external">\n                    <div class="imgbox">\n                        <img src="' + d.poster + '" alt="">\n                        <div class="status">' + $.getUpdateStatus(d.updateStatus, d.updateSite) + '</div>\n                    </div>\n                    <p class="name">' + d.title + '</p>\n                </a>\n                ';
             }
+
             return html;
         },
 
@@ -37,7 +55,53 @@ setTimeout(function () {
                 success: function success(res) {
                     console.log('发现', res);
                     if (res.DATA) {
+                        // 直接渲染，无法记录返回时当前页面状态。
                         callback(res.DATA);
+
+                        /*// 带有状态缓存的渲染
+                        let oldData = history.state.data || {}
+                        let ajaxData = res.DATA
+                        let oldLen = oldData.length
+                        // console.log('oldData', oldData);
+                        // console.log('oldLen', oldLen);
+                        // console.log('ajaxData', res.DATA);
+                        // console.log('loader.dataLoaded', loader.dataLoaded);
+                        // 渲染老数据
+                        if (oldLen > 0 && loader.dataLoaded === undefined) {
+                            // 设置loader的当前页
+                            loader.currentPage = history.state.currentPage
+                             // 渲染老数据
+                            console.log('渲染老数据');
+                            callback(oldData);
+                             // 设置历史滚动条位置
+                            $findContent.scrollTop(history.state.scrollTop)
+                         } else {
+                            //渲染新数据
+                            let saveData//需要保持的 老数据+新数据
+                            if (oldLen > 0) {
+                                saveData = Object.assign({}, oldData)
+                                // 因为key重复，所以用此方法，将ajaxdata的对象值都追加到newData上
+                                for (let i = 0; i < ajaxData.length; i++) {
+                                    saveData[oldLen] = ajaxData[i]
+                                    oldLen++
+                                }
+                                saveData.length = oldLen
+                            } else {
+                                saveData = ajaxData
+                            }
+                             // console.log('saveData', saveData);
+                             // 记录新数据
+                            history.replaceState({
+                                data: saveData,
+                                currentPage: loader.currentPage,
+                                scrollTop: $findContent.scrollTop()
+                            }, "", "");
+                             // 渲染新的ajax数据
+                            console.log('渲染新数据');
+                            callback(ajaxData)
+                        }
+                         // 限制老数据只加载一次
+                        loader.dataLoaded = true*/
                     } else {
                         $.alert('没有数据了');
                     }
@@ -49,6 +113,8 @@ setTimeout(function () {
             });
         }
     });
+
+    window.findLoader = loader;
 
     // 顶部筛选
     var $selectSwitch = $('.select-switch');
@@ -80,6 +146,8 @@ setTimeout(function () {
             // 设置文本
             var value = picker.value;
             setSelectName(sortIndex, value);
+
+            loader.cleanCache();
         }
     });
 
@@ -102,6 +170,8 @@ setTimeout(function () {
             // 设置文本
             var value = picker.value == '全部' ? '类型' : picker.value;
             setSelectName(areaIndex, value);
+
+            loader.cleanCache();
         }
     });
     if (sessionStorage.first_type !== '') {
@@ -127,6 +197,8 @@ setTimeout(function () {
             // 设置文本
             var value = picker.value == '全部' ? 'fun类' : picker.value;
             setSelectName(typeIndex, value);
+
+            loader.cleanCache();
         }
     });
     if (sessionStorage.type !== '') {

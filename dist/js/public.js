@@ -23,7 +23,8 @@ var ScrollLoad = function () {
             loading: false, //加载等待
             currentPage: 1, //当前页
             listContanier: opt.scrollContanier, //list容器，默认等于scroll容器
-            scrollContanier: opt.scrollContanier
+            scrollContanier: opt.scrollContanier,
+            cache: true //默认开启页面缓存，记录数据以及滚动条位置
         };
 
         opt = $.extend({}, DEFAULT, opt);
@@ -63,7 +64,7 @@ var ScrollLoad = function () {
         value: function _ajax(data) {
             if (data.length) {
                 this.currentPage++;
-                this.render(data);
+                this.render(this._cache(data));
                 if (data.length < this.perload) {
                     this.finish();
                 }
@@ -72,12 +73,107 @@ var ScrollLoad = function () {
             }
         }
 
+        // 对数据进行缓存，返回页面时能记录render的数据以及滚动条位置
+
+    }, {
+        key: '_cache',
+        value: function _cache(data) {
+            var _this2 = this;
+
+            if (!this.cache) {
+                return data;
+            }
+
+            // 带有状态缓存的渲染
+            var oldData = history.state.data || {};
+            var ajaxData = data;
+            var oldLen = oldData.length;
+            var reData = void 0; //返回出去供render使用
+            // console.log('oldData', oldData);
+            // console.log('oldLen', oldLen);
+            // console.log('ajaxData', res.DATA);
+
+            // 记录滚动条位置
+            if (!this._cache.run) {
+                (function () {
+                    var onscroll = false;
+                    _this2.scrollContanier.on('scroll click', function () {
+                        if (!onscroll) {
+                            onscroll = true;
+                            setTimeout(function () {
+                                onscroll = false;
+                            }, 500);
+                            var scrollTop = $(this).scrollTop();
+                            var _data = Object.assign(history.state, {
+                                scrollTop: scrollTop
+                            });
+                            history.replaceState(_data, '', '');
+                        }
+                    });
+                })();
+            }
+
+            // 渲染老数据
+            if (oldLen > 0 && !this._cache.run) {
+                // 设置loader的当前页
+                this.currentPage = history.state.currentPage;
+
+                // 渲染老数据
+                console.log('渲染老数据');
+                reData = oldData;
+            } else {
+                //渲染新数据
+
+                var saveData = void 0; //需要保持的 老数据+新数据
+                if (oldLen > 0) {
+                    saveData = Object.assign({}, oldData);
+                    // 因为key重复，所以用此方法，将ajaxdata的对象值都追加到newData上
+                    for (var i = 0; i < ajaxData.length; i++) {
+                        saveData[oldLen] = ajaxData[i];
+                        oldLen++;
+                    }
+                    saveData.length = oldLen;
+                } else {
+                    saveData = ajaxData;
+                }
+
+                // console.log('saveData', saveData);
+
+                // 记录新数据
+                history.replaceState({
+                    data: saveData,
+                    currentPage: this.currentPage,
+                    scrollTop: this.scrollContanier.scrollTop()
+                }, "", "");
+
+                // 渲染新的ajax数据
+                console.log('渲染新数据');
+                reData = ajaxData;
+            }
+
+            // 限制执行次数
+            this._cache.run = true;
+            return reData;
+        }
+
+        // 清空缓存的数据
+
+    }, {
+        key: 'cleanCache',
+        value: function cleanCache() {
+            history.replaceState({
+                data: {},
+                currentPage: 1,
+                scrollTop: 0
+            }, "", "");
+        }
+
         // 滚动逻辑
 
     }, {
         key: 'scroll',
         value: function scroll() {
-            var _this2 = this;
+            var _this3 = this;
 
             // 滚动到接近底部时加载数据
             if (this.scrollContanier.scrollTop() + this.scrollContanier.height() + 100 < this.scrollContanier[0].scrollHeight) {
@@ -102,9 +198,9 @@ var ScrollLoad = function () {
                 limit: this.perload //每页条数
             }, function (data) {
                 // 重置加载flag
-                _this2.loading = false;
+                _this3.loading = false;
 
-                _this2._ajax(data);
+                _this3._ajax(data);
             });
         }
 
@@ -113,7 +209,7 @@ var ScrollLoad = function () {
     }, {
         key: 'reload',
         value: function reload() {
-            var _this3 = this;
+            var _this4 = this;
 
             // 滚动条置顶
             this.scrollContanier[0].scrollTop = 0;
@@ -129,7 +225,7 @@ var ScrollLoad = function () {
 
             // 开启无限加载
             this.scrollContanier.on('scroll', function () {
-                _this3.scroll();
+                _this4.scroll();
             });
 
             // loading效果
@@ -140,8 +236,8 @@ var ScrollLoad = function () {
                 skip: 1, //当前页
                 limit: this.perload //每页条数
             }, function (data) {
-                _this3.listContanier.empty();
-                _this3._ajax(data);
+                _this4.listContanier.empty();
+                _this4._ajax(data);
                 $.hideIndicator();
             });
         }
@@ -171,7 +267,8 @@ var ScrollLoad = function () {
         value: function render(data) {
             // 根据每页条数限制data长度
             // 后台返回的数据，有可能超过自定分页长度
-            if (this.perload < data.length) {
+            // 缓存模式开启时，不限制。因为缓存功能会一次性加载多页数据
+            if (this.perload < data.length && !this.cache) {
                 data.length = this.perload;
             }
             var html = this.template(data);
@@ -181,6 +278,11 @@ var ScrollLoad = function () {
 
             // 将loader移动到列表末
             this.preloader.appendTo(this.listContanier);
+
+            // 如果有缓存，还原滚动条高度
+            if (this.cache) {
+                this.scrollContanier.scrollTop(history.state.scrollTop);
+            }
         }
     }]);
 
