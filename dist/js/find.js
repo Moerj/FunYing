@@ -91,11 +91,12 @@ setTimeout(function () {
 
     // 类型
     var areaIndex = 1;
+    var areaValues = ['全部', '电影', '电视剧', '动画', '演唱会', '娱乐', '体育', '游戏', '周边', '其他'];
     $selectSwitch.eq(areaIndex).picker({
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
-            values: ['全部', '电影', '电视剧', '动画', '演唱会', '娱乐', '体育', '游戏', '周边', '其他']
+            values: areaValues
         }],
         onOpen: function onOpen() {
             toggleArrow(areaIndex);
@@ -110,6 +111,37 @@ setTimeout(function () {
             setSelectName(areaIndex, value);
 
             loader.cleanCache();
+
+            // 控制fun类的picker
+            var cols = $selectSwitch.eq(typeIndex)[0].__eleData.picker.params.cols[0];
+            switch (value[0]) {
+                case '电影':
+                    cols.values = ['全部', '动作', '喜剧', '爱情', '科幻', '悬疑', '恐怖'];
+                    break;
+                case '动画':
+                    cols.values = ['全部', '欧美', '日本', '华语'];
+                    break;
+                case '电视剧':
+                    cols.values = ['全部', '韩国', '欧美', '日本', '华语'];
+                    break;
+                case '演唱会':
+                    cols.values = ['全部'];
+                    break;
+                case '娱乐':
+                    cols.values = ['全部'];
+                    break;
+                case '综艺':
+                    cols.values = ['全部'];
+                    break;
+                case '其他':
+                    cols.values = ['全部'];
+                    break;
+
+                default:
+                    //全部
+                    cols.values = areaValues;
+                    break;
+            }
         }
     });
     if (sessionStorage.first_type !== '') {
@@ -118,11 +150,12 @@ setTimeout(function () {
 
     // fun类
     var typeIndex = 2;
+    var typeValues = ['全部', '经典', '华语', '欧美', '韩国', '日本', '动作', '喜剧', '爱情', '科幻', '悬疑', '恐怖', '豆瓣高分', '冷门佳片'];
     $selectSwitch.eq(typeIndex).picker({
         toolbarTemplate: '<header class="find-select"></header>',
         cols: [{
             textAlign: 'center',
-            values: ['全部', '经典', '华语', '欧美', '韩国', '日本', '动作', '喜剧', '爱情', '科幻', '悬疑', '恐怖', '豆瓣高分', '冷门佳片']
+            values: typeValues
         }],
         onOpen: function onOpen() {
             toggleArrow(typeIndex);
