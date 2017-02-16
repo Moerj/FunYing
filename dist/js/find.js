@@ -52,8 +52,6 @@ setTimeout(function () {
         }
     });
 
-    window.findLoader = loader;
-
     // 顶部筛选
     var $selectSwitch = $('.select-switch');
 
