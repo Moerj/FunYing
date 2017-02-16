@@ -23,18 +23,20 @@ setTimeout(function () {
             return html;
         },
 
-        ajax: function ajax(data, callback) {
+        ajax: function ajax(callback) {
 
-            // 合并入筛选参数
-            data = $.extend({}, data, {
+            var postData = {
                 sort: Number(sessionStorage.sort),
                 first_type: sessionStorage.first_type,
-                type: sessionStorage.type
-            });
+                type: sessionStorage.type,
+                openId: $.openId,
+                skip: this.currentPage, //当前页
+                limit: this.perload //每页条数
+            };
 
             $.ajax({
                 url: 'http://www.funying.cn/wx/rest/find/all',
-                data: data,
+                data: postData,
                 success: function success(res) {
                     console.log('发现', res);
                     if (res.DATA) {

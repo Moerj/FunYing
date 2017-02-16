@@ -8,6 +8,8 @@ setTimeout(function () {
 
         new ScrollLoad({
 
+            cache: false,
+
             scrollContanier: $contanier, //滚动父容器
             // maxload: 10,
             // perload: 7,

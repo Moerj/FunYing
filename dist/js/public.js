@@ -51,14 +51,10 @@ var ScrollLoad = function () {
         });
 
         // 首次加载
-        if (this.cache && history.state.data) {
+        if (this.cache && history.state && history.state.data) {
             this.render(history.state.data);
         } else {
-            this.ajax({
-                openId: $.openId,
-                skip: 1, //当前页
-                limit: this.perload //每页条数
-            }, function (data) {
+            this.ajax(function (data) {
                 _this._ajax(data);
             });
         }
@@ -210,11 +206,7 @@ var ScrollLoad = function () {
             // 设置flag
             this.isloading = true;
 
-            this.ajax({
-                openId: $.openId,
-                skip: this.currentPage, //当前页
-                limit: this.perload //每页条数
-            }, function (data) {
+            this.ajax(function (data) {
                 // 重置加载flag
                 _this4.isloading = false;
 
@@ -242,11 +234,7 @@ var ScrollLoad = function () {
             this.isloading = false;
             this.iscomplate = false;
 
-            this.ajax({
-                openId: $.openId,
-                skip: 1, //当前页
-                limit: this.perload //每页条数
-            }, function (data) {
+            this.ajax(function (data) {
                 _this5.listContanier.empty();
                 _this5._ajax(data);
                 reload_callbcak();

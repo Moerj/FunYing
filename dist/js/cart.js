@@ -24,14 +24,16 @@ setTimeout(function () {
             return html;
         },
 
-        ajax: function ajax(data, callback) {
-            var newData = $.extend({}, data, {
-                state: 0 //购物车
-            });
+        ajax: function ajax(callback) {
 
             $.ajax({
                 url: 'http://www.funying.cn/wx/rest/user/myMovie',
-                data: newData,
+                data: {
+                    state: 0, //购物车
+                    openId: $.openId,
+                    skip: this.currentPage, //当前页
+                    limit: this.perload //每页条数
+                },
                 cache: false,
                 success: function success(res) {
                     console.log(res);

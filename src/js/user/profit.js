@@ -6,6 +6,8 @@ setTimeout(function () {
     function entry() {
         new ScrollLoad({
 
+            cache:false,
+
             scrollContanier: '#profitScrollContanier', //滚动父容器
             listContanier: '#profitList',
             // maxload: 10,
@@ -152,6 +154,7 @@ setTimeout(function () {
         new ScrollLoad({
             scrollContanier: `${pageId} .con2`, //滚动父容器
             listContanier: `${pageId} .list`,
+            cache:false,
             // maxload: 10,
             // perload: 7,
 
