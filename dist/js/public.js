@@ -21,6 +21,7 @@ var ScrollLoad = function () {
             maxload: 1000, //最大条数
             perload: 27, //每次分页条数
             isloading: false, //加载等待
+            iscomplate: false, //最后一页数据加载完成
             currentPage: 1, //当前页
             listContanier: opt.scrollContanier, //list容器，默认等于scroll容器
             scrollContanier: opt.scrollContanier,
@@ -44,7 +45,7 @@ var ScrollLoad = function () {
             this.perload = this.maxload;
         }
 
-        // 开启滚动监听
+        // 监听滚动 - 到底部加载数据
         this.scrollContanier.on('scroll', function () {
             _this.scroll();
         });
@@ -192,13 +193,13 @@ var ScrollLoad = function () {
         value: function scroll() {
             var _this4 = this;
 
+            // 如果正在加载，则退出
+            if (this.isloading || this.iscomplate) return;
+
             // 滚动到接近底部时加载数据
             if (this.scrollContanier.scrollTop() + this.scrollContanier.height() + 100 < this.scrollContanier[0].scrollHeight) {
                 return;
             }
-
-            // 如果正在加载，则退出
-            if (this.isloading) return;
 
             // 超出最大限制
             if (this.listContanier.children().length >= this.maxload) {
@@ -225,7 +226,7 @@ var ScrollLoad = function () {
 
     }, {
         key: 'reload',
-        value: function reload() {
+        value: function reload(reload_callbcak) {
             var _this5 = this;
 
             // 滚动条置顶
@@ -239,14 +240,7 @@ var ScrollLoad = function () {
 
             // 重置状态
             this.isloading = false;
-
-            // 开启无限加载
-            this.scrollContanier.on('scroll', function () {
-                _this5.scroll();
-            });
-
-            // loading效果
-            $.showIndicator();
+            this.iscomplate = false;
 
             this.ajax({
                 openId: $.openId,
@@ -255,7 +249,7 @@ var ScrollLoad = function () {
             }, function (data) {
                 _this5.listContanier.empty();
                 _this5._ajax(data);
-                $.hideIndicator();
+                reload_callbcak();
             });
         }
 
@@ -264,8 +258,8 @@ var ScrollLoad = function () {
     }, {
         key: 'finish',
         value: function finish() {
-            // 关闭滚动监听
-            this.scrollContanier.off('scroll');
+            // 设置状态 - 全部数据加载完成
+            this.iscomplate = true;
 
             // 内容出现混动条时，才会显示已经到底
             var h1 = this.loadEffect[0].offsetTop;

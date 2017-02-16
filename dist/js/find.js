@@ -77,7 +77,12 @@ setTimeout(function () {
         onClose: function onClose(picker) {
             toggleArrow(sortIndex);
             sessionStorage.sort = picker.value[0] == '更新时间' ? 1 : 2;
-            loader.reload();
+
+            // 重新加载loader
+            $.showIndicator();
+            loader.reload(function () {
+                $.hideIndicator();
+            });
 
             // 设置文本
             var value = picker.value;
@@ -102,7 +107,12 @@ setTimeout(function () {
         onClose: function onClose(picker) {
             toggleArrow(areaIndex);
             sessionStorage.first_type = picker.value[0] == '全部' ? '' : picker.value[0];
-            loader.reload();
+
+            // 重新加载loader
+            $.showIndicator();
+            loader.reload(function () {
+                $.hideIndicator();
+            });
 
             // 设置文本
             var value = picker.value == '全部' ? '类型' : picker.value;
@@ -161,7 +171,12 @@ setTimeout(function () {
         onClose: function onClose(picker) {
             toggleArrow(typeIndex);
             sessionStorage.type = picker.value[0] == '全部' ? '' : picker.value[0];
-            loader.reload();
+
+            // 重新加载loader
+            $.showIndicator();
+            loader.reload(function () {
+                $.hideIndicator();
+            });
 
             // 设置文本
             var value = picker.value == '全部' ? 'fun类' : picker.value;
