@@ -45,15 +45,11 @@ class ScrollLoad {
         });
 
         // 首次加载
-        if (this.cache && history.state.data) {
+        if (this.cache && history.state && history.state.data) {
             this.render(history.state.data)
 
         } else {
-            this.ajax({
-                openId: $.openId,
-                skip: 1, //当前页
-                limit: this.perload //每页条数
-            }, (data) => {
+            this.ajax((data) => {
                 this._ajax(data)
             })
         }
@@ -189,11 +185,7 @@ class ScrollLoad {
         // 设置flag
         this.isloading = true;
 
-        this.ajax({
-            openId: $.openId,
-            skip: this.currentPage, //当前页
-            limit: this.perload //每页条数
-        }, (data) => {
+        this.ajax((data) => {
             // 重置加载flag
             this.isloading = false;
 
@@ -217,11 +209,7 @@ class ScrollLoad {
         this.isloading = false;
         this.iscomplate = false
 
-        this.ajax({
-            openId: $.openId,
-            skip: 1, //当前页
-            limit: this.perload //每页条数
-        }, (data) => {
+        this.ajax((data) => {
             this.listContanier.empty()
             this._ajax(data)
             reload_callbcak()

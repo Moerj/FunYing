@@ -1,5 +1,5 @@
-setTimeout(function() {
-    
+setTimeout(function () {
+
 
 
     function myMovieLoad() {
@@ -36,15 +36,18 @@ setTimeout(function() {
                 return html
             },
 
-            ajax: (data, callback) => {
+            ajax: function (callback) {
+
                 $.ajax({
                     url: 'http://www.funying.cn/wx/rest/user/myMovie',
                     data: {
+                        state: 1, //我的影片
                         openId: $.openId,
-                        state: 1 //我的影片
+                        skip: this.currentPage, //当前页
+                        limit: this.perload //每页条数
                     },
                     success: (res) => {
-                        console.log('我的影片：',res);
+                        console.log('我的影片：', res);
                         if (res.DATA.length) {
                             callback(res.DATA)
                         } else {

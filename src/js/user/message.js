@@ -35,10 +35,15 @@ setTimeout(function () {
                 return html
             },
 
-            ajax: (data, callback) => {
+            ajax: function (callback) {
+
                 $.ajax({
                     url: 'http://www.funying.cn/wx/rest/user/systemMsg',
-                    data: data,
+                    data: {
+                        openId: $.openId,
+                        skip: this.currentPage, //当前页
+                        limit: this.perload //每页条数
+                    },
                     success: (res) => {
                         console.log('系统消息：', res);
                         if (res.DATA.length) {

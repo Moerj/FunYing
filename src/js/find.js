@@ -1,4 +1,4 @@
-setTimeout(function() {
+setTimeout(function () {
 
 
     // 筛选参数，页面独有
@@ -30,19 +30,21 @@ setTimeout(function() {
             return html
         },
 
-        ajax: (data, callback) => {
+        ajax: function (callback) {
 
-            // 合并入筛选参数
-            data = $.extend({}, data, {
+            let postData = {
                 sort: Number(sessionStorage.sort),
                 first_type: sessionStorage.first_type,
-                type: sessionStorage.type
-            })
+                type: sessionStorage.type,
+                openId: $.openId,
+                skip: this.currentPage, //当前页
+                limit: this.perload //每页条数
+            }
 
             $.ajax({
                 url: 'http://www.funying.cn/wx/rest/find/all',
-                data: data,
-                success: function(res) {
+                data: postData,
+                success: function (res) {
                     console.log('发现', res);
                     if (res.DATA) {
 
@@ -52,7 +54,7 @@ setTimeout(function() {
                         $.alert('没有数据了')
                     }
                 },
-                error: function(e) {
+                error: function (e) {
                     console.log(e);
                     $.alert('刷新失败，请稍后再试！')
                 }
@@ -116,7 +118,7 @@ setTimeout(function() {
         onClose: (picker) => {
             toggleArrow(areaIndex)
             sessionStorage.first_type = picker.value[0] == '全部' ? '' : picker.value[0]
-            
+
             // 重新加载loader
             $.showIndicator()
             loader.reload(() => {
@@ -133,13 +135,13 @@ setTimeout(function() {
             let cols = $selectSwitch.eq(typeIndex)[0].__eleData.picker.params.cols[0]
             switch (value[0]) {
                 case '电影':
-                    cols.values = ['全部',`动作`,`喜剧`,`爱情`,`科幻`,`悬疑`,`恐怖`,`剧情`]
+                    cols.values = ['全部', `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`, `剧情`]
                     break;
                 case '动画':
-                    cols.values = ['全部',`欧美`,`日本`,`华语`]
+                    cols.values = ['全部', `欧美`, `日本`, `华语`]
                     break;
                 case '电视剧':
-                    cols.values = ['全部',`韩国`,`欧美`,`日本`,`华语`]
+                    cols.values = ['全部', `韩国`, `欧美`, `日本`, `华语`]
                     break;
                 case '演唱会':
                     cols.values = ['全部']
@@ -153,8 +155,8 @@ setTimeout(function() {
                 case '其他':
                     cols.values = ['全部']
                     break;
-            
-                default://全部
+
+                default: //全部
                     cols.values = areaValues
                     break;
             }
@@ -167,7 +169,7 @@ setTimeout(function() {
 
     // fun类
     const typeIndex = 2
-    const typeValues = [`全部`, `经典`, `华语`, `欧美`, `韩国`, `日本`, `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`,`剧情`, `豆瓣高分`, `冷门佳片`]
+    const typeValues = [`全部`, `经典`, `华语`, `欧美`, `韩国`, `日本`, `动作`, `喜剧`, `爱情`, `科幻`, `悬疑`, `恐怖`, `剧情`, `豆瓣高分`, `冷门佳片`]
     $selectSwitch.eq(typeIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
         cols: [{
@@ -180,7 +182,7 @@ setTimeout(function() {
         onClose: (picker) => {
             toggleArrow(typeIndex)
             sessionStorage.type = picker.value[0] == '全部' ? '' : picker.value[0]
-            
+
             // 重新加载loader
             $.showIndicator()
             loader.reload(() => {
@@ -200,7 +202,7 @@ setTimeout(function() {
 
 
     // 选中筛选内容，并收起筛选器
-    $(document).on('click', '.picker-item', function() {
+    $(document).on('click', '.picker-item', function () {
         $.closeModal(".picker-modal.modal-in")
     })
 

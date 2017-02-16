@@ -1,7 +1,7 @@
 // 剧情更新
 
-setTimeout(function(){
-    
+setTimeout(function () {
+
 
     new ScrollLoad({
 
@@ -26,16 +26,17 @@ setTimeout(function(){
             return html
         },
 
-        ajax: (data, callback) => {
-            // 合并入筛选参数
-            data = $.extend({}, data, {
-                sort: 1
-            })
+        ajax: function (callback) {
 
             $.ajax({
                 type: "get",
                 url: 'http://www.funying.cn/wx/rest/find/all',
-                data: data,
+                data: {
+                    sort: 1,
+                    openId: $.openId,
+                    skip: this.currentPage, //当前页
+                    limit: this.perload //每页条数
+                },
                 success: function (res) {
                     if (res.DATA) {
                         callback(res.DATA)

@@ -86,10 +86,15 @@ setTimeout(function () {
                 return html
             },
 
-            ajax: (data, callback) => {
+            ajax: function (callback) {
+
                 $.ajax({
                     url: 'http://www.funying.cn/wx/rest/pay/detail',
-                    data: data,
+                    data: {
+                        openId: $.openId,
+                        skip: this.currentPage, //当前页
+                        limit: this.perload //每页条数
+                    },
                     success: (res) => {
                         console.log('收益明细：', res);
                         if (res.STATUS == 1) {
@@ -175,13 +180,16 @@ setTimeout(function () {
                 return html
             },
 
-            ajax: (data, callback) => {
-                data = $.extend(data, {
-                    type: type
-                })
+            ajax: function (callback) {
+                
                 $.ajax({
                     url: 'http://www.funying.cn/wx/rest/pay/twitterDetail',
-                    data: data,
+                    data: {
+                        type: type,
+                        openId: $.openId,
+                        skip: this.currentPage, //当前页
+                        limit: this.perload //每页条数
+                    },
                     success: (res) => {
                         console.log(type + '级推客：', res);
                         if (res.STATUS == 1) {
