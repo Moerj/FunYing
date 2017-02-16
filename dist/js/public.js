@@ -20,7 +20,7 @@ var ScrollLoad = function () {
         var DEFAULT = {
             maxload: 1000, //最大条数
             perload: 27, //每次分页条数
-            loading: false, //加载等待
+            isloading: false, //加载等待
             currentPage: 1, //当前页
             listContanier: opt.scrollContanier, //list容器，默认等于scroll容器
             scrollContanier: opt.scrollContanier,
@@ -198,7 +198,7 @@ var ScrollLoad = function () {
             }
 
             // 如果正在加载，则退出
-            if (this.loading) return;
+            if (this.isloading) return;
 
             // 超出最大限制
             if (this.listContanier.children().length >= this.maxload) {
@@ -207,7 +207,7 @@ var ScrollLoad = function () {
             }
 
             // 设置flag
-            this.loading = true;
+            this.isloading = true;
 
             this.ajax({
                 openId: $.openId,
@@ -215,7 +215,7 @@ var ScrollLoad = function () {
                 limit: this.perload //每页条数
             }, function (data) {
                 // 重置加载flag
-                _this4.loading = false;
+                _this4.isloading = false;
 
                 _this4._ajax(data);
             });
@@ -238,7 +238,7 @@ var ScrollLoad = function () {
             this.currentPage = 1;
 
             // 重置状态
-            this.loading = false;
+            this.isloading = false;
 
             // 开启无限加载
             this.scrollContanier.on('scroll', function () {
