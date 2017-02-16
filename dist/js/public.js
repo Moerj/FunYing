@@ -37,7 +37,7 @@ var ScrollLoad = function () {
         }
 
         // 创建loading
-        this.preloader = $('\n            <div class="infinite-scroll-preloader">\n                <div class="preloader"></div>\n            </div>\n        ').appendTo(this.listContanier);
+        this.loadEffect = $('\n            <div class="infinite-scroll-preloader">\n                <div class="preloader"></div>\n            </div>\n        ').appendTo(this.listContanier);
 
         // 调整最大页数
         if (this.perload > this.maxload) {
@@ -232,7 +232,7 @@ var ScrollLoad = function () {
             this.scrollContanier[0].scrollTop = 0;
 
             // 还原loading的效果
-            this.preloader.html('<div class="preloader"></div>');
+            this.loadEffect.html('<div class="preloader"></div>');
 
             // 当前页从1开始
             this.currentPage = 1;
@@ -268,12 +268,12 @@ var ScrollLoad = function () {
             this.scrollContanier.off('scroll');
 
             // 内容出现混动条时，才会显示已经到底
-            var h1 = this.preloader[0].offsetTop;
+            var h1 = this.loadEffect[0].offsetTop;
             var h2 = this.listContanier.height() - parseInt(this.listContanier.css('padding-top'));
             if (h1 > h2 - 10) {
-                this.preloader.text('已经到底了！');
+                this.loadEffect.text('已经到底了！');
             } else {
-                this.preloader.text('');
+                this.loadEffect.text('');
             }
         }
 
@@ -297,7 +297,7 @@ var ScrollLoad = function () {
             this.listContanier.append(html);
 
             // 将loader移动到列表末
-            this.preloader.appendTo(this.listContanier);
+            this.loadEffect.appendTo(this.listContanier);
 
             // 如果有缓存，还原滚动条高度
             if (this.cache) {
