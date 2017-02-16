@@ -136,7 +136,7 @@ var ScrollLoad = function () {
                 this.currentPage = history.state.currentPage;
 
                 // 渲染老数据
-                console.log('渲染老数据');
+                console.info('load cache data');
                 reData = oldData;
             } else {
                 //渲染新数据
@@ -164,7 +164,7 @@ var ScrollLoad = function () {
                 }, "", "");
 
                 // 渲染新的ajax数据
-                console.log('渲染新数据');
+                console.info('load ajax data');
                 reData = ajaxData;
             }
 
@@ -231,7 +231,7 @@ var ScrollLoad = function () {
             // 滚动条置顶
             this.scrollContanier[0].scrollTop = 0;
 
-            // 回复loading的效果
+            // 还原loading的效果
             this.preloader.html('<div class="preloader"></div>');
 
             // 当前页从1开始
