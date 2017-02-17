@@ -254,6 +254,8 @@ setTimeout(function () {
 
         new ScrollLoad({
 
+            cache: false,
+
             scrollContanier: $contanier, //滚动父容器
             // maxload: 10,
             // perload: 7,
@@ -351,6 +353,8 @@ setTimeout(function () {
 
         new ScrollLoad({
 
+            cache: false,
+
             scrollContanier: $contanier, //滚动父容器
 
             // 配置渲染模板
@@ -405,6 +409,8 @@ setTimeout(function () {
     // 收益明细页数据
     function entry() {
         new ScrollLoad({
+
+            cache: false,
 
             scrollContanier: '#profitScrollContanier', //滚动父容器
             listContanier: '#profitList',
@@ -534,6 +540,7 @@ setTimeout(function () {
         new ScrollLoad({
             scrollContanier: pageId + ' .con2', //滚动父容器
             listContanier: pageId + ' .list',
+            cache: false,
             // maxload: 10,
             // perload: 7,
 

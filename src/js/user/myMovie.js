@@ -9,6 +9,8 @@ setTimeout(function () {
 
         new ScrollLoad({
 
+            cache: false,
+
             scrollContanier: $contanier, //滚动父容器
 
             // 配置渲染模板
