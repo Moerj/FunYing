@@ -57,6 +57,7 @@ gulp.task('sass', function () {
     gulp.src(paths.sass.entry)
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer('last 10 version', 'android 4'))
+        .pipe($.minifyCss())
         .pipe(gulp.dest('./dist/css/'))
         .pipe(reload({
             stream: true
@@ -68,6 +69,7 @@ gulp.task('sass-debug', function () {
         .pipe($.sourcemaps.init())
         .pipe($.sass().on('error', $.sass.logError))
         .pipe($.autoprefixer('last 10 version', 'android 4'))
+        .pipe($.minifyCss())
         .pipe($.sourcemaps.write('./'))
         .pipe(gulp.dest('./dist/css/'))
         .pipe(reload({
