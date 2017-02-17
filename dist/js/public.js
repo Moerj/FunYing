@@ -606,3 +606,10 @@ $.shareConfig = function (callback) {
         }
     });
 };
+
+// html过滤
+$.htmlFilter = function (str) {
+    str = str.replace(/<[^>]+>/g, ""); //去掉所有的html标记
+    str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+    return str;
+};

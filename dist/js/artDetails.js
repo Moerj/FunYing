@@ -37,7 +37,7 @@
                 wx.ready(function () {
                     var config = {
                         title: data.title,
-                        desc: data.context,
+                        desc: $.htmlFilter(data.context),
                         imgUrl: $('img')[0].src
                     };
                     //分享到朋友圈

@@ -6,7 +6,7 @@ $.fn.init = function (data) {
     if (data != null) {
         for (let i = 0; i < this.length; i++) {
             let thisJq = $(this[i])
-                // console.log(thisJq);
+            // console.log(thisJq);
             if (this[i].localName === 'img') {
                 thisJq.attr('src', data)
             } else if (thisJq.val() == undefined) {
@@ -173,8 +173,8 @@ $.wxPay = function (payOption, payCallback) {
                 nonceStr: res.nonceStr, // 必填，生成签名的随机串
                 signature: res.signature, // 必填，签名，见附录1
                 jsApiList: [
-                        "chooseWXPay"
-                    ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                    "chooseWXPay"
+                ] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
             });
 
             // 通过ready接口处理成功验证
@@ -267,4 +267,12 @@ $.shareConfig = function (callback) {
             callback(res)
         }
     });
+}
+
+
+// html过滤
+$.htmlFilter = function (str) {
+    str = str.replace(/<[^>]+>/g, ""); //去掉所有的html标记
+    str = str.replace(/&nbsp;/ig, ''); //去掉&nbsp;
+    return str
 }
