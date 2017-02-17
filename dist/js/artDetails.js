@@ -35,13 +35,16 @@
                     jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
                 });
                 wx.ready(function () {
-                    wx.onMenuShareTimeline({ //分享到朋友圈
-                        title: data.title
-                    });
-                    wx.onMenuShareAppMessage({ //分享给朋友
+                    var config = {
                         title: data.title,
-                        desc: data.context
-                    });
+                        desc: data.context,
+                        imgUrl: $('img')[0].src
+                    };
+                    //分享到朋友圈
+                    wx.onMenuShareTimeline(config);
+
+                    //分享给朋友
+                    wx.onMenuShareAppMessage(config);
                 });
             });
         };

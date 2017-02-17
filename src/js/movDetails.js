@@ -212,15 +212,17 @@ setTimeout(function () {
                 jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表
             });
             wx.ready(function () {
-                wx.onMenuShareTimeline({ //分享到朋友圈
-                    title: mov.title,
-                    imgUrl: mov.stills
-                });
-                wx.onMenuShareAppMessage({ //分享给朋友
+                let config = {
                     title: mov.title,
                     desc: mov.star,
                     imgUrl: mov.stills
-                });
+                }
+
+                // 分享到朋友圈
+                wx.onMenuShareTimeline(config);
+
+                // 分享给朋友
+                wx.onMenuShareAppMessage(config);
 
             });
         })
