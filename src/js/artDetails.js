@@ -57,7 +57,7 @@
 
         if (qs.articleId) {
             // 加载二维码
-            $('#qrcode').attr('src', data.QR_CODE)
+            $('#qrcode').attr('src', res.QR_CODE)
 
             // 判断是否会员，然后隐藏二维码
             if (res.IS_SUBSCRIBE != 1) {
@@ -67,7 +67,7 @@
 
         // 分享配置
         $.shareConfig((res) => {
-            console.log('分享配置', res);
+            // console.log('分享配置', res);
             wx.config({
                 // debug: true,
                 appId: res.appId, // 必填，公众号的唯一标识
