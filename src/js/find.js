@@ -105,7 +105,7 @@ setTimeout(function () {
 
     // 类型
     const areaIndex = 1
-    const areaValues = ['全部', `电影`, `电视剧`, `动画`, `演唱会`, `娱乐`, `体育`, `游戏`, `周边`, `其他`]
+    const areaValues = ['全部', `电影`, `电视剧`, `动画`, `演唱会`, `娱乐`, `游戏`, `周边`, `其他`]
     $selectSwitch.eq(areaIndex).picker({
         toolbarTemplate: `<header class="find-select"></header>`,
         cols: [{
