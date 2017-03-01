@@ -9,3 +9,4 @@ node_modules
 
 jsconfig.json
 ftp.md
+.ftpconfig
